@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { NotifierModule } from 'angular-notifier';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -18,6 +19,7 @@ import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
+
 
 import 'style-loader!angular2-busy/build/style/busy.css';
 
@@ -50,7 +52,10 @@ export type StoreType = {
     ReactiveFormsModule,
     NgaModule.forRoot(),
     PagesModule,
-    routing
+    routing,
+    NotifierModule.forRoot( {
+      // Custom options in here
+    })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

@@ -18,6 +18,7 @@ import 'style-loader!./theme/initial.scss';
     <main [ngClass]="{'menu-collapsed': isMenuCollapsed}" baThemeRun>
       <div class="additional-bg"></div>
       <router-outlet></router-outlet>
+      <x-notifier-container></x-notifier-container>
     </main>
   `
 })
