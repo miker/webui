@@ -5,7 +5,7 @@ import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/
 import { Location } from '@angular/common';
 
 import { GlobalState } from '../../../../global.state';
-import { RestService, WebSocketService } from '../../../../services/';
+import { RestService, WebSocketService, FreeNASNotifierService } from '../../../../services/';
 
 import { Subscription } from 'rxjs';
 import { EntityUtils } from '../utils';
@@ -13,7 +13,8 @@ import { EntityUtils } from '../utils';
 @Component({
   selector: 'entity-add',
   templateUrl: './entity-add.component.html',
-  styleUrls: ['./entity-add.component.css']
+  styleUrls: ['./entity-add.component.css'],
+  providers: [FreeNASNotifierService]
 })
 export class EntityAddComponent implements OnInit {
 
@@ -27,7 +28,7 @@ export class EntityAddComponent implements OnInit {
 
   private busy: Subscription;
 
-  constructor(protected router: Router, protected rest: RestService, protected ws: WebSocketService, protected formService: DynamicFormService, protected _injector: Injector, protected _appRef: ApplicationRef, protected _state: GlobalState, protected location: Location) {
+  constructor(protected router: Router, protected fns: FreeNASNotifierService, protected rest: RestService, protected ws: WebSocketService, protected formService: DynamicFormService, protected _injector: Injector, protected _appRef: ApplicationRef, protected _state: GlobalState, protected location: Location) {
 
   }
 
