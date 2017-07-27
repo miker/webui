@@ -11,4 +11,4 @@ export * from './baCheckbox';
 export * from './baMultiCheckbox';
 export * from './baJob';
 export * from './baBackTop';
-export * from './FabSpeedDial';
+export * from './FabSpeedDialContainer';

@@ -1,11 +1,12 @@
 import {Component, Input} from "@angular/core";
+import {FabSpeedDialComponent, FabSpeedDialTrigger, FabSpeedDialActions} from "./components/FabSpeedDial";
 
 @Component({
-    selector: 'fab-speed-dial',
-    templateUrl: './fab-speed-dial.html',
-    styleUrls: ['./fab-speed-dial.scss']
+    selector: 'fab-speed-dial-container',
+    templateUrl: './fab-speed-dial-container.html',
+    styleUrls: ['./fab-speed-dial-container.scss']
 })
-export class FabSpeedDial {
+export class FabSpeedDialContainer {
 
     private _fixed: boolean = false;
 

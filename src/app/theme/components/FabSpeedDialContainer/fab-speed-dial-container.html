@@ -1,0 +1,10 @@
+<fab-speed-dial #myFab [direction]="direction" [animationMode]="animationMode" [fixed]="fixed"
+                    (mouseenter)="myFab.open = true" (mouseleave)="myFab.open = false">
+    <fab-trigger [spin]="spin">
+        <button md-fab (click)="_click('trigger')">Check?</button>
+    </fab-trigger>
+
+    <fab-actions>
+        <button md-mini-fab (click)="_click('action1')">Add</button>
+    </fab-actions>
+</fab-speed-dial>
