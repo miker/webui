@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 
 @Component({
-    selector: 'demo-fab-speed-dial',
+    selector: 'fab-speed-dial',
     templateUrl: './fab-speed-dial.html',
     styleUrls: ['./fab-speed-dial.scss']
 })

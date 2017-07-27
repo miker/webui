@@ -1,7 +1,7 @@
 md-card {
   margin: 30px;
 
-  &.fab-demo-actions {
+  &.fab-actions {
     display:flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -20,7 +20,7 @@ md-card {
   }
 }
 
-.container-fab-demo {
+.container-fab {
   width: 100%;
   display:flex;
   flex-direction: row;
