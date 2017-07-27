@@ -29,6 +29,17 @@
   </ngx-datatable-column>
   </ngx-datatable>
 </md-card>
-<a *ngIf="conf.route_add"  md-fab class="md-fab-bottom-right-1" color="accent" (click)="doAdd()">
-            <md-icon class="md-16">star</md-icon>
-</a>
+
+<fab-speed-dial #myFab [direction]="left" 
+class="md-fab-bottom-right-1" 
+[animationMode]="fling" [fixed]="fixed"
+                    (mouseenter)="myFab.open = true" 
+                    (mouseleave)="myFab.open = false">
+    <fab-trigger [spin]="spin">
+        <button md-fab><md-icon class="md-16">person</md-icon></button>
+    </fab-trigger>
+
+    <fab-actions>
+        <button *ngIf="conf.route_add" md-mini-fab (click)="doAdd()"><md-icon class="md-16">add</md-icon></button>
+    </fab-actions>
+</fab-speed-dial>
