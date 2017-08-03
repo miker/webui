@@ -2,7 +2,7 @@
 
 <alert *ngIf="success" type="success">{{ successMessage }}</alert>
 <alert *ngIf="error" type="danger"><span [innerHTML]="error"></span></alert>
-<ba-card>
+<md-card>
   <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" [ngBusy]="[parentBusy, busy]">
 
     <dynamic-form-bootstrap-control #component *ngFor="let controlModel of conf.formModel" [group]="formGroup" [model]="controlModel"
@@ -11,4 +11,4 @@
     <button class="btn btn-raised btn-info" type="submit">OK</button>
 
   </form>
-</ba-card>
+</md-card>

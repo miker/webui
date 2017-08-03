@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as _ from 'lodash';
 import {Subscription} from 'rxjs';
+import { MdCardModule } from '@angular/material';
 
 import {
   RestService,

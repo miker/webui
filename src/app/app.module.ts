@@ -11,6 +11,52 @@ import {RouterModule} from '@angular/router';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ConfirmDialog} from './pages/common/confirm-dialog/confirm-dialog.component';
 
+
+
+
+
+
+
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { Routes, RouterModule } from '@angular/router';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { routing, appRoutingProviders } from './app.routing';
+
+/* App component */
+import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+/* Core Module */
+import { CoreModule } from './core/core.module';
+
+import { MaterialModule } from '@angular/material';
+
+@NgModule({
+declarations: [
+AppComponent,
+PageNotFoundComponent
+],
+imports: [
+BrowserModule,
+CoreModule,
+FormsModule,
+HttpModule,
+ChartsModule,
+routing
+],
+providers: [
+appRoutingProviders
+],
+bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
 /*
  * Platform and Environment providers/directives/pipes
  */

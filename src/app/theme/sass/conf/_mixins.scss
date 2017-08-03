@@ -49,8 +49,17 @@
   background-image: url($images-root + $relativeUrl);
 }
 
+@mixin body-bg() {
+  background: $body-bg;
+}
+
 @mixin bg-translucent-dark($opacity) {
   background: rgba(0, 0, 0, $opacity);
+}
+
+@mixin additional-bg($opacity) {
+  opacity: $opacity;
+  background: $body-bg;
 }
 
 @mixin placeholderStyle($color, $opacity) {

@@ -25,7 +25,7 @@ main {
 
   .additional-bg {
     display: none;
-    @include additional-bg();
+    @include additional-bg(1);
   }
 }
 
@@ -47,7 +47,7 @@ a {
 
 .body-bg {
   display: none;
-  background: $primary-light;
+  background: $body-bg;
 }
 main::before {
   background: $primary-light !important;
@@ -64,9 +64,8 @@ main::before {
 
 .al-main {
   margin-left: $left-space;
-  padding: 66px 0 34px 0;
   position: relative;
-  background: $primary-light;
+  background: $body-bg;
 }
 
 .al-footer {
@@ -79,7 +78,7 @@ main::before {
   font-size: 13px;
   color: $default-text;
   transition: padding-left 0.5s ease;
-  background: $primary-light;
+  background: $body-bg;
 }
 
 .al-footer-main {
@@ -109,7 +108,6 @@ main::before {
 }
 
 .al-content {
-  padding: 8px 32px 8px 40px;
 
 
 }

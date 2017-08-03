@@ -18,6 +18,7 @@ export class UserListComponent {
     { name: 'Home directory', prop: 'bsdusr_home' },
     { name: 'Shell', prop: 'bsdusr_shell' },
     { name: 'Builtin', prop: 'bsdusr_builtin' },
+    { name: 'Attributes', prop: 'bsdusr_attributes' },
   ];
   public config: any = {
     paging: true,

@@ -39,7 +39,11 @@ export class BaThemeConfigProvider {
 
     this.conf = {
       theme : {
-        name : 'modern',
+        name : 'default',
+     // name : 'warriors',  
+     // name : 'sharks',  
+     // name : 'hylian',  
+
       },
       colors : {
         default : this.basic.default,
