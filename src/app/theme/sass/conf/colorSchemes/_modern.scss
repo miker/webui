@@ -27,6 +27,7 @@ $mail-box:                      whitesmoke;
 $progress-background:           #fafafa;
 $auth-panel-background:         #fafafa;
 $bootstrap-panel-bg:            #fafafa;
+$sidebar:            			#fafafa;
 $body-bg:                       #F5F5F6;
 $input-background:              #F5F5F6;
 $default-text:                  #212121;
@@ -73,5 +74,4 @@ $bootstrap-panel-header-border: 1px solid rgba(#1976d2, 0.12);
   @include angular-material-theme($lasso-theme);
   // haz moar overrides plz?
   $bootstrap-panel-header-bg:     #1f1f1f;
-  $sidebar:                       #1f1f1f;
 }

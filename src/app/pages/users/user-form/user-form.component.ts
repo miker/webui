@@ -37,22 +37,6 @@ export class UserFormComponent {
       name : 'bsdusr_username',
       placeholder : 'Username',
     },
-	{
-      type : 'hidden',
-      name : 'bsdusr_attributes',
-      placeholder : 'Attributes',
-      options : {
- 		//	"some_attr": "foo",
- 		
-   		"ui-theme": : {
-   			// Themes: modern, lasso
-    		"theme": "modern",
-    		// font picker is next
-    		//"font": "sans"
-   		}
-	}
-      multiple : false
-    },
     {
       type : 'input',
       name : 'bsdusr_full_name',
@@ -140,7 +124,6 @@ export class UserFormComponent {
   private bsdusr_group: any;
   private bsdusr_aux_group: any;
   private bsdusr_creategroup: any;
-  private bsdusr_attributes: any;
 
   constructor(protected router: Router, protected rest: RestService,
               protected ws: WebSocketService, protected _state: GlobalState) {}
@@ -208,19 +191,6 @@ export class UserFormComponent {
           entityForm.formGroup.controls['bsdusr_shell'].setValue(
               this.shells[1][0]);
         });
-    /* list user attributes */
-    entityForm.ws.call('notifier.choices', [ 'ATTRIBUTE_CHOICES' ])
-        .subscribe((res) => {
-          this.bsdusr_attributes = _.find(this.fieldConfig, {name : "bsdusr_attributes"});
-          this.attribute = res;
-          let bsduser_attributes = this.bsdusr_attributes
-          res.forEach((item) => {
-            this.bsdusr_attributes.options.push({label : item[1], value : item[0]});
-          });
-          entityForm.formGroup.controls['bsdusr_attributes'].setValue(
-              this.attribute[1][0]);
-        });
-
   }
 
   clean_uid(value) {
