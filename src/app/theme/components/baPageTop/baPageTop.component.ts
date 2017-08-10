@@ -1,4 +1,5 @@
 import 'style-loader!./baPageTop.scss';
+import {BaThemeConfigProvider} from '../../theme.configProvider';
 
 import { Component } from '@angular/core';
 
@@ -16,10 +17,15 @@ export class BaPageTop {
   public isScrolled: boolean = false;
   public isMenuCollapsed: boolean = false;
 
-  constructor(protected router: Router, private _state: GlobalState, public _ws: WebSocketService, private dialogService: DialogService) {
+  constructor(protected router: Router, private _state: GlobalState, public _ws: WebSocketService, private dialogService: DialogService, private _baConfig: BaThemeConfigProvider){
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });
+  }
+
+  changeTheme() {
+      this._baConfig.changeTheme({name : 'material-theme'});
+      
   }
 
   public toggleMenu() {

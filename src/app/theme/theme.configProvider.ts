@@ -39,7 +39,7 @@ export class BaThemeConfigProvider {
 
     this.conf = {
       theme : {
-        name : 'modern',
+        name : 'material-theme',
       },
       colors : {
         default : this.basic.default,
@@ -84,7 +84,10 @@ export class BaThemeConfigProvider {
 
   get() { return this.conf; }
 
-  changeTheme(theme: any) { _.merge(this.get().theme, theme); }
+  changeTheme(theme: any) { 
+    console.error('Fuuuuck');
+    _.merge(this.get().theme, theme); 
+  }
 
   changeColors(colors: any) { _.merge(this.get().colors, colors); }
 }
