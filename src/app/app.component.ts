@@ -20,7 +20,7 @@ import {layoutPaths} from './theme/theme.constants';
 @Component({
   selector : 'app',
   template : `
-    <main [ngClass]="{'menu-collapsed': isMenuCollapsed}" baThemeRun>
+    <main id="mainbodyElement" [ngClass]="{'menu-collapsed': isMenuCollapsed}" baThemeRun>
       <div class="additional-bg"></div>
       <router-outlet></router-outlet>
     </main>
@@ -36,7 +36,7 @@ export class App {
               private viewContainerRef: ViewContainerRef,
               private themeConfig: BaThemeConfig) {
 
-    themeConfig.config();
+    themeConfig.config('material-theme');
 
     this._loadImages();
 
