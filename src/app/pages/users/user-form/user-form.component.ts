@@ -38,11 +38,12 @@ export class UserFormComponent {
       placeholder : 'Username',
     },
 	{
-      type : 'select',
+      type : 'hidden',
       name : 'bsdusr_attributes',
-      placeholder : 'User Preferences',
+      placeholder : 'Attributes',
       options : {
-      	"some_attr": "foo",
+ 		//	"some_attr": "foo",
+ 		
    		"ui-theme": : {
    			// Themes: modern, lasso
     		"theme": "modern",
