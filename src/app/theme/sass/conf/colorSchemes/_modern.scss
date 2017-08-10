@@ -7,7 +7,16 @@ $modern-theme-accent:           mat-palette($mat-amber);
 $modern-theme-warn:             mat-palette($mat-red);
 $modern-theme:                  mat-light-theme($modern-theme-primary, $modern-theme-accent, $modern-theme-warn);
 
+// Define an alternate dark theme.
+$lasso-primary: mat-palette($mat-blue-grey);
+//$lasso-accent:  mat-palette($mat-amber, A200, A100, A400);
+$lasso-accent:  mat-palette($mat-amber);
+$lasso-warn:    mat-palette($mat-deep-orange);
+$lasso-theme:   mat-dark-theme($lasso-primary, $lasso-accent, $lasso-warn);
 @include angular-material-theme($modern-theme);
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 
 
 $default:                       #000000;
@@ -17,7 +26,6 @@ $input-border:                  transparent;
 $mail-box:                      whitesmoke;
 $progress-background:           #fafafa;
 $auth-panel-background:         #fafafa;
-$sidebar:                       #fafafa;
 $bootstrap-panel-bg:            #fafafa;
 $body-bg:                       #F5F5F6;
 $input-background:              #F5F5F6;
@@ -59,3 +67,11 @@ $hoverlink:                     $default-text;
 $bootstrap-panel-radius:        5px;
 $bootstrap-panel-header-bg:     #002171;
 $bootstrap-panel-header-border: 1px solid rgba(#1976d2, 0.12);
+
+// Testing multiple themes, might need to move this to its own colorScheme
+.lasso-theme {
+  @include angular-material-theme($lasso-theme);
+  // haz moar overrides plz?
+  $bootstrap-panel-header-bg:     #1f1f1f;
+  $sidebar:                       #1f1f1f;
+}
