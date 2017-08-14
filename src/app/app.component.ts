@@ -36,7 +36,7 @@ export class App {
               private viewContainerRef: ViewContainerRef,
               private themeConfig: BaThemeConfig) {
 
-    themeConfig.config('material-theme');
+    themeConfig.config();
 
     this._loadImages();
 

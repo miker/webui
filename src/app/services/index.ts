@@ -9,4 +9,5 @@ export * from './iscsi.service';
 export * from './idmap.service';
 export * from './tooltips.service';
 export * from './dialog.service';
+export * from './user-theme.service';
 export * from './shell.service';
