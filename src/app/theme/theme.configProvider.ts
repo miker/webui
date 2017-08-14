@@ -85,7 +85,7 @@ export class BaThemeConfigProvider {
   get() { return this.conf; }
 
   changeTheme(theme: any) { 
-    console.error('Fuuuuck');
+    console.error('redacted');
     _.merge(this.get().theme, theme); 
   }
 
