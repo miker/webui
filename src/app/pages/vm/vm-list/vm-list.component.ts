@@ -30,6 +30,7 @@ export class VmListComponent {
     {name : 'Memory Size (MiB)', prop : 'memory'},
     {name : 'Boot Loader Type', prop : 'bootloader'},
     {name : 'State', prop : 'state'},
+    {name: 'Autostart', prop : 'autostart'},
   ];
   public config: any = {
     paging : true,
