@@ -10,6 +10,7 @@ import {AlertModule} from 'ngx-bootstrap/alert';
 import {NgaModule} from '../../theme/nga.module';
 
 import {CommonFormComponent} from './form';
+import {ConfirmDialog} from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports : [
@@ -17,7 +18,7 @@ import {CommonFormComponent} from './form';
     DynamicFormsCoreModule.forRoot(), DynamicFormsBootstrapUIModule, BusyModule,
     NgaModule, MaterialModule, MdTableModule
   ],
-  declarations : [ CommonFormComponent ],
+  declarations : [ CommonFormComponent, ConfirmDialog ],
   exports : [ CommonFormComponent ]
 })
 export class FnCommonModule {

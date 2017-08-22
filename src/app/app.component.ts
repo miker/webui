@@ -4,6 +4,9 @@ import { Router, NavigationEnd, ActivatedRoute, ActivatedRouteSnapshot } from '@
 
 import { RoutePartsService } from "./services/route-parts/route-parts.service";
 
+// the only thing using this jquery stuff is bootstrap things, when they are gone remove it
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
