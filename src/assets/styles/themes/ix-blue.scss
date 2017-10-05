@@ -1,4 +1,7 @@
 @import '~@angular/material/theming';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 @include mat-core();
 
 $md-primary: (
@@ -79,6 +82,10 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
 // include the custom theme object into the angular material theme
 .ix-blue {
     @include angular-material-theme($freenas-theme);
+    
+    .mat-sidenav-container { 
+        background-color: rgba(0, 0, 0, 0.09)
+    }
 
     .mat-bg-primary,
     .topbar,
@@ -92,6 +99,9 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         background: map-get($md-primary, 500) !important;
         color: #ffffff !important;
     }
+    div.hopscotch-bubble {
+       background:  rgba(0, 149, 213, 0.85) !important;
+    }
     .mat-color-primary,
     .sidebar-panel.mat-sidenav .sidebar-list-item.open > .mat-list-item-content > a > span,
     .sidebar-panel.mat-sidenav .sidebar-list-item.open .sub-menu .mat-list-item.selected a {
@@ -104,7 +114,10 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-left: 2px solid map-get($md-primary, 500);
     }
     .sidebar-panel.mat-sidenav {
-        background: url('../../images/sidebar-bg.jpg') no-repeat;
+        background: rgba(255,255,255, 0.45);
+    }
+    .mat-sidenav {
+        background-color: rgba(255,255,255, 0.45) !important;
     }
     .breadcrumb-bar {
         background: #ffffff !important;
@@ -158,6 +171,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
     div.hopscotch-bubble .hopscotch-nav-button.next:hover,
     div.hopscotch-bubble .hopscotch-nav-button.next {
         background-color: map-get($md-accent, 500);
+
         color: black;
     }
     .mat-bg-warn {

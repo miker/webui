@@ -10,8 +10,12 @@ import {EntityTableComponent} from './entity-table.component';
   selector : 'app-entity-table-add-actions',
   template : `
 	<div *ngIf="this.entity.conf.route_add || this.actions.length > 0">
-		<smd-fab-speed-dial #myFab [direction]="direction" [animationMode]="animationMode"
-				(mouseenter)="myFab.open = true" (mouseleave)="myFab.open = false">
+		<smd-fab-speed-dial 
+			#myFab id="fabbed"
+			[direction]="direction" 
+			[animationMode]="animationMode"
+			(mouseenter)="myFab.open = true" 
+			(mouseleave)="myFab.open = false">
 			<smd-fab-trigger [spin]="spin">
 				<button md-fab><md-icon>list</md-icon></button>
 			</smd-fab-trigger>

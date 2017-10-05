@@ -1,3 +1,11 @@
+#fabbed {
+  position: absolute !important;
+  bottom: 36px;
+  right: 36px;
+}
+
+
+
 @mixin smd-fab-speed-dial-container($box-orient, $flex-direction) {
   -webkit-box-orient: $box-orient;
   -webkit-box-direction: normal;
@@ -25,10 +33,6 @@
 }
 
 smd-fab-speed-dial {
-  display: inline-block;
-  position: absolute;
-  right: 66px;
-  padding-bottom: 60px;
 
   &.smd-opened {
     .smd-fab-speed-dial-container {
@@ -62,6 +66,7 @@ smd-fab-speed-dial {
     }
 
     smd-fab-actions {
+      poaition: fixed;
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
