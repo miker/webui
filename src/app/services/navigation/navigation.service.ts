@@ -199,13 +199,13 @@ export class NavigationService {
       state: 'http://doc.freenas.org/11/freenas.html',
     },
     {
-      name: 'Dev Examples',
+      name: 'Developer Examples',
       type: 'dropDown',
       tooltip: 'Examples',
-      icon: 'people',
+      icon: 'build',
       state: 'examples',
       sub: [
-        {name: 'Cards', state: 'example-cards'},
+        {name: 'Cards', state: 'cards'},
       ]
     },
   ]
