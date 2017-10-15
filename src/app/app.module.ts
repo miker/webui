@@ -22,6 +22,7 @@ import {ENV_PROVIDERS} from '../environments/environment';
 import { AppLoaderComponent } from './services/app-loader/app-loader.component';
 import { AppLoaderModule } from './services/app-loader/app-loader.module';
 import { NotificationsService } from 'app/services/notifications.service';
+import { ExamplesModule } from './pages/examples/examples.module';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -35,6 +36,7 @@ export function createTranslateLoader(http: Http) {
     AppLoaderModule,
     HttpModule,
     AppCommonModule,
+    ExamplesModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),

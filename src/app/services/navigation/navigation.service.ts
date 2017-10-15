@@ -197,7 +197,17 @@ export class NavigationService {
       tooltip: 'Guide',
       icon: 'info',
       state: 'http://doc.freenas.org/11/freenas.html',
-    }
+    },
+    {
+      name: 'Dev Examples',
+      type: 'dropDown',
+      tooltip: 'Examples',
+      icon: 'people',
+      state: 'examples',
+      sub: [
+        {name: 'Cards', state: 'example-cards'},
+      ]
+    },
   ]
   
   // Icon menu TITLE at the very top of navigation.
