@@ -1,3 +1,17 @@
-<p>
-  example-cards works!
-</p>
+<!--<md-grid-list cols="{{gridCols}}" rowHeight="484px" gutterSize="32px" class="" id="">
+<md-grid-tile *ngFor="let card of cards; let i=index"  [colspan]="1" [rowspan]="1" id="{{ i }}">-->
+
+	<div class="entity-cards-container">
+	<div *ngFor="let card of cards; let i=index" class="entity-card-wrapper">
+		<entity-card [conf]="cards[i]"></entity-card>
+  </div>
+
+</div>
+	<!-- </md-grid-tile>
+</md-grid-list>-->
+
+<!--
+	<div>
+	<app-entity-table-add-actions [entity]="this"></app-entity-table-add-actions>
+	</div> 
+-->

@@ -1,0 +1,9 @@
+.entity-cards-container .entity-card-wrapper{
+  display:inline-flex;
+  padding:0 32px;
+  text-align:left;
+}
+
+.entity-cards-container{
+  text-align:center;
+}

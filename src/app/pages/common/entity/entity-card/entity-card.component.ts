@@ -135,13 +135,13 @@ export class EntityCardComponent implements OnInit {
       return this.conf.getCardActions(row);
     } else {
       return [{
-        id: "edit",
-        label: "Edit",
-        onClick: (row) => { this.doEdit(row.id); },
+        id: "save",
+        label: "Save",
+        onClick: (row) => { this.doSave(); },
       }, {
         id: "delete",
         label: "Delete",
-        onClick: (row) => { this.doDelete(row.id); },
+        onClick: (row) => { this.doDelete(); },
       }, ]
     }
   }
@@ -165,14 +165,20 @@ export class EntityCardComponent implements OnInit {
     this.router.navigate(new Array('/').concat(this.conf.route_add));
   }
 
-  doEdit(id) {
+  doSave() {
+    this.toggleFlip();
+    /*
     this.router.navigate(
-      new Array('/').concat(this.conf.route_edit).concat(id));
+      new Array('/').concat(this.conf.route_edit).concat(id)
+    );
+    */
   }
 
-  doDelete(id) {
+  doDelete() {
+    
     this.dialog.confirm("Delete", "Are you sure you want to delete it?").subscribe((res) => {
       if (res) {
+	/*
         this.loader.open();
         this.loaderOpen = true;
         let data = {};
@@ -182,11 +188,14 @@ export class EntityCardComponent implements OnInit {
           },
           (res) => { new EntityUtils().handleError(this, res); this.loader.close();}
         );
+	*/
       }
     })
+
+    this.toggleFlip();
   }
   toggleFlip(){
-    this.isFlipped = !this.isFlipped;
+  this.isFlipped = !this.isFlipped;
   }
 }
 
