@@ -1,19 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { EntityModule } from '../../common/entity/entity.module';
 import { RestService } from '../../../services/';
 
-interface CardConfig {
-  header: string;
-  body: string;
-  footer: string;
-}
-
 interface UserProfile {
   username: string;
   fullname: string;
-  uid: string;
-  gid: string;
+  uid: number;
+  gid: number;
   homeDirectory: string;
   shell: string;
 }
@@ -30,14 +24,12 @@ export class ExampleCardsComponent implements OnInit {
 
   ngOnInit() {
     this.getUserList();
-    //this.init(16);
-    //this.gridCols = 1;
   }
 
   getUserList() {
     this.rest.get('account/users', {}).subscribe((res) => {
       console.log(res);
-      for(var i = 0; i < res.total; i++){
+      for(var i = 0; i < res.data.length; i++){
 	var card: UserProfile = {
 	  username: res.data[i].bsdusr_username,
 	  fullname: res.data[i].bsdusr_full_name,
@@ -46,20 +38,12 @@ export class ExampleCardsComponent implements OnInit {
 	  homeDirectory: res.data[i].bsdusr_home,
 	  shell: res.data[i].bsdusr_shell
 	}
+	if(res.data[i].bsdusr_full_name == ""){
+	  card.fullname = res.data[i].bsdusr_username;
+	}
 	console.log(card);
 	this.cards.push(card);
       }
     })
-  }
-
-  private init(num:number){
-    for(var i = 0; i < num; i++){
-      var card: CardConfig = {
-	header: "HEADER: Card #" + i,
-	body: "",
-	footer: ""
-      }
-      this.cards.push(card);
-    }
   }
 }

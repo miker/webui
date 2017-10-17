@@ -1,17 +1,32 @@
-<!--<md-grid-list cols="{{gridCols}}" rowHeight="484px" gutterSize="32px" class="" id="">
-<md-grid-tile *ngFor="let card of cards; let i=index"  [colspan]="1" [rowspan]="1" id="{{ i }}">-->
-
 	<div class="entity-cards-container">
 	<div *ngFor="let card of cards; let i=index" class="entity-card-wrapper">
-		<entity-card [conf]="cards[i]"></entity-card>
+		<!-- 
+		 Create ng-templates that you inject into the entity-card component. 
+		 Keep in mind, entity-card is injecting your ng-template into an <md-card> 
+		 so you can use almost any of the usual components like <md-header>, 
+		 <md-content> etc. except for md-footer. The entity-card will provide 
+		 the controls there.
+		-->
+		<ng-template #cardfront let-name="name">
+			<h3 style="text-align:center;opacity:0.75;"> 
+				{{ cards[i].fullname  }} 
+			  <br>
+				<span style="font-size:14px;">({{ cards[i].username }})</span>
+			</h3>
+    </ng-template>
+
+		<ng-template #cardback let-name="name">
+			<md-grid-list 
+				cols="1"
+				rowHeight="420px" gutterSize="0px"
+				>
+				<md-grid-tile [colspan]="1" [rowspan]="1">
+					<h2>There are {{ cards[i].length }} options</h2>
+				</md-grid-tile>
+			</md-grid-list>
+    </ng-template>
+
+		<entity-card [conf]="cards[i]" [front]="cardfront" [back]="cardback"></entity-card>
   </div>
 
 </div>
-	<!-- </md-grid-tile>
-</md-grid-list>-->
-
-<!--
-	<div>
-	<app-entity-table-add-actions [entity]="this"></app-entity-table-add-actions>
-	</div> 
--->

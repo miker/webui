@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk';
 import { MdPaginator, MdSort } from '@angular/material';
@@ -26,6 +26,8 @@ export class EntityCardComponent implements OnInit {
 
   @Input('conf') conf: any;
   @Input() isFlipped = false;  
+  @Input() front: TemplateRef<any>;
+  @Input() back: TemplateRef<any>;
 
   public busy: Subscription;
 
@@ -50,7 +52,7 @@ export class EntityCardComponent implements OnInit {
     if (this.conf.preInit) {
       this.conf.preInit(this);
     }
-    this.getData();
+    //this.getData();
     if (this.conf.afterInit) {
       this.conf.afterInit(this);
     }
