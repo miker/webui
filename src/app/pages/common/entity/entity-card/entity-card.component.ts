@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ElementRef, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk';
 import { MdPaginator, MdSort } from '@angular/material';
@@ -25,9 +25,11 @@ import { AppLoaderService } from '../../../../services/app-loader/app-loader.ser
 export class EntityCardComponent implements OnInit {
 
   @Input('conf') conf: any;
-  @Input() isFlipped = false;  
+  @Input() isFlipped = false;
+  @Output() editCard: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() front: TemplateRef<any>;
   @Input() back: TemplateRef<any>;
+  @Input() lazyLoaded: boolean = false;
 
   public busy: Subscription;
 
@@ -57,6 +59,16 @@ export class EntityCardComponent implements OnInit {
       this.conf.afterInit(this);
     }
   }
+
+  ngAfterViewInit(){
+    if(this.conf){
+      this.isFlipped = this.conf.isFlipped;
+      console.log("conf exists!!")
+    } else {
+      alert("conf doesn't exist!!");
+    }
+  }
+
   toggle(row: any) {
     
     let rpc: string;
@@ -137,14 +149,15 @@ export class EntityCardComponent implements OnInit {
       return this.conf.getCardActions(row);
     } else {
       return [{
-        id: "save",
-        label: "Save",
-        onClick: (row) => { this.doSave(); },
-      }, {
-        id: "delete",
-        label: "Delete",
-        onClick: (row) => { this.doDelete(); },
-      }, ]
+        id: "edit",
+        label: "Edit",
+	onClick: (row) => { 
+	  this.editCard.emit(true);
+	  this.toggleFlip();
+	  this.lazyLoaded = true;
+	  //this.conf.isFlipped = true;
+	},
+      }]
     }
   }
 
@@ -197,7 +210,7 @@ export class EntityCardComponent implements OnInit {
     this.toggleFlip();
   }
   toggleFlip(){
-  this.isFlipped = !this.isFlipped;
+  this.conf.isFlipped = !this.conf.isFlipped;
   }
 }
 

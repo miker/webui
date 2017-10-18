@@ -3,11 +3,15 @@ import { MaterialModule } from '@angular/material';
 import { EntityModule } from '../../common/entity/entity.module';
 import { RestService } from '../../../services/';
 
+
 interface UserProfile {
+  index:number;
+  isFlipped:boolean;
   username: string;
   fullname: string;
-  uid: number;
-  gid: number;
+  id: string;
+  uid: string;
+  gid: string;
   homeDirectory: string;
   shell: string;
 }
@@ -20,7 +24,8 @@ interface UserProfile {
 export class ExampleCardsComponent implements OnInit {
 
   @Input() cards = [];
-  constructor(protected rest: RestService) {}
+
+  constructor(protected rest: RestService){}
 
   ngOnInit() {
     this.getUserList();
@@ -31,8 +36,11 @@ export class ExampleCardsComponent implements OnInit {
       console.log(res);
       for(var i = 0; i < res.data.length; i++){
 	var card: UserProfile = {
+	  index: i,
+	  isFlipped:false,
 	  username: res.data[i].bsdusr_username,
 	  fullname: res.data[i].bsdusr_full_name,
+	  id: res.data[i].id,
 	  uid: res.data[i].bsdusr_uid,
 	  gid: res.data[i].bsdusr_group,
 	  homeDirectory: res.data[i].bsdusr_home,
@@ -45,5 +53,10 @@ export class ExampleCardsComponent implements OnInit {
 	this.cards.push(card);
       }
     })
+  }
+
+  toggleForm(state, card){
+    // load #cardBack template with code here
+    card.isFlipped = state;
   }
 }

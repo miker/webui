@@ -6,9 +6,10 @@ import { MdGridListModule } from '@angular/material';
 import { EntityModule } from '../common/entity/entity.module';
 
 import { StorageService } from '../../services/storage.service';
-
 import { routing } from './examples.routing';
+
 import { ExampleCardsComponent } from './example-cards/example-cards.component';
+import { ExampleCardsFormComponent } from './example-cards/example-cards-form.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ExampleCardsComponent } from './example-cards/example-cards.component';
   ],
   declarations: [
     ExampleCardsComponent,
+    ExampleCardsFormComponent
   ],
   providers: [
     StorageService

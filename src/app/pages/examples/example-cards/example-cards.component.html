@@ -15,15 +15,8 @@
 			</h3>
     </ng-template>
 
-		<ng-template #cardback let-name="name">
-			<md-grid-list 
-				cols="1"
-				rowHeight="420px" gutterSize="0px"
-				>
-				<md-grid-tile [colspan]="1" [rowspan]="1">
-					<h2>There are {{ cards[i].length }} options</h2>
-				</md-grid-tile>
-			</md-grid-list>
+		<ng-template #cardback let-name="name" >
+			<example-cards-form [userId]="cards[i].id" (cancel)="toggleForm($event,cards[i])"></example-cards-form>
     </ng-template>
 
 		<entity-card [conf]="cards[i]" [front]="cardfront" [back]="cardback"></entity-card>
