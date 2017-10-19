@@ -16,7 +16,7 @@
     </ng-template>
 
 		<ng-template #cardback let-name="name" >
-			<example-cards-form [userId]="cards[i].id" (cancel)="toggleForm($event,cards[i])"></example-cards-form>
+			<example-cards-form *ngIf="tpl == 'users' " [userId]="cards[i].id" (cancel)="toggleForm($event,cards[i])"></example-cards-form>
     </ng-template>
 
 		<entity-card [conf]="cards[i]" [front]="cardfront" [back]="cardback"></entity-card>

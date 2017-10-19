@@ -31,6 +31,11 @@ export class ExampleCardsFormComponent {
   public fieldConfig: FieldConfig[] = [
     {
       type : 'input',
+      name : 'bsdusr_username',
+      placeholder : 'Username',
+    },
+    {
+      type : 'input',
       name : 'bsdusr_full_name',
       placeholder : 'Full Name',
     },
@@ -57,11 +62,6 @@ export class ExampleCardsFormComponent {
       type : 'input',
       name : 'bsdusr_uid',
       placeholder : 'User ID',
-    },
-    {
-      type : 'input',
-      name : 'bsdusr_username',
-      placeholder : 'Username',
     },
 
     {

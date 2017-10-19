@@ -24,6 +24,7 @@ interface UserProfile {
 export class ExampleCardsComponent implements OnInit {
 
   @Input() cards = [];
+  public tpl = "users";
 
   constructor(protected rest: RestService){}
 
