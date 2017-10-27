@@ -33,9 +33,16 @@ import {AdminLayoutComponent} from '../../../../components/common/layouts/admin-
   styleUrls : [ './entity-form.component.scss' ],
   providers : [ EntityFormService, FieldRelationService ]
 })
+
 export class EntityFormComponent implements OnInit, OnDestroy {
 
   @Input('conf') conf: any;
+
+  public actions: any[];
+
+  public spin: boolean = true;
+  public direction: string = 'right';
+  public animationMode: string = 'fling';
 
   protected pk: any;
   public formGroup: FormGroup;
@@ -81,12 +88,12 @@ export class EntityFormComponent implements OnInit, OnDestroy {
   ngAfterViewInit() {
     this.templates.forEach((item) => {
       if (item.type == 'TOP') {
-        this.templateTop = item.templateRef;
       }
     });
   }
 
   ngOnInit() {
+
     if (this.conf.preInit) {
       this.conf.preInit(this);
     }
@@ -111,10 +118,13 @@ export class EntityFormComponent implements OnInit, OnDestroy {
             this.submitFunction = this.addSubmit;
           }
           this.isNew = true;
+        
+
         }
       }
 
       this.fieldConfig = this.conf.fieldConfig;
+      this.actions = this.conf.getActions();
       this.formGroup = this.entityFormService.createFormGroup(this.fieldConfig);
 
       for (let i in this.fieldConfig) {
@@ -144,8 +154,8 @@ export class EntityFormComponent implements OnInit, OnDestroy {
         this.getFunction.subscribe((res) => {
           if (res.data){
             this.data = res.data;
-            if( typeof(this.conf.resourceTransformIncomingRestData) !== "undefined" ) {
-              this.data = this.conf.resourceTransformIncomingRestData(this.data);
+            if( typeof(this.conf.resource_transformIncommingRestData) !== "undefined" ) {
+              this.data = this.conf.resource_transformIncommingRestData(this.data);
             }
             for (let i in this.data) {
               let fg = this.formGroup.controls[i];

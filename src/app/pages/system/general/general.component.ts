@@ -22,6 +22,36 @@ export class GeneralComponent {
 
   protected resource_name: string = 'system/settings';
 
+  getActions() {
+    let actions = [];
+    actions.push({
+      label : "Save",
+      icon: "save",
+      onClick : () => {
+        this.router.navigate(new Array('').concat(
+            ['system', 'general', 'config-save']));
+      }
+    });
+    actions.push({
+      label : "Upload",
+      icon: "file_upload",
+      onClick : () => {
+        this.router.navigate(new Array('').concat(
+            ['system', 'general', 'config-upload']));
+      }
+    });
+    actions.push({
+      label : "Reset",
+      icon: "clear",
+      onClick : () => {
+        this.router.navigate(new Array('').concat(
+            ['system', 'general', 'config-reset']));
+      }
+    });
+
+    return actions;
+  }
+
   public fieldConfig: FieldConfig[] = [{
       type: 'select',
       name: 'stg_guiprotocol',
@@ -177,20 +207,5 @@ export class GeneralComponent {
           this.stg_sysloglevel.options.push({ label: item[1], value: item[0] });
         });
       });
-  }
-
-  gotoSaveConfig() {
-    this.router.navigate(
-      new Array('').concat(['system', 'general', 'config-save']));
-  }
-
-  gotoUploadConfig() {
-    this.router.navigate(
-      new Array('').concat(['system', 'general', 'config-upload']));
-  }
-
-  gotoResetConfig() {
-    this.router.navigate(
-      new Array('').concat(['system', 'general', 'config-reset']));
   }
 }

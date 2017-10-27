@@ -21,6 +21,9 @@ import {
 export class AdvancedComponent {
   protected resource_name: string = 'system/advanced';
 
+  getActions() {
+    return [];
+  }
   public fieldConfig: FieldConfig[] = [{
       type: 'checkbox',
       name: 'adv_consolemenu',
