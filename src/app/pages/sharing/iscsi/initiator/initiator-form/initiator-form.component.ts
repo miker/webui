@@ -8,7 +8,9 @@ import { FieldConfig } from '../../../../common/entity/entity-form/models/field-
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class InitiatorFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/iscsi/authorizedinitiator';
   protected route_success: string[] = [ 'sharing', 'iscsi', 'initiator' ];
   protected isEntity: boolean = true;

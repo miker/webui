@@ -27,7 +27,9 @@ import {
 })
 
 export class ServiceTFTPComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/tftp';
   protected route_success: string[] = [ 'services' ];
 

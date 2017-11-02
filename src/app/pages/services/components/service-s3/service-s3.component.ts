@@ -28,6 +28,9 @@ import {
 })
 
 export class ServiceS3Component implements OnInit {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/s3';
   protected route_success: string[] = [ 'services' ];
 

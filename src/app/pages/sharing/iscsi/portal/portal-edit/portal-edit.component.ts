@@ -13,6 +13,9 @@ import { EntityFormService } from '../../../../common/entity/entity-form/service
   providers : [ IscsiService, EntityFormService ],
 })
 export class PortalEditComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/iscsi/portal';
   protected route_success: string[] = [ 'sharing', 'iscsi', 'portals' ];
   protected isEntity: boolean = true;

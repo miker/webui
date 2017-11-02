@@ -23,7 +23,9 @@ import {TOOLTIPS} from '../../common/tooltips';
   providers : [ TooltipsService ],
 })
 export class ConfigurationComponent implements OnInit {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'network/globalconfiguration/';
   public fieldConfig: FieldConfig[] = [
     {

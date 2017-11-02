@@ -25,6 +25,9 @@ import {
 })
 
 export class ServiceAFPComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/afp';
   protected route_success: string[] = [ 'services' ];
 

@@ -29,6 +29,9 @@ import {
 })
 
 export class ServiceFTPComponent implements OnInit {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/ftp';
   protected route_success: string[] = [ 'services' ];
 

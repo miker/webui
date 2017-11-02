@@ -13,7 +13,9 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class AuthorizedAccessFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/iscsi/authcredential';
   protected route_success: string[] = [ 'sharing', 'iscsi', 'auth' ];
   protected isEntity: boolean = true;

@@ -9,7 +9,9 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class GlobalconfigurationComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/iscsi/globalconfiguration/';
 
   public fieldConfig: FieldConfig[] = [

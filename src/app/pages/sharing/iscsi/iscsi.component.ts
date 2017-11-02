@@ -9,7 +9,9 @@ import * as _ from 'lodash';
   styleUrls: ['./iscsi.component.css']
 })
 export class ISCSI implements OnInit{
-
+  getActions() {
+    return [];
+  }
    @ViewChild('tabGroup') tabGroup;
    protected indexMap: any[] = ['configuration', 'portals', 'initiator', 'auth', 'target', 'extent', 'associatedtarget'];
 

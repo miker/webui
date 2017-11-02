@@ -28,6 +28,9 @@ import {
 })
 
 export class ServiceUPSComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/ups';
   protected route_success: string[] = [ 'services' ];
 

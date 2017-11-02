@@ -23,6 +23,9 @@ import {
 })
 
 export class ServiceDDNSComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/dynamicdns';
   protected route_success: string[] = [ 'services' ];
 

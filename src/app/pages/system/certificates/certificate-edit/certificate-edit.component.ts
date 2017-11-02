@@ -25,7 +25,9 @@ import {
   template: `<entity-form [conf]="this"></entity-form>`
 })
 export class CertificateEditComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'system/certificate';
   protected route_success: string[] = ['system', 'certificates'];
   protected isEntity: boolean = true;

@@ -28,6 +28,9 @@ import {
 })
 
 export class ServiceSSHComponent implements OnInit {
+    getActions() {
+    return [];
+  }
   // Form Layout
   protected resource_name: string = 'services/ssh';
   protected isBasicMode: boolean = true;

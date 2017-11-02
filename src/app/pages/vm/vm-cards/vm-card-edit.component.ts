@@ -14,7 +14,9 @@ import {RestService, WebSocketService} from '../../../services/';
   template : `<entity-form-embedded [args]="machineId" [conf]="this"></entity-form-embedded>`
 })
 export class VmCardEditComponent {
-
+  getActions() {
+    return [];
+  }
   @Input() machineId: string = '';
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() saved: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -28,7 +28,9 @@ import {
 })
 
 export class ServiceSMARTComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/smart';
   protected route_success: string[] = [ 'services' ];
 

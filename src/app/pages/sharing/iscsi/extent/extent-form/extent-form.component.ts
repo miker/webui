@@ -15,7 +15,9 @@ import { IscsiService } from '../../../../../services/';
   providers: [ IscsiService ],
 })
 export class ExtentFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/iscsi/extent';
   protected route_success: string[] = [ 'sharing', 'iscsi', 'extent' ];
   protected isEntity: boolean = true;

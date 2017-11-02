@@ -16,7 +16,9 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class StaticRouteFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'network/staticroute/';
   protected route_success: string[] = [ 'network', 'staticroutes' ];
   protected isEntity: boolean = true;

@@ -10,7 +10,9 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class SMBFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'sharing/cifs/';
   protected route_success: string[] = [ 'sharing', 'smb' ];
   protected isEntity: boolean = true;

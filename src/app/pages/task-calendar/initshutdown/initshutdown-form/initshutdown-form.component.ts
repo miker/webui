@@ -15,7 +15,9 @@ import { FormGroup } from '@angular/forms';
   providers: [TaskService, UserService, EntityFormService]
 })
 export class InitshutdownFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'tasks/initshutdown';
   protected route_success: string[] = ['tasks', 'initshutdown'];
   protected entityForm: EntityFormComponent;

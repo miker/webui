@@ -15,6 +15,9 @@ import {
 })
 
 export class ServiceRSYNCComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/rsyncd';
   protected route_success: string[] = [ 'services' ];
 

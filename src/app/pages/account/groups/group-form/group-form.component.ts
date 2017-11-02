@@ -7,10 +7,12 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
 
 @Component({
   selector: 'app-group-form',
-  template: `<entity-form [conf]="this"></entity-form>`
+  template: `<entity-form [title]="title" [conf]="this"></entity-form>`
 })
 export class GroupFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected route_success: string[] = ['account', 'groups'];
   protected resource_name: string = 'account/groups/';
   protected isEntity: boolean = true;

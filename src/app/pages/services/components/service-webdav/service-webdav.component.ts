@@ -28,7 +28,9 @@ import {
 })
 
 export class ServiceWebdavComponent implements OnInit {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/webdav';
   protected route_success: string[] = [ 'services' ];
 

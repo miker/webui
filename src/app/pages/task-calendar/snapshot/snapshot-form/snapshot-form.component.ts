@@ -16,7 +16,9 @@ import { EntityUtils } from '../../../common/entity/utils';
   providers: [TaskService, UserService, EntityFormService]
 })
 export class SnapshotFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'storage/task';
   protected route_success: string[] = ['tasks', 'snapshot'];
   protected entityForm: EntityFormComponent;

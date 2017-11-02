@@ -9,7 +9,9 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
   template: `<entity-form [conf]="this"></entity-form>`,
 })
 export class NTPServerEditComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'system/ntpserver/';
   protected route_success: string[] = ['system', 'ntpservers'];
   protected isEntity: boolean = true;

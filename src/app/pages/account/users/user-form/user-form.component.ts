@@ -21,7 +21,9 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class UserFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'account/users/';
   protected route_success: string[] = ['account', 'users' ];
   protected isEntity: boolean = true;

@@ -12,7 +12,9 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class InterfacesFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'network/interface/';
   protected route_success: string[] = [ 'network', 'interfaces' ];
   protected isEntity: boolean = true;

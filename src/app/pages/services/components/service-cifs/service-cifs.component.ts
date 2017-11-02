@@ -21,6 +21,9 @@ import {
 })
 
 export class ServiceCIFSComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/cifs';
   protected route_success: string[] = [ 'services' ];
   protected arrayControl: FormArray;

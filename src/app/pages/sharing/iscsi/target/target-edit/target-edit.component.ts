@@ -17,7 +17,9 @@ import { EntityFormService } from '../../../../common/entity/entity-form/service
   providers : [ IscsiService, EntityFormService ],
 })
 export class TargetEditComponent implements OnInit {
-
+  getActions() {
+    return [];
+  }
   public target_resource_name: string = 'services/iscsi/target/';
   public targetgroup_resource_name: string = 'services/iscsi/targetgroup/';
   public route_success: string[] = [ 'sharing', 'iscsi', 'target' ];

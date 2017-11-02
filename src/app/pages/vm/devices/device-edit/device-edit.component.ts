@@ -32,7 +32,9 @@ import {EntityTemplateDirective} from '../../../common/entity/entity-template.di
 })
 
 export class DeviceEditComponent implements OnInit {
-
+  getActions() {
+    return [];
+  }
   
   public resource_name: string = 'vm/device';
   public route_cancel: string[];

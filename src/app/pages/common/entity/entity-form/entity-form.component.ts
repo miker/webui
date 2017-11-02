@@ -35,6 +35,7 @@ import {AdminLayoutComponent} from '../../../../components/common/layouts/admin-
 })
 
 export class EntityFormComponent implements OnInit, OnDestroy {
+  @Input() title = '';
 
   @Input('conf') conf: any;
 

@@ -21,7 +21,9 @@ import {
 })
 
 export class ServiceSMBComponent implements OnInit {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/cifs';
   protected route_success: string[] = ['services'];
   public fieldConfig: FieldConfig[] = [{

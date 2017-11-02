@@ -24,7 +24,9 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class AlertServiceEditPagerdutyComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name = 'system/consulalerts';
   protected route_success: string[] = [ 'system', 'alertservice'];
   protected isNew = false;

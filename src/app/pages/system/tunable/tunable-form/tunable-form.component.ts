@@ -26,6 +26,9 @@ import {
 })
 export class TunableFormComponent {
 
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'system/tunable';
   protected route_success: string[] = ['system', 'tunable'];
   protected isEntity: boolean = true;

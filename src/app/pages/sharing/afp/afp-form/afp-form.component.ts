@@ -8,7 +8,9 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class AFPFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected route_success: string[] = [ 'sharing', 'afp' ];
   protected resource_name: string = 'sharing/afp/';
   protected isEntity: boolean = true;

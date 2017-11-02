@@ -22,7 +22,25 @@ export class AdvancedComponent {
   protected resource_name: string = 'system/advanced';
 
   getActions() {
-    return [];
+    let actions = [];
+    actions.push({
+      label : "Hey, Im an Action",
+      icon: "error",
+      onClick : () => {
+        this.router.navigate(new Array('').concat(
+            ['system', 'advanced', 'thing']));
+      }
+    });
+    actions.push({
+      label : "Another Action Here",
+      icon: "error_outline",
+      onClick : () => {
+        this.router.navigate(new Array('').concat(
+            ['system', 'advanced', 'other_thing']));
+      }
+    });
+
+    return actions;
   }
   public fieldConfig: FieldConfig[] = [{
       type: 'checkbox',

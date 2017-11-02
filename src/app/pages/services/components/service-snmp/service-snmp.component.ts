@@ -30,6 +30,9 @@ import {
 })
 
 export class ServiceSNMPComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/snmp';
   protected route_success: string[] = [ 'services' ];
   public fieldConfig: FieldConfig[] = [

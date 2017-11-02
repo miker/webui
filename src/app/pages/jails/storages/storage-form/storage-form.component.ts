@@ -11,7 +11,9 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
   template: `<entity-form [conf]="this"></entity-form>`
 })
 export class StorageFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'jails/mountpoints/';
   protected route_success: string[] = ['jails', 'storage'];
   protected isEntity: boolean = true;

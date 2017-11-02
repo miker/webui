@@ -14,7 +14,9 @@ import {RestService, WebSocketService} from '../../../services/';
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class VmFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'vm/vm';
   protected isEntity: boolean = true;
   protected route_success: string[] = [ 'vm' ];

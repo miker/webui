@@ -9,6 +9,9 @@ import { FieldConfig } from '../../../common/entity/entity-form/models/field-con
 })
 
 export class WebdavFormComponent {
+    getActions() {
+    return [];
+  }
     protected resource_name: string = 'sharing/webdav';
     protected route_success: string[] = [ 'sharing', 'webdav' ];
     protected isEntity: boolean = true;

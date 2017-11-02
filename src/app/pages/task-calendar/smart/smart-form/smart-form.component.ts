@@ -15,7 +15,9 @@ import { FormGroup } from '@angular/forms';
   providers: [TaskService, StorageService, EntityFormService]
 })
 export class SmartFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'tasks/smarttest';
   protected route_success: string[] = ['tasks', 'smart'];
   protected entityForm: EntityFormComponent;

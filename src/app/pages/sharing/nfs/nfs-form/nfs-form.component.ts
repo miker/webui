@@ -12,7 +12,9 @@ import { EntityFormService } from '../../../common/entity/entity-form/services/e
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class NFSFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected route_success: string[] = [ 'sharing', 'nfs' ];
   protected resource_name: string = 'sharing/nfs/';
   protected isEntity: boolean = true;

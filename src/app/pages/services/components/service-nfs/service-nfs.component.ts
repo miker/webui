@@ -18,6 +18,9 @@ import {
 })
 
 export class ServiceNFSComponent{
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/nfs';
   protected route_success: string[] = [ 'services' ];
   public fieldConfig: FieldConfig[] = [

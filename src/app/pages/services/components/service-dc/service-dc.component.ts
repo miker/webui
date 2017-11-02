@@ -28,6 +28,9 @@ import {
 })
 
 export class ServiceDCComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/domaincontroller';
   protected route_success: string[] = [ 'services' ];
 

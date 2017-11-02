@@ -20,6 +20,9 @@ import {
 })
 
 export class ServiceLLDPComponent {
+    getActions() {
+    return [];
+  }
   protected resource_name: string = 'services/lldp';
   protected route_success: string[] = [ 'services' ];
 

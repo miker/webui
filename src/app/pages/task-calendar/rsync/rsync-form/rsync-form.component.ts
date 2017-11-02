@@ -15,7 +15,9 @@ import { FormGroup } from '@angular/forms';
   providers: [TaskService, UserService, EntityFormService]
 })
 export class RsyncFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'tasks/rsync';
   protected route_success: string[] = ['tasks', 'rsync'];
   protected entityForm: EntityFormComponent;

@@ -16,7 +16,9 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class LaggFormComponent {
-
+  getActions() {
+    return [];
+  }
   protected resource_name: string = 'network/lagg/';
   protected route_success: string[] = [ 'network', 'laggs' ];
   protected isEntity: boolean = true;

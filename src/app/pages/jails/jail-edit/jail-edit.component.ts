@@ -18,7 +18,9 @@ import { EntityFormService } from '../../common/entity/entity-form/services/enti
   providers: [JailService, EntityFormService]
 })
 export class JailEditComponent implements OnInit {
-
+  getActions() {
+    return [];
+  }
   protected updateCall = 'jail.do_update';
   protected upgradeCall = 'jail.upgrade';
   protected queryCall = 'jail.query';
