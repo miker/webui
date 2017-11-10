@@ -1,4 +1,5 @@
 import {Location} from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import {
   Component,
   ContentChildren,
@@ -31,12 +32,15 @@ import {AdminLayoutComponent} from '../../../../components/common/layouts/admin-
   selector : 'entity-form',
   templateUrl : './entity-form.component.html',
   styleUrls : [ './entity-form.component.scss' ],
-  providers : [ EntityFormService, FieldRelationService ]
+  providers : [ EntityFormService, Title, FieldRelationService ]
 })
 export class EntityFormComponent implements OnInit, OnDestroy {
 
   @Input('conf') conf: any;
-
+  private title: Title;
+  public spin: boolean = true;
+  public direction: string = 'right';
+  public animationMode: string = 'fling';
   protected pk: any;
   public formGroup: FormGroup;
   public fieldConfig: FieldConfig[];
@@ -68,7 +72,8 @@ export class EntityFormComponent implements OnInit, OnDestroy {
   public error: string;
   public success: boolean = false;
   public data: Object = {};
-
+  public actions: any;
+  
   constructor(protected router: Router, protected route: ActivatedRoute,
               protected rest: RestService, protected ws: WebSocketService,
               protected location: Location, private fb: FormBuilder,
@@ -90,6 +95,11 @@ export class EntityFormComponent implements OnInit, OnDestroy {
     if (this.conf.preInit) {
       this.conf.preInit(this);
     }
+    if (this.conf.getActions) {
+      this.actions = this.conf.getActions
+    } else {
+      this.actions = [];
+    }
     this.sub = this.route.params.subscribe(params => {
       this.resourceName = this.conf.resource_name;
       if (this.resourceName && !this.resourceName.endsWith('/')) {
@@ -103,7 +113,7 @@ export class EntityFormComponent implements OnInit, OnDestroy {
           } else {
             this.submitFunction = this.editSubmit;
             this.resourceName = this.resourceName + this.pk + '/';
-          }      
+          }
         } else {
           if (this.conf.addCall) {
             this.submitFunction = this.addCall;
@@ -194,7 +204,7 @@ export class EntityFormComponent implements OnInit, OnDestroy {
       this.conf.afterInit(this);
     }
   }
-
+  
   ngOnChanges() {
     if (this.formGroup) {
       const controls = Object.keys(this.formGroup.controls);
@@ -227,7 +237,7 @@ export class EntityFormComponent implements OnInit, OnDestroy {
     return this.ws.call(call, payload);
   }
 
-  editSubmit(body: any) { 
+  editSubmit(body: any) {
     let resource = this.resourceName;
     if (this.conf.custom_edit_query) {
       resource = this.conf.custom_edit_query;
@@ -248,7 +258,7 @@ export class EntityFormComponent implements OnInit, OnDestroy {
       resource = this.conf.custom_add_query;
     }
 
-    return this.rest.post(resource, {body}, this.conf.route_usebaseUrl); 
+    return this.rest.post(resource, {body}, this.conf.route_usebaseUrl);
   }
 
   onSubmit(event: Event) {
@@ -290,9 +300,9 @@ export class EntityFormComponent implements OnInit, OnDestroy {
                             this.success = true;
                           }
 
-                          if (this.conf.resource_name == "system/advanced") {                            
+                          if (this.conf.resource_name == "system/advanced") {
                             this.adminLayout.onShowConsoleFooterBar(value['adv_consolemsg']);
-                          }                          
+                          }
                         },
                         (res) => {
                           this.loader.close();

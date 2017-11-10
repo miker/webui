@@ -1,0 +1,17 @@
+<smd-fab-speed-dial
+    #actionFab [direction]="direction"
+    [animationMode]="animationMode"
+    (mouseenter)="actionFab.open = true"
+    (mouseleave)="actionFab.open = false">
+    <smd-fab-trigger [spin]="spin">
+        <button md-fab><md-icon>list</md-icon></button>
+    </smd-fab-trigger>
+    <smd-fab-actions>
+        <button
+            *ngFor="let action of actions"
+            md-mini-fab (click)="action.onClick()"
+            mdTooltip="{{action.label}}">
+            <md-icon>{{action.icon}}</md-icon>
+        </button>
+    </smd-fab-actions>
+</smd-fab-speed-dial>

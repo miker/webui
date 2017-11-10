@@ -21,6 +21,7 @@ import {
 export class GeneralComponent {
 
   protected resource_name: string = 'system/settings';
+  public title = 'System Settings - General';
 
   public fieldConfig: FieldConfig[] = [{
       type: 'select',
@@ -178,19 +179,32 @@ export class GeneralComponent {
         });
       });
   }
-
-  gotoSaveConfig() {
-    this.router.navigate(
-      new Array('').concat(['system', 'general', 'config-save']));
-  }
-
-  gotoUploadConfig() {
-    this.router.navigate(
-      new Array('').concat(['system', 'general', 'config-upload']));
-  }
-
-  gotoResetConfig() {
-    this.router.navigate(
-      new Array('').concat(['system', 'general', 'config-reset']));
-  }
+  getActions() {
+      let actions = [];
+      actions.push({
+        label : "Save",
+        icon  : "save",
+        onClick : () => {
+          this.router.navigate(
+            new Array('').concat(['system', 'general', 'config-save']));
+        }
+      });
+      actions.push({
+        label : "Upload Config",
+        icon  : "file_upload",
+        onClick : () => {
+          this.router.navigate(
+            new Array('').concat(['system', 'general', 'config-upload']));
+        }
+      });
+      actions.push({
+        label : "Reset",
+        icon  : "clear",
+        onClick : () => {
+          this.router.navigate(
+            new Array('').concat(['system', 'general', 'config-reset']));
+        }
+      });
+      return actions;
+    }
 }
