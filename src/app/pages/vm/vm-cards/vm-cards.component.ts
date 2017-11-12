@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { FreeNASCoreService, CoreEvent } from '../../../services/freenascore.service';
 import { Router } from '@angular/router';
 //import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule, MdButtonToggleGroup } from '@angular/material';
@@ -42,7 +43,7 @@ export class VmCardsComponent implements OnInit {
   @Input() cache = []; // Master List: 
   @ViewChild('viewMode') viewMode:MdButtonToggleGroup;
   
-
+  private init:boolean = true;
   public tpl = "edit";
   private pwrBtnLabel: string;
   private pwrBtnOptions = {
@@ -51,10 +52,24 @@ export class VmCardsComponent implements OnInit {
   }
   protected loaderOpen: boolean = false;
 
-  constructor(protected ws: WebSocketService,protected rest: RestService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
+  constructor(protected core: FreeNASCoreService, protected ws: WebSocketService,protected rest: RestService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
 
   ngOnInit() {
-    this.getVmList('init');
+    // Core Event Listeners
+    this.core.coreEvents.subscribe((evt:CoreEvent) => {
+      switch(evt.name){
+	case "VmProfiles":
+	  console.log("VM Cards Component")
+	  this.setVmList(evt.data)
+	  break;
+	case "VmProfile":
+	  console.log("VM Cards Component")
+	  this.setVm(evt.data)
+	  break;
+      }
+      
+    });
+    this.getVmList();
     this.viewMode.value = "cards";
   }
 
@@ -83,6 +98,10 @@ export class VmCardsComponent implements OnInit {
   }
 
   parseResponse(data){
+    //Temporary Workaround Until Middleware adds state property
+    if(!data.state){
+      data.state = "STOPPED";
+    }
     var card: VmProfile = { 
       name:data.name,
       id:data.id,
@@ -100,20 +119,22 @@ export class VmCardsComponent implements OnInit {
     return card;
   }
 
-  getVmList(init?:string) {
-    this.rest.get('vm/vm', {}).subscribe((res) => {
-      console.log('getVmList');
-      console.log(res);
-      for(var i = 0; i < res.data.length; i++){
-	var card = this.parseResponse(res.data[i]);
+  getVmList(){
+    this.core.coreEvents.next({name:"VmProfilesRequest"})
+  }
+  setVmList(data:any) {
+    //this.rest.get('vm/vm', {}).subscribe((res) => {
+      for(var i = 0; i < data.length; i++){
+	var card = this.parseResponse(data[i]);
 	//console.log(card);
 	this.cache.push(card);
 	this.pwrBtnLabel = this.pwrBtnOptions[this.cache[i].state];
       }   
-      if(init){
+      if(this.init){
 	this.displayAll()
+	this.init = false;
       }
-    })  
+    //}) 
   }
 
   getVm(index,id?:any) {
@@ -123,11 +144,23 @@ export class VmCardsComponent implements OnInit {
       this.cards[index].id = id;
     } 
     
-    this.rest.get('vm/vm/'+this.cards[index].id, {}).subscribe((res) => {
+    if(!id){ id = this.cards[index].id}
+    this.core.coreEvents.next({
+      name:"VmProfileRequest", 
+      args:{
+	id:id,
+      }
+    });
+  }
+  setVm(data:any) {
+    let card = this.parseResponse(data);
+    let index = this.cards.indexOf(card);
+
+    //this.rest.get('vm/vm/'+this.cards[index].id, {}).subscribe((res) => {
       var card = this.parseResponse(res.data);
       this.cards[index] = card;
       this.updateCache();
-    })  
+    //});  
   }
 
   updateCache(){

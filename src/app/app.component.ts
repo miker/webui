@@ -6,6 +6,7 @@ import { RoutePartsService } from "./services/route-parts/route-parts.service";
 import { MdSnackBar } from '@angular/material';
 import * as hopscotch from 'hopscotch';
 import { RestService } from './services/rest.service';
+import { ApiService } from './services/api.service';
 import { TourService } from './services/tour.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
     private routePartsService: RoutePartsService,
     public snackBar: MdSnackBar,
     private rest: RestService,
+    public api: ApiService,
     private tour: TourService) {}
     protected user: any;
 
