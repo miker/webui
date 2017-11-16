@@ -34,13 +34,31 @@
 		<div *ngIf="viewMode.value == 'table'"
 			fxLayout="row"
 	 		fxLayoutWrap
-			fxLayoutAlign="space-between start"
-			fxLayoutGap="5%"
+			fxLayoutAlign="space-between stretch"
+			fxLayoutGap="2%"
 			>
-			<vm-table [data]="cards" fxFlex="60" fxLayout="column"></vm-table>
+			<vm-table [data]="cards" fxFlex="60" ></vm-table>
 
 			<!-- Summary and forms for table view go here -->
-			<div class="dynamic-content" fxFlex="35"><h2>Charts Go Here!</h2></div>
+			<div class="dynamic-content" 
+				fxFlex="38"
+				fxFlexAlign="space-between stretch"
+				fxLayout="row"
+				fxLayoutWrap
+				fxLayoutAlign="space-between stretch"
+				fxLayoutGap="0px">
+		
+			<!-- TableView VM Edit Form -->
+			<vm-card-edit 
+				fxFlex="100"
+				fxFlexAlign="end"
+        *ngIf="focusedVM !== 'none' && cards[focusedVM].template == 'edit'"
+        [isNew]="cards[focusedVM].isNew"
+        [machineId]="cards[focusedVM].id"  
+        (cancel)="cancel(focusedVM)"
+        (saved)="toggleForm($event.flipState,cards[focusedVM],'none');refreshVM(focusedVM,$event.id)"
+        ></vm-card-edit>	
+			</div>
 		</div>
 	</md-card-content>
 </md-card>

@@ -40,6 +40,7 @@ export class VmCardsComponent implements OnInit {
   @Input() searchTerm:string = '';
   @Input() cards = []; // Display List
   @Input() cache = []; // Master List: 
+  @Input() focusedVM = 'none';
   @ViewChild('viewMode') viewMode:MdButtonToggleGroup;
 
 
@@ -145,6 +146,7 @@ export class VmCardsComponent implements OnInit {
       id = evnt;
     }
      */
+    console.log("GETVM: Index == " + index + " && ID = " + id)
     this.getVm(index,id);
   }
 
@@ -198,16 +200,31 @@ export class VmCardsComponent implements OnInit {
     } else {
       this.toggleForm(false,card,'none')
     }
+    this.focusedVM = 'none';
 
   }
 
   focusVM(index){
+    // Flip all other cards to front face
+    if(this.cards[index].isFlipped == true){
+      this.focusedVM = index;
+    }
+   
+    console.log("FOCUSVM: this.focusedVM = " + this.focusedVM)
     for(var i = 0; i < this.cards.length; i++){
       if(i !== index && this.cards[i].isFlipped ){
 	//console.log("Index = " + index + " && i = " + i);
 	this.cards[i].isFlipped = false;
 	this.cards[i].lazyLoaded = false;
 	this.cards[i].template = 'none';
+      }
+    }
+  }
+
+  focusVmById(id){
+    for(var i = 0; i < this.cards.length; i++){
+      if(this.cards[i].id == id){
+	this.focusVM(i);
       }
     }
   }

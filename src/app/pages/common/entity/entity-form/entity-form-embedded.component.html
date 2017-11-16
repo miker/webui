@@ -5,7 +5,7 @@ Please <button md-raised-button color="primary" class="btn btn-link" type="butto
 <p *ngIf="success" type="success">Successfully updated.</p>
 <p *ngIf="error" type="danger"><span [innerHTML]="error"></span></p>
 
-<div class="md-content">
+<!--<div class="md-content">-->
 	<form (ngSubmit)="onSubmit($event)" [formGroup]="formGroup" class="form-wrap">
 		<div class="fieldset-container fieldset-display-{{ fieldSetDisplay }}">
 			<ng-container *ngFor="let fieldSet of fieldSets; let i = index">
@@ -30,5 +30,5 @@ Please <button md-raised-button color="primary" class="btn btn-link" type="butto
 			<!-- </div> -->
 		</md-card-actions>
 	</form>
-</div>
+	<!--</div>-->
 
