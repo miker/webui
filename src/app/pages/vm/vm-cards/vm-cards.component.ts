@@ -7,6 +7,8 @@ import { WebSocketService, RestService } from '../../../services/';
 import { DialogService } from '../../../services/dialog.service';
 import { AppLoaderService } from '../../../services/app-loader/app-loader.service';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -42,6 +44,7 @@ export class VmCardsComponent implements OnInit {
   @Input() cache = []; // Master List: 
   @Input() focusedVM = 'none';
   @ViewChild('viewMode') viewMode:MdButtonToggleGroup;
+  public tableData:BehaviorSubject<any>;
 
 
   public tpl = "edit";
@@ -55,6 +58,7 @@ export class VmCardsComponent implements OnInit {
   constructor(protected ws: WebSocketService,protected rest: RestService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
 
   ngOnInit() {
+    this.tableData = new BehaviorSubject([]);
     this.getVmList('init');
     this.viewMode.value = "cards";
   }
@@ -109,11 +113,13 @@ export class VmCardsComponent implements OnInit {
 	var card = this.parseResponse(res.data[i]);
 	//console.log(card);
 	this.cache.push(card);
-	//this.pwrBtnLabel = this.pwrBtnOptions[this.cache[i].state];
       }   
       if(init){
-	this.displayAll()
+	this.displayAll();
       }
+      console.log();
+      this.tableData.next(this.cards);
+      console.log("GETVMLIST: tableData.next fired");
     })  
   }
 
@@ -182,11 +188,12 @@ export class VmCardsComponent implements OnInit {
 	    this.cards.splice(index,1);
 	    this.loader.close();
 	    this.updateCache();
-	  }/*,
-	  (res) => { 
-	    new EntityUtils().handleError(this, res);
+	    this.focusedVM = 'none';
+	  },
+	  (err) => { 
+	    alert("ERROR! - " + err);
 	    this.loader.close(); 
-	  }*/
+	  }
 	);        
       }
     })

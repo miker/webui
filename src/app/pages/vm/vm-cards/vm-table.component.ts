@@ -1,8 +1,9 @@
-import {Component, ElementRef, OnInit, Input} from '@angular/core';
+import {Component, ChangeDetectorRef, ElementRef, OnDestroy, OnInit, AfterViewInit, Input} from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Observable} from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -15,7 +16,7 @@ import {RestService, WebSocketService} from '../../../services/';
   template : `
     <ngx-datatable
       class='material'
-      [rows]='data'
+      [rows]='config.rows'
       [columnMode]="'force'"
       [scrollbarH]="true"
       [rowHeight]="'50px'"
@@ -81,7 +82,7 @@ import {RestService, WebSocketService} from '../../../services/';
     </ngx-datatable>
   `
 })
-export class VmTableComponent {
+export class VmTableComponent implements OnInit{
   /*
   protected resource_name: string = 'vm/vm';
   protected route_add: string[] = [ 'vm', 'add' ];
@@ -92,7 +93,7 @@ export class VmTableComponent {
   protected toggleStart: string = "vm.start";
   protected toggleStop: string = "vm.stop";
   */
-  constructor(protected router: Router, protected rest: RestService,
+  constructor(protected cd: ChangeDetectorRef, protected router: Router, protected rest: RestService,
     protected ws: WebSocketService) {}
   public title = "Virtual Machines"
 
@@ -108,15 +109,29 @@ export class VmTableComponent {
     /*{name: 'Actions', prop : 'cardActions'}*/
   ];
 
-  @Input() data: any[];
+  @Input() tableData: BehaviorSubject<any>;
+  public data: any[];
   public config: any = {
     paging : true,
     sorting : {columns : this.columns},
     rows: this.data,
   };
 
+  ngOnInit(){
+    console.log("VMTABLE: OnInit")
+    this.tableData.subscribe((cards) => {
+      this.cd.markForCheck();
+      console.log("VMTABLE: Cards Received!")
+      console.log(cards);
+      this.config.rows = [...cards];
+    });
+  }
   afterInit() { 
-    this.config.rows = this.data;
+    //this.config.rows = this.data;
     this.config.columns = this.columns;
+  }
+
+  ngOnDestroy(){
+    console.log("VMTABLE: Destroyed");
   }
 }
