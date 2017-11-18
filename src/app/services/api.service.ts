@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { WebSocketService } from './ws.service';
 import { RestService } from './rest.service';
-import { FreeNASCoreService, CoreEvent } from './freenascore.service';
+import { CoreService, CoreEvent } from './core/core.service';
 
 interface ApiCall {
   namespace: string;
@@ -44,7 +44,7 @@ export class ApiService {
 
   private apiCallBuffer: ApiCall[] = [];
   private isRegistered: boolean = false
-  constructor(protected core: FreeNASCoreService, protected ws: WebSocketService,protected     rest: RestService) {
+  constructor(protected core: CoreService, protected ws: WebSocketService,protected     rest: RestService) {
     console.log("*** New Instance of API Service ***");
     this.registerDefinitions();
   }

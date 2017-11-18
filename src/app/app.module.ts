@@ -8,7 +8,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 import { MaterialModule } from '@angular/material';
 import { NgIdleModule } from '@ng-idle/core';
 import { rootRouterConfig } from './app.routes';
-import { FreeNASCoreService } from './services/freenascore.service';
+import { CoreService } from './services/core/core.service';
 import { AppCommonModule } from "./components/common/app-common.module";
 import { AppComponent } from './app.component';
 
@@ -54,7 +54,7 @@ export function createTranslateLoader(http: Http) {
   ],
   declarations: [AppComponent, ConfirmDialog, ErrorDialog, AboutModalDialog, ConsolePanelModalDialog],
   providers: [
-    FreeNASCoreService,
+    CoreService,
     RoutePartsService,
     NavigationService,
     AuthService,

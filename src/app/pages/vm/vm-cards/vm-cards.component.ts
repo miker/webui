@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { FreeNASCoreService, CoreEvent } from '../../../services/freenascore.service';
+import { CoreService, CoreEvent } from '../../../services/core/core.service';
 import { Router } from '@angular/router';
 //import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule, MdButtonToggleGroup } from '@angular/material';
@@ -52,7 +52,7 @@ export class VmCardsComponent implements OnInit {
   }
   protected loaderOpen: boolean = false;
 
-  constructor(protected core: FreeNASCoreService, protected ws: WebSocketService,protected rest: RestService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
+  constructor(protected core: CoreService, protected ws: WebSocketService,protected rest: RestService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
 
   ngOnInit() {
     // Core Event Listeners
