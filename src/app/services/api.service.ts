@@ -35,16 +35,19 @@ export class ApiService {
       (evt:CoreEvent) => {
 	//Process Event if CoreEvent is in the api definitions list
 	if(this.apiDefinitions[evt.name]){
+	  //console.log(evt);
 	  let call = this.parseCoreEvent(evt);
 	  if(call.args){
 	    this.ws.call(call.namespace, call.args).subscribe((res) => {
-	      this.core.coreEvents.next({name:"VmList",data:res.data})
+	      console.log("*** API Response:");
+	      console.log(res)
+	      this.core.coreEvents.next({name:"VmProfile",data:res})
 	    });
 	  } else {
 	    this.ws.call(call.namespace).subscribe((res) => {
 	      console.log("*** API Response:");
 	      console.log(res);
-	      this.core.coreEvents.next({name:"VmList",data:res})
+	      this.core.coreEvents.next({name:"VmProfiles",data:res})
 	    });
 	  }
 	}

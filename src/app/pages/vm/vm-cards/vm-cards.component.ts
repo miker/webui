@@ -60,10 +60,11 @@ export class VmCardsComponent implements OnInit {
       switch(evt.name){
 	case "VmProfiles":
 	  console.log("VM Cards Component")
-	  this.setVmList(evt.data)
+	  this.setVmList(evt.data);
 	  break;
 	case "VmProfile":
-	  console.log("VM Cards Component")
+	  console.log("VM Cards Component");
+	  console.log(evt);
 	  this.setVm(evt.data)
 	  break;
       }
@@ -145,20 +146,31 @@ export class VmCardsComponent implements OnInit {
     } 
     
     if(!id){ id = this.cards[index].id}
+    console.log("GETVM:");
+    console.log(this.cards[index]);
     this.core.coreEvents.next({
       name:"VmProfileRequest", 
-      args:{
-	id:id,
-      }
+      //args:[[["id", "=", id]]]
+      args:[[[ 'id', '=',  String(id) ]], {"get": true}]
     });
   }
   setVm(data:any) {
     let card = this.parseResponse(data);
-    let index = this.cards.indexOf(card);
+    let index;
+    for(var i = 0; i < this.cards.length; i++){
+      if(card.id == this.cards[i].id){
+	index = i;
+	break;
+      }
+    }
 
+    for(var prop in data){
+      this.cards[index][prop] = card[prop];
+    }
+    console.log(index);
     //this.rest.get('vm/vm/'+this.cards[index].id, {}).subscribe((res) => {
-      var card = this.parseResponse(res.data);
-      this.cards[index] = card;
+    //var card = this.parseResponse(res.data);
+    //this.cards[index] = card;
       this.updateCache();
     //});  
   }
