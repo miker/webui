@@ -56,7 +56,7 @@ export class VmCardsComponent implements OnInit {
 
   ngOnInit() {
     // Core Event Listeners
-    this.core.coreEvents.subscribe((evt:CoreEvent) => {
+    /*this.core.coreEvents.subscribe((evt:CoreEvent) => {
       switch(evt.name){
 	case "VmProfiles":
 	  console.log("VM Cards Component")
@@ -69,7 +69,15 @@ export class VmCardsComponent implements OnInit {
 	  break;
       }
       
-    });
+    });*/
+
+    /* 
+     * Register the component with the EventBus 
+     * and subscribe to the observable it returns
+     */
+    this.core.register({observerClass:this, eventName:"VmProfiles"}).subscribe((evt: CoreEvent) => { this.setVmList(evt) });
+    this.core.register({observerClass:this, eventName:"VmProfile"}).subscribe((evt: CoreEvent) => { this.setVm(evt) });
+
     this.getVmList();
     this.viewMode.value = "cards";
   }
@@ -121,10 +129,17 @@ export class VmCardsComponent implements OnInit {
   }
 
   getVmList(){
-    this.core.coreEvents.next({name:"VmProfilesRequest"})
+    this.core.emit({name:"VmProfilesRequest"})
   }
-  setVmList(data:any) {
-    //this.rest.get('vm/vm', {}).subscribe((res) => {
+  setVmList(evt: CoreEvent) {
+    console.log("SETVMLIST: CoreEvent Received");
+    console.log(evt);
+    let data:any;
+    if(evt.data){
+      data = evt.data;
+    } else{
+      data = [];
+    }
       for(var i = 0; i < data.length; i++){
 	var card = this.parseResponse(data[i]);
 	//console.log(card);
@@ -135,7 +150,6 @@ export class VmCardsComponent implements OnInit {
 	this.displayAll()
 	this.init = false;
       }
-    //}) 
   }
 
   getVm(index,id?:any) {
@@ -148,13 +162,13 @@ export class VmCardsComponent implements OnInit {
     if(!id){ id = this.cards[index].id}
     console.log("GETVM:");
     console.log(this.cards[index]);
-    this.core.coreEvents.next({
+    this.core.emit({
       name:"VmProfileRequest", 
-      //args:[[["id", "=", id]]]
-      args:[[[ 'id', '=',  String(id) ]], {"get": true}]
+      data:[[[ 'id', '=',  String(id) ]], {"get": true}]
     });
   }
-  setVm(data:any) {
+  setVm(evt:CoreEvent) {
+    let data = evt.data;
     let card = this.parseResponse(data);
     let index;
     for(var i = 0; i < this.cards.length; i++){

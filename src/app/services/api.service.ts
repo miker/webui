@@ -7,7 +7,7 @@ import { FreeNASCoreService, CoreEvent } from './freenascore.service';
 interface ApiCall {
   namespace: string;
   args?: any;
-  response ?: any;
+  responseEvent ?: any;// The event name of the response this service will send
 }
 
 @Injectable()
@@ -18,52 +18,79 @@ export class ApiService {
       protocol:"websocket",
       version:"1",
       namespace: "vm.query",
-      args: []
+      //args: [],
+      responseEvent: "VmProfiles"
     },
     VmProfileRequest:{
       protocol:"websocket",
       version:"1",
       namespace:"vm.query",
-      args:[]
-    }
+      args:[],
+      responseEvent: "VmProfile"
+    },
+    VmStart:{
+      protocol:"websocket",
+      version:"1",
+      namespace:"vm.start",
+      //args:[]
+    },
+    VmStop:{
+      protocol:"websocket",
+      version:"1",
+      namespace:"vm.stop",
+      //args:[]
+    },
   } 
 
   private apiCallBuffer: ApiCall[] = [];
+  private isRegistered: boolean = false
   constructor(protected core: FreeNASCoreService, protected ws: WebSocketService,protected     rest: RestService) {
     console.log("*** New Instance of API Service ***");
-    this.core.coreEvents.subscribe(
-      (evt:CoreEvent) => {
-	//Process Event if CoreEvent is in the api definitions list
-	if(this.apiDefinitions[evt.name]){
-	  //console.log(evt);
-	  let call = this.parseCoreEvent(evt);
-	  if(call.args){
-	    this.ws.call(call.namespace, call.args).subscribe((res) => {
-	      console.log("*** API Response:");
-	      console.log(res)
-	      this.core.coreEvents.next({name:"VmProfile",data:res})
-	    });
-	  } else {
-	    this.ws.call(call.namespace).subscribe((res) => {
-	      console.log("*** API Response:");
-	      console.log(res);
-	      this.core.coreEvents.next({name:"VmProfiles",data:res})
-	    });
+    this.registerDefinitions();
+  }
+
+  registerDefinitions(){
+    console.log("APISERVICE: Registering API Definitions");
+    for(var def in this.apiDefinitions){
+      console.log("def = " + def);
+      this.core.register({observerClass:this, eventName:def}).subscribe(
+	(evt:CoreEvent) => {
+	  //Process Event if CoreEvent is in the api definitions list
+	  if(this.apiDefinitions[evt.name]){
+	    //console.log(evt);
+	    let call = this.parseCoreEvent(evt);
+	    if(call.args){
+	      this.ws.call(call.namespace, call.args).subscribe((res) => {
+		console.log("*** API Response:");
+		console.log(res)
+		//this.core.coreEvents.next({name:call.responseEvent,data:res})
+		this.core.emit({name:call.responseEvent,data:res});
+	      });
+	    } else {
+	      this.ws.call(call.namespace).subscribe((res) => {
+		console.log("*** API Response:");
+		//console.log(res);
+		console.log(call);
+		//this.core.coreEvents.next({name:call.responseEvent,data:res})
+		this.core.emit({name:call.responseEvent,data:res});
+	      });
+	    }
 	  }
-	}
-      },
-      (err) => {
-	console.log(err)
-      });
+	},
+	(err) => {
+	  console.log(err)
+	});
+    }
   }
 
   parseCoreEvent(evt:CoreEvent){
     let call: ApiCall = {
-      namespace: this.apiDefinitions[evt.name].namespace
+      namespace: this.apiDefinitions[evt.name].namespace,
+      responseEvent: this.apiDefinitions[evt.name].responseEvent
     }
 
-    if(evt.args){
-      call.args = evt.args;
+    if(evt.data){
+      call.args = evt.data;
     } 
     return call;
   }
