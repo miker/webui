@@ -28,17 +28,19 @@ export class ApiService {
       args:[],
       responseEvent: "VmProfile"
     },
-    VmStart:{
+    VmStartRequest:{
       protocol:"websocket",
       version:"1",
       namespace:"vm.start",
-      //args:[]
+      args:[],
+      responseEvent:"VmStarted"
     },
-    VmStop:{
+    VmStopRequest:{
       protocol:"websocket",
       version:"1",
       namespace:"vm.stop",
-      //args:[]
+      args:[],
+      responseEvent:"VmStopped"
     },
   } 
 

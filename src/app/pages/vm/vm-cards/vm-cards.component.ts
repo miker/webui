@@ -55,28 +55,15 @@ export class VmCardsComponent implements OnInit {
   constructor(protected core: CoreService, protected ws: WebSocketService,protected rest: RestService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
 
   ngOnInit() {
-    // Core Event Listeners
-    /*this.core.coreEvents.subscribe((evt:CoreEvent) => {
-      switch(evt.name){
-	case "VmProfiles":
-	  console.log("VM Cards Component")
-	  this.setVmList(evt.data);
-	  break;
-	case "VmProfile":
-	  console.log("VM Cards Component");
-	  console.log(evt);
-	  this.setVm(evt.data)
-	  break;
-      }
-      
-    });*/
 
     /* 
      * Register the component with the EventBus 
      * and subscribe to the observable it returns
      */
-    this.core.register({observerClass:this, eventName:"VmProfiles"}).subscribe((evt: CoreEvent) => { this.setVmList(evt) });
-    this.core.register({observerClass:this, eventName:"VmProfile"}).subscribe((evt: CoreEvent) => { this.setVm(evt) });
+    this.core.register({observerClass:this, eventName:"VmProfiles"}).subscribe((evt: CoreEvent) => { this.setVmList(evt); });
+    this.core.register({observerClass:this, eventName:"VmProfile"}).subscribe((evt: CoreEvent) => { this.setVm(evt); });
+    this.core.register({observerClass:this, eventName:"VmStarted"}).subscribe((evt:CoreEvent) => { this.updateVmModelState(evt.data); });
+    this.core.register({observerClass:this, eventName:"VmStopped"}).subscribe((evt:CoreEvent) => { this.updateVmModelState(evt.data); });
 
     this.getVmList();
     this.viewMode.value = "cards";
@@ -182,11 +169,7 @@ export class VmCardsComponent implements OnInit {
       this.cards[index][prop] = card[prop];
     }
     console.log(index);
-    //this.rest.get('vm/vm/'+this.cards[index].id, {}).subscribe((res) => {
-    //var card = this.parseResponse(res.data);
-    //this.cards[index] = card;
       this.updateCache();
-    //});  
   }
 
   updateCache(){
@@ -195,15 +178,6 @@ export class VmCardsComponent implements OnInit {
   }
 
   refreshVM(index,id:any){
-    //let id: any;
-    //console.log(id);
-    /*
-    if(evnt.data.id){
-      id = evnt.data.id
-    } else {
-      id = evnt;
-    }
-     */
       this.getVm(index,id);
   }
 
@@ -287,10 +261,19 @@ export class VmCardsComponent implements OnInit {
     this.focusVM(index);
   }
 
-  // toggles VM on/off
+  // toggles VM on/off (The UI elements shouldn't trigger this directly)
   toggleVmState(index){
     let vm = this.cards[index];
-    let action: string;
+    let eventName: string;
+    if (vm.state != 'RUNNING') {
+      eventName = 'VmStartRequest';
+    } else {
+      eventName = 'VmStopRequest';
+    }
+
+    this.core.emit({ name:eventName , data: [ vm.id ] });
+
+    /*let action: string;
     let rpc: string;
     if (vm.state != 'RUNNING') {
       rpc = 'vm.start';
@@ -301,7 +284,31 @@ export class VmCardsComponent implements OnInit {
       console.log(this.cards[index].state);
       this.refreshVM(index,vm.id);
       this.pwrBtnLabel = this.pwrBtnOptions[this.cards[index].state];
-    });
+    });*/
+  }
+
+  updateVmModelState(data){
+    // Middleware returns a boolean. UI requires more VM data
+      let id = 0;
+      if(!data){
+	console.log("Response data = " + data);
+      }
+
+      console.log("UPDATE_VM_MODEL:");
+      console.log(data);
+
+      let index = this.getViewIndexById(id);
+      console.log(this.cards[index].state);
+      this.refreshVM(index,id);
+      this.pwrBtnLabel = this.pwrBtnOptions[this.cards[index].state];
+  }
+
+  getViewIndexById(id){
+    for(var i = 0; i < this.cards.length; i++){
+      if(this.cards[i].id == id){
+	return i;
+      }
+    }
   }
 
   vnc(index){
