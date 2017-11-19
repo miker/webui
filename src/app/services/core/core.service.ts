@@ -5,9 +5,12 @@ import { Subject } from 'rxjs/Subject';
 
 /*
  * Heavily influenced by Objective C's NSNotificationCenter
- * Terminology has been altered to follow RxJS/Javascript 
- * to make things more intuitive, but doesn't actually use
- * RxJS under the hood.
+ * Methodology has been altered to incorporate RxJS Subjects 
+ * to leverage built in functionality of Angular. 
+ *
+ * ObjectiveC uses a "selector" a.k.a. callback that NSNotificationCenter
+ * would call directly. This CoreService instead returns an RxJS Observable that
+ * the component/service can subscribe to.
  *
  * If you're interested check out the link below:
  * https://developer.apple.com/documentation/foundation/nsnotificationcenter
