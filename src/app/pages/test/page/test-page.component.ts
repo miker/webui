@@ -10,10 +10,10 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: './test-page.component.html',
   styleUrls: ['./test-page.component.css']
 })
-export class TestPage {
+export class TestPage extends Page {
 
   constructor(protected core: CoreService){
-    //super({ events:new Subject(), data:[], url:"Test Page" });
+    super({ events:new Subject(), data:[], url:"Test Page" });
     this.core.register({observerClass: this, eventName:"someRandomEvent"}).subscribe((evt) => {console.log('Blah')});
     console.log('TestPage Component Contructor')
   }
