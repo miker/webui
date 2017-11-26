@@ -165,6 +165,13 @@ export class NavigationService {
       state: 'vm'
     },
     {
+      name: 'Test Page',
+      type: 'link',
+      tooltip: 'Test Page',
+      icon: 'laptop_windows',
+      state: 'test'
+    },
+    {
       name: 'Reporting',
       type: 'link',
       tooltip: 'Reports',

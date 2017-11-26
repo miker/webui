@@ -21,6 +21,7 @@ import { DownloadKeyModalDialog } from './components/common/dialog/downloadkey/d
 import { ErrorDialog } from './pages/common/error-dialog/error-dialog.component';
 import { WebSocketService } from './services/ws.service';
 import { RestService } from './services/rest.service';
+import { CoreServices} from 'app/core/coreservices.module';
 import { AppLoaderService } from './services/app-loader/app-loader.service';
 
 import { ENV_PROVIDERS } from '../environments/environment';
@@ -50,6 +51,7 @@ export function createTranslateLoader(http: Http) {
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     NgIdleModule.forRoot(),
     MarkdownModule.forRoot(),
+    CoreServices.forRoot()
   ],
   declarations: [AppComponent, ConfirmDialog, ErrorDialog, AboutModalDialog, ConsolePanelModalDialog, DownloadKeyModalDialog],
   providers: [
