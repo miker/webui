@@ -10,14 +10,17 @@ export interface ViewControllerOptions {
 export abstract class ViewController {
 
   protected name: string = "ViewController";
-  public viewsData: any[] = []; // (each of these are passed to view as <data> property)
-  private viewsEvents: Subject<CoreEvent>;
+  public viewsData: any[]; // (each of these are passed to view as <data> property)
+  protected viewsEvents: Subject<CoreEvent>;
 
   constructor(options?: ViewControllerOptions) {
     console.log(this.name + ' Class Constructor'); 
     if(options){
       this.setViewsData(options.data);
       this.setViewsEvents(options.events);
+    } else {
+      this.setViewsData();
+      this.setViewsEvents();
     }
   }
 

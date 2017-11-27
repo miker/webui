@@ -15,6 +15,8 @@ export class TestPage extends PageComponent {
   constructor(protected core: CoreService){
     super(core);
     console.log('TestPage Component Contructor');
+    console.log(this.viewsData);
+    console.log(this.viewsEvents);
 
     /* 
      * Register the component with the EventBus 
@@ -26,6 +28,7 @@ export class TestPage extends PageComponent {
     });
 
     this.init();
+
   }
 
   init(){
