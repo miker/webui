@@ -8,10 +8,10 @@ export interface Action {
 
 export abstract class View {
 
-  private actions?: Action[];
-  private primaryAction?: Action;// (this should be your only FAB button in template) 
-  private parent:Subject<any>;// (Send actions back to ViewController via this Subject)
-  private data: any;
+  public actions?: Action[];
+  public primaryAction?: Action;// (this should be your only FAB button in template) 
+  public parent:Subject<any>;// (Send actions back to ViewController via this Subject)
+  public data: any;
 
   constructor() { }
 }

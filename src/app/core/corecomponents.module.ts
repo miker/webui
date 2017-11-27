@@ -1,7 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { MaterialModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
-import { ApiService } from 'app/core/services/api.service';
-import { CoreService } from 'app/core/services/core.service';
+
+import { PageComponent } from 'app/core/components/page/page.component';
+import { ViewComponent } from './components/view/view.component';
+import { CardComponent } from './components/card/card.component';
 
 /*
  *
@@ -15,23 +18,19 @@ import { CoreService } from 'app/core/services/core.service';
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule
   ],
-  providers: [
-    CoreService,
-    ApiService
+  declarations: [
+    PageComponent,
+    ViewComponent,
+    CardComponent
   ],
   exports: [ // Modules and Components here
     CommonModule,
+    MaterialModule,
+    PageComponent,
+    ViewComponent,
+    CardComponent
   ]
 })
-export class CoreServices {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CoreServices,
-      providers: [
-        CoreService,
-	ApiService
-      ]
-    }
-  }
-}
+export class CoreComponents {}

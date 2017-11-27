@@ -12,13 +12,17 @@ export interface PageOptions {
 
 export abstract class Page extends ViewController {
 
-  //protected name: string = "Page";
+  public name: string = "Page";
   private url: string; // Give the page a url
   private displayList: any[]; // (This is a copy of the <viewsData>. If filtering view nodes, this is what gets altered instead of the actual viewsData)
 
-  constructor(options: PageOptions) {
-    super({events: options.events, data: options.data});
+  constructor(options?: PageOptions) {
+    super();
     // url ??
-    console.log(super.getName() + ' Class Constructor');
+    console.log(this.name + ' Class Constructor');
+    if(options){
+      this.setViewsData(options.data);
+      this.setViewsEvents(options.events);
+    }
   }
 }

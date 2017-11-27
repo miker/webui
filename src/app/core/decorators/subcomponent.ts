@@ -3,21 +3,27 @@ import "reflect-metadata";
 
 export function SubComponent(annotation: any) {
   return function (target: Function) {
-    const parentTarget = Object.getPrototypeOf(target.prototype).constructor;
-    
+  const parentTarget = Object.getPrototypeOf(target.prototype).constructor;
+
     const parentAnnotations = Reflect.getMetadata('annotations', parentTarget);
-    
+
     let parentAnnotation = parentAnnotations[0];
     Object.keys(parentAnnotation).forEach(key => {
       if (parentAnnotation[key]) {
-        if (!annotation[key]) {
-          annotation[key] = parentAnnotation[key];
-        }
+	if (!annotation[key]) {
+	  annotation[key] = parentAnnotation[key];
+	}
       }
     });
-    
-    const metadata = new Component(annotation);
+  
 
+  const metadata = new Component(annotation);
+  console.log("SubComponent!!");
+  //let metadata = Object.create(DecoratorFactory);
+  //metadata = Object.assign(metadata, defaultComponentProps, annotation);
+  //Object.setPrototypeOf(annotation, DecoratorFactory);
+  //console.log(defaultComponentProps);
+  //return function (target: Function) {
     Reflect.defineMetadata('annotations', [ metadata ], target);
-  };
-};
+  }
+}
