@@ -203,6 +203,13 @@ export class NavigationService {
       state: 'systemprocesses'
     },
     {
+       name: 'PEER',
+       type: 'link',
+       tooltip: 'Peer',
+       icon: 'storage',
+       state: 'peer'
+    },
+    {
       name: 'Shell',
       type: 'link',
       tooltip: 'Shell',
