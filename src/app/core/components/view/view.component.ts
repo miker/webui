@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { View, Action } from 'app/core/classes/view';
+import { Subject } from 'rxjs/Subject';
+import { CoreEvent } from 'app/core/services/core.service';
+import { View } from 'app/core/classes/view';
 
 // This makes the metadata available globally
 // Deal Breaker: Angular injects the component's
@@ -13,13 +15,19 @@ export const ViewComponentMetadata = {
 @Component(ViewComponentMetadata)
 export class ViewComponent extends View {
 
-  @Input() data: any;
+  readonly componentName = ViewComponent;
+  public data: any;
+  public viewController: Subject<CoreEvent>
 
   constructor(){
     super();
   }
 
   ngOnInit() {
-  }
 
+  }
+  
+  setData(data:any){
+    this.data = data;
+  }
 }

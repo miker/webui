@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -21,7 +21,12 @@ import { DownloadKeyModalDialog } from './components/common/dialog/downloadkey/d
 import { ErrorDialog } from './pages/common/error-dialog/error-dialog.component';
 import { WebSocketService } from './services/ws.service';
 import { RestService } from './services/rest.service';
-import { CoreServices} from 'app/core/coreservices.module';
+
+// Core Application Services and Service Injector
+import { CoreServices} from 'app/core/services/coreservices.module';
+import { setCoreServiceInjector } from 'app/core/services/coreserviceinjector';
+import { CoreComponents } from 'app/core/components/corecomponents.module'
+
 import { AppLoaderService } from './services/app-loader/app-loader.service';
 
 import { ENV_PROVIDERS } from '../environments/environment';
@@ -51,7 +56,8 @@ export function createTranslateLoader(http: Http) {
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     NgIdleModule.forRoot(),
     MarkdownModule.forRoot(),
-    CoreServices.forRoot()
+    CoreServices.forRoot(),
+    CoreComponents
   ],
   declarations: [AppComponent, ConfirmDialog, ErrorDialog, AboutModalDialog, ConsolePanelModalDialog, DownloadKeyModalDialog],
   providers: [
@@ -67,6 +73,7 @@ export function createTranslateLoader(http: Http) {
     AppComponent
   ],
   entryComponents: [
+    // CoreComponents
     AppLoaderComponent,
     ConfirmDialog,
     ErrorDialog,
@@ -75,4 +82,13 @@ export function createTranslateLoader(http: Http) {
     DownloadKeyModalDialog
   ],
 })
-export class AppModule { }
+export class AppModule { 
+  /**
+     * Allows for retrieving singletons using `AppModule.injector.get(MyService)`
+     * This is good to prevent injecting the service as constructor parameter.
+     */
+    static injector: Injector;
+    constructor(injector: Injector) {
+      setCoreServiceInjector(injector);
+    }
+}

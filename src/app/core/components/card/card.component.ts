@@ -17,8 +17,9 @@ export const CardComponentMetadata = {
 
 @Component(CardComponentMetadata)
 export class CardComponent extends ViewComponent {
-  
-  @Input() data: CardData;
+
+  readonly componentName = CardComponent;
+  @Input() data: any; //CardData = {};
 
   constructor(){
     super();

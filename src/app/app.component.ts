@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, NavigationCancel, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { URLSearchParams, } from '@angular/http';
@@ -22,7 +22,10 @@ export class AppComponent implements OnInit {
   protected accountUserResource: string = 'account/users/1';
   protected user: any;
 
-  constructor(public title: Title,
+  constructor(
+    public title: Title,
+    public viewContainerRef: ViewContainerRef,
+    public resolver: ComponentFactoryResolver,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private routePartsService: RoutePartsService,
@@ -37,12 +40,12 @@ export class AppComponent implements OnInit {
 
     router.events.subscribe(s => {
       if (s instanceof NavigationCancel) {
-        let params = new URLSearchParams(s.url.split('#')[1]);
-        let isEmbedded = params.get('embedded');
+	let params = new URLSearchParams(s.url.split('#')[1]);
+	let isEmbedded = params.get('embedded');
 
-        if(isEmbedded) {
-          document.body.className += " embedding-active";
-        }
+	if(isEmbedded) {
+	  document.body.className += " embedding-active";
+	}
       }
     });
   }
@@ -55,12 +58,12 @@ export class AppComponent implements OnInit {
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe((routeChange) => {
       const routeParts = this.routePartsService.generateRouteParts(this.activeRoute.snapshot);
       if (!routeParts.length) {
-        return this.title.setTitle(this.appTitle);
+	return this.title.setTitle(this.appTitle);
       }
       // Extract title from parts;
       this.pageTitle = routeParts
-        .map((part) => part.title)
-        .reduce((partA, partI) => { return `${partA} > ${partI}` });
+	.map((part) => part.title)
+	.reduce((partA, partI) => { return `${partA} > ${partI}` });
       this.pageTitle += ` | ${this.appTitle}`;
       this.title.setTitle(this.pageTitle);
     });

@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from 'app/core/services/api.service';
 import { CoreService } from 'app/core/services/core.service';
 
+
 /*
  *
  * This is the Core Module. By importing this module you'll 
  * ensure your page will have the right dependencies in place
  * to make use of the CoreService (event bus) and any helper
  * services that get added later on.
+ *
+ * Import this in app.module.ts and call it's forRoot() method
  *
  * */
 
@@ -21,7 +24,7 @@ import { CoreService } from 'app/core/services/core.service';
     ApiService
   ],
   exports: [ // Modules and Components here
-    CommonModule,
+    CommonModule
   ]
 })
 export class CoreServices {
@@ -29,7 +32,7 @@ export class CoreServices {
     return {
       ngModule: CoreServices,
       providers: [
-        CoreService,
+	CoreService,
 	ApiService
       ]
     }

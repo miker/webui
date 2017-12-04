@@ -1,4 +1,4 @@
-<md-card>
+<md-card *ngIf="data">
 	<md-card-title *ngIf="data.header" >{{ data.header }}</md-card-title>
 	<md-card-content *ngIf="data.content">{{ data.content }}</md-card-content>
 	<md-card-footer *ngIf="data.footer"></md-card-footer>

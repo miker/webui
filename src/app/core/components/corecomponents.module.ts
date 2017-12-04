@@ -3,8 +3,11 @@ import { MaterialModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 
 import { PageComponent } from 'app/core/components/page/page.component';
-import { ViewComponent } from './components/view/view.component';
-import { CardComponent } from './components/card/card.component';
+import { ViewComponent } from 'app/core/components/view/view.component';
+import { CardComponent } from 'app/core/components/card/card.component';
+import { ViewControlComponent } from 'app/core/components/viewcontrol/viewcontrol.component';
+import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
+import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
 
 /*
  *
@@ -23,13 +26,25 @@ import { CardComponent } from './components/card/card.component';
   declarations: [
     PageComponent,
     ViewComponent,
-    CardComponent
+    CardComponent,
+    ViewControlComponent,
+    ViewControllerComponent,
+    CoreContainer
   ],
   exports: [ // Modules and Components here
     CommonModule,
     MaterialModule,
+    CoreContainer,
     PageComponent,
     ViewComponent,
+    ViewControlComponent,
+    ViewControllerComponent,
+    CardComponent
+  ],
+  entryComponents:[
+    ViewComponent,
+    ViewControlComponent,
+    ViewControllerComponent,
     CardComponent
   ]
 })
