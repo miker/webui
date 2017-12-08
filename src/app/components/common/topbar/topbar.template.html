@@ -31,8 +31,8 @@
     <md-icon>format_color_fill</md-icon>
   </button>
   <md-menu #themeMenu="mdMenu" >
-    <md-grid-list class="theme-list" cols="1" rowHeight="24px">
-      <md-grid-tile *ngFor="let theme of themeService.freenasThemes" (click)="changeTheme(theme)">
+    <md-grid-list *ngFor="let theme of themeService.freenasThemes" class="theme-list" cols="1" [rowHeight]="theme.rh">
+      <md-grid-tile *ngIf="!theme.isHidden" (click)="changeTheme(theme)">
         <div md-menu-item [title]="theme.name">
           <div [style.background]="theme.baseColor" class="egret-swatch"></div>
           <md-icon class="active-icon" *ngIf="theme.isActive">check</md-icon>
@@ -40,6 +40,15 @@
         <span class="mat-color-accent text-muted text-sm mat-list-item-ripple mat-ripple">{{ theme.label }}</span>
       </md-grid-tile>
     </md-grid-list>
+    <md-grid-list class="theme-list" cols="1" rowHeight="24px">
+      <md-grid-tile (click)="onCustomTheme()">
+      <div md-menu-item title="Custom Theme">
+          <div style="background: #0095d5;" class="egret-swatch"></div>
+          <md-icon class="active-icon">settings</md-icon>
+     </div>
+        <span class="mat-color-accent text-muted text-sm mat-list-item-ripple mat-ripple">{{ "Custom Theme" }}</span>
+      </md-grid-tile>
+      </md-grid-list>
   </md-menu>
 
   <button md-icon-button (click)="startTour()" class="topbar-button-right" mdTooltip="Guide Tour" [style.overflow]="'visible'">

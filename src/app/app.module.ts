@@ -17,6 +17,7 @@ import { AuthService } from './services/auth/auth.service';
 import { ConfirmDialog } from './pages/common/confirm-dialog/confirm-dialog.component';
 import { AboutModalDialog } from './components/common/dialog/about/about-dialog.component';
 import { ConsolePanelModalDialog } from './components/common/dialog/consolepanel/consolepanel-dialog.component';
+import { CustomThemeModalDialog } from './components/common/dialog/customtheme/customtheme-dialog.component';
 import { DownloadKeyModalDialog } from './components/common/dialog/downloadkey/downloadkey-dialog.component';
 import { ErrorDialog } from './pages/common/error-dialog/error-dialog.component';
 import { InfoDialog } from './pages/common/info-dialog/info-dialog.component';
@@ -29,6 +30,8 @@ import { AppLoaderComponent } from './services/app-loader/app-loader.component';
 import { AppLoaderModule } from './services/app-loader/app-loader.module';
 import { NotificationsService } from 'app/services/notifications.service';
 import { MarkdownModule } from 'angular2-markdown';
+import { ColorPickerModule } from 'ngx-color-picker';
+
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -51,15 +54,17 @@ export function createTranslateLoader(http: Http) {
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     NgIdleModule.forRoot(),
     MarkdownModule.forRoot(),
+    ColorPickerModule,
+
   ],
-  declarations: [AppComponent, ConfirmDialog, ErrorDialog, InfoDialog, AboutModalDialog, ConsolePanelModalDialog, DownloadKeyModalDialog],
+  declarations: [AppComponent, ConfirmDialog, ErrorDialog, InfoDialog, AboutModalDialog, ConsolePanelModalDialog, CustomThemeModalDialog, DownloadKeyModalDialog],
   providers: [
     RoutePartsService,
     NavigationService,
     AuthService,
     WebSocketService,
     RestService,
-    AppLoaderService, 
+    AppLoaderService,
     NotificationsService,
     ENV_PROVIDERS],
   bootstrap: [
@@ -72,6 +77,7 @@ export function createTranslateLoader(http: Http) {
     InfoDialog,
     AboutModalDialog,
     ConsolePanelModalDialog,
+    CustomThemeModalDialog,
     DownloadKeyModalDialog
   ],
 })

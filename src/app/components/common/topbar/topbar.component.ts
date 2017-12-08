@@ -13,6 +13,8 @@ import * as hopscotch from 'hopscotch';
 import {RestService} from "../../../services/rest.service";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
+import { CustomThemeModalDialog } from '../dialog/customtheme/customtheme-dialog.component';
+
 
 @Component({
   selector: 'topbar',
@@ -156,6 +158,14 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
   onShowAbout() {
     let dialogRef = this.dialog.open(AboutModalDialog, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      // The dialog was closed
+    });
+  }
+
+ onCustomTheme() {
+    let dialogRef = this.dialog.open(CustomThemeModalDialog, {});
 
     dialogRef.afterClosed().subscribe(result => {
       // The dialog was closed

@@ -1,0 +1,18 @@
+
+<h1 md-dialog-title class="mat-card-title-text">Custom Theme</h1>
+
+<div md-dialog-content>
+<input [colorPicker]="'#0095d5'"
+        (colorPickerChange)="primary=$event"
+        [style.background]="'#0095d5'"
+        [cpOKButton]="true"/>
+         
+<input [colorPicker]="'#ffc107'"
+        (colorPickerChange)="accent=$event"
+        [style.background]="'#ffc107'"
+        [cpOKButton]="true"/>
+</div>
+<div md-dialog-actions>
+  <button class="mat-raised-button mat-primary" (click)="applyCustomTheme()">Apply</button>
+  <button class="mat-raised-button mat-accent" (click)="dialogRef.close(false)">Close</button>
+</div>

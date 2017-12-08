@@ -7,7 +7,9 @@ export interface Theme {
   label: string;
   baseColor: string;
   isActive: boolean;
-  hasDarkLogo: boolean
+  isHidden: boolean;
+  hasDarkLogo: boolean;
+  rh: string
 }
 
 @Injectable()
@@ -19,43 +21,73 @@ export class ThemeService {
     label: 'Dark Purple',
     baseColor: '#9c27b0',
     isActive: false,
-    hasDarkLogo: false
+    isHidden: false,
+    hasDarkLogo: false,
+    rh: "24px"
   }, {
     name: 'egret-dark-pink',
     label: 'Dark Pink',
     baseColor: '#e91e63',
     isActive: false,
-    hasDarkLogo: false
+    isHidden: false,
+    hasDarkLogo: false,
+    rh: "24px"
   }, {
     name: 'egret-blue',
     label: 'Blue',
     baseColor: '#2196f3',
     isActive: false,
-    hasDarkLogo: true
+    isHidden: false,
+    hasDarkLogo: true,
+    rh: "24px"
   }, {
     name: 'ix-blue',
     label: 'iX Blue',
     baseColor: '#0095D5',
     isActive: true,
-    hasDarkLogo: false
+    isHidden: false,
+    hasDarkLogo: false,
+    rh: "24px"
   }, {
     name: 'egret-indigo',
     label: 'Indigo',
     baseColor: '#3f51b5',
     isActive: false,
-    hasDarkLogo: false
+    isHidden: false,
+    hasDarkLogo: false,
+    rh: "24px"
   }, {
     name: 'freenas-warriors',
     label: 'Warriors',
     baseColor: '#fdb927',
     isActive: false,
-    hasDarkLogo: true
+    isHidden: false,
+    hasDarkLogo: true,
+    rh: "24px"
   }, {
     name: 'freenas-sharks',
     label: 'Sharks',
     baseColor: '#088696',
     isActive: false,
-    hasDarkLogo: false
+    isHidden: false,
+    hasDarkLogo: false,
+    rh: "24px"
+  }, {
+    name: 'custom-light',
+    label: 'Custom Light',
+    baseColor: '#0095D5',
+    isActive: false,
+    isHidden: true,
+    hasDarkLogo: false,
+    rh: "0"
+  }, {
+    name: 'custom-dark',
+    label: 'Custom Dark',
+    baseColor: '#0095D5',
+    isActive: false,
+    isHidden: true,
+    hasDarkLogo: true,
+    rh: "0"
   }];
 
   savedUserTheme = "";

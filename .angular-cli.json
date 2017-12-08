@@ -38,6 +38,8 @@
             "assets/styles/themes/ix-blue.scss",
             "assets/styles/themes/freenas-warriors.scss",
             "assets/styles/themes/freenas-sharks.scss",
+	    "assets/styles/themes/custom-light.scss",
+	    "assets/styles/themes/custom-dark.scss",
             "assets/styles/styles.css",
             "assets/styles/egret_overrides.css"
         ],
