@@ -1,7 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CoreService, CoreEvent } from 'app/core/services/core.service';
 import { ViewControllerComponent, ViewConfig, ViewControllerMetadata } from 'app/core/components/viewcontroller/viewcontroller.component';
-import { CardComponent, CardData } from 'app/core/components/card/card.component';
+import { ViewComponent } from 'app/core/components/view/view.component';
+import { CardComponent } from 'app/core/components/card/card.component';
+import { ViewButtonComponent } from 'app/core/components/viewbutton/viewbutton.component';
 import { Subject } from 'rxjs/Subject';
 import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
 
@@ -14,7 +16,7 @@ import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.c
 })
 export class TestPage extends ViewControllerComponent implements AfterViewInit {
 
-   readonly componentName = TestPage;
+  readonly componentName = TestPage;
   constructor(){
     super();
 
@@ -25,7 +27,12 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
 
     this.core.register({observerClass:this, eventName:"VmProfiles"}).subscribe((evt: CoreEvent) => { 
       console.log(evt);
-      this.processEvent(evt.data); 
+      this.updateDataAll(evt.data); 
+    });
+
+    this.core.register({observerClass:this, eventName:"VmProfile"}).subscribe((evt: CoreEvent) => { 
+      console.log(evt);
+      this.updateData(evt.data); 
     });
 
     this.init();
@@ -35,27 +42,45 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
   }
 
   init(){
-    let actions = [
-      {
-	control:'ViewControlButton',
-	coreEvent:{ name:'VmProfile' },
-	id: "0"
-      }
-    ];
-    this.setViewsActions(actions);
     this.core.emit({name:"VmProfilesRequest"});
+    this.controlEvents.subscribe((evt:CoreEvent) => {
+      switch(evt.name){
+	default:
+	  console.log("btnPress received. Changing card.headerTitle...")
+	  console.log(evt.sender);
+	  console.log(this.displayList);
+	    
+	  let card = new CardComponent();
+	  card.headerTitle = "Title Changed!";
+	  let index = this.displayList.indexOf(evt.sender);
+	  this.displayList[index] = card;
+
+	break;
+      }
+    });
   }
 
-  processEvent(evt){
-    let result = [];
-    for(var i = 0; i < evt.length; i++){
-      let card: CardData = {};
-      card.header = evt[i].name;
-      card.content = evt[i].vm_type;
-      let view = new CardComponent();
-      view.viewController = this.viewEvents;
-      view.data = card;
-      this.addView(view);
+  updateData(data){
+    // Do Something
+  }
+
+  updateDataAll(data){
+    console.log("updateDataAll()");
+    let card = new CardComponent();
+    card.headerTitle = "All of the Views";//data[i].name;
+
+    for(var i = 0; i < data.length; i++){
+      let view = new ViewComponent();
+      card.addChild(view);
     }
+
+    let button = new ViewButtonComponent();
+    button.raised = false;
+    button.label = "Send";
+    button.action = { name:"btnPress", sender:card};
+    button.target = this.controlEvents;
+    button.contextColor = "warn";
+    card.footerControls = [button];
+    this.addChild(card);
   }
 }

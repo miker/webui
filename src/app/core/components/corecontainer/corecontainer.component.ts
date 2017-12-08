@@ -1,36 +1,58 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewContainerRef,ComponentRef,ComponentFactory, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input,  OnChanges, SimpleChanges,EventEmitter, ViewContainerRef,ComponentRef,ComponentFactory, ComponentFactoryResolver } from '@angular/core';
 import { ViewConfig } from 'app/core/components/viewcontroller/viewcontroller.component';
+import { Subject } from 'rxjs/Subject';
+import { CoreEvent } from 'app/core/services/core.service';
 
 @Component({
   selector:'core-container',
   template: '<ng-template></ng-template>'
 })
-export class CoreContainer implements OnInit {
+export class CoreContainer implements OnInit, OnChanges {
 
   readonly componentName = CoreContainer;
-  @Input() loadedView: any;
+  @Input() child:any;
+  private instance: any;
+  public changeEvents: Subject<CoreEvent>;
 
-  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef){
+  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef){      
   }
 
   ngOnInit(){
-    this.loadComponent();
+    //this.loadComponent();
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    
+    console.log("ngOnChanges() ********");
+    this.onChange();
+  }
+
+  onChange(){
+    if(this.instance){
+      this.configureComponent(this.instance);
+    } else {
+      this.loadComponent();
+    }
   }
 
   loadComponent(){
     console.log("Loading Component ********");
-    console.log(this.loadedView)
-    const factory = this.resolver.resolveComponentFactory(this.loadedView.componentName);
+    
+    const factory = this.resolver.resolveComponentFactory(this.child.componentName);
+    
     const ref = <any>this.viewContainerRef.createComponent(factory);
-    this.configureComponent(ref);
+    this.instance = ref.instance;
+    this.configureComponent(ref.instance);
     ref.changeDetectorRef.detectChanges();    
+    
   }
-
-  configureComponent(ref){
-    for(var prop in this.loadedView){
-      if(typeof this.loadedView[prop] !== "function"){
-	ref.instance[prop] = this.loadedView[prop]
+  
+  configureComponent(inst){
+    for(var prop in this.child){
+      if(typeof this.child[prop] !== "function"){
+	inst[prop] = this.child[prop]
       }
     }
   }
+  
 }

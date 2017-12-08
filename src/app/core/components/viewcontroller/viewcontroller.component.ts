@@ -7,9 +7,9 @@ import { Subject } from 'rxjs/Subject';
 
 export const ViewControllerMetadata = {
   template: `
-  <ng-container *ngIf="viewsData.length > 0;">
-    <ng-container *ngFor="let view of viewsData; let i=index;">
-      <core-container [loadedView]="viewsData[i]"></core-container>
+  <ng-container *ngIf="displayList.length > 0;">
+    <ng-container *ngFor="let view of displayList; let i=index;">
+      <core-container [child]="displayList[i]"></core-container>
     </ng-container>
   </ng-container>
   `,
@@ -31,7 +31,7 @@ export class ViewControllerComponent extends ViewController implements OnInit {
 
   readonly componentName = ViewControllerComponent;
   protected core: CoreService;
-  public viewEvents: Subject<CoreEvent> = new Subject();
+  public controlEvents: Subject<CoreEvent> = new Subject();
 
   constructor() {
     super();
@@ -40,5 +40,4 @@ export class ViewControllerComponent extends ViewController implements OnInit {
 
   ngOnInit(){
   }
-
 }

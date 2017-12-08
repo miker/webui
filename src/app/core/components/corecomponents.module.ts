@@ -8,6 +8,7 @@ import { CardComponent } from 'app/core/components/card/card.component';
 import { ViewControlComponent } from 'app/core/components/viewcontrol/viewcontrol.component';
 import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
 import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
+import { ViewButtonComponent } from './viewbutton/viewbutton.component';
 
 /*
  *
@@ -29,7 +30,8 @@ import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.c
     CardComponent,
     ViewControlComponent,
     ViewControllerComponent,
-    CoreContainer
+    CoreContainer,
+    ViewButtonComponent
   ],
   exports: [ // Modules and Components here
     CommonModule,
@@ -38,12 +40,14 @@ import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.c
     PageComponent,
     ViewComponent,
     ViewControlComponent,
+    ViewButtonComponent,
     ViewControllerComponent,
     CardComponent
   ],
   entryComponents:[
     ViewComponent,
     ViewControlComponent,
+    ViewButtonComponent,
     ViewControllerComponent,
     CardComponent
   ]
