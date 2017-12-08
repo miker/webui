@@ -15,7 +15,8 @@ import {
 })
 export class CustomThemeModalDialog {
 
-  public myTheme: any = {};
+  public primary: string = "#0095d5";
+  public accent: string = "#ffc107";
 
   constructor(
     public dialogRef: MdDialogRef<CustomThemeModalDialog>,

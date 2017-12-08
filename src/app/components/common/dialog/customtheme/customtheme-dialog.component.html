@@ -1,15 +1,13 @@
-
-<h1 md-dialog-title class="mat-card-title-text">Custom Theme</h1>
-
+<h1 md-dialog-title>Custom Theme</h1>
 <div md-dialog-content>
-<input [colorPicker]="'#0095d5'"
+<input [colorPicker]="primary"
         (colorPickerChange)="primary=$event"
-        [style.background]="'#0095d5'"
+        [style.background]="primary"
         [cpOKButton]="true"/>
          
-<input [colorPicker]="'#ffc107'"
+<input [colorPicker]="accent"
         (colorPickerChange)="accent=$event"
-        [style.background]="'#ffc107'"
+        [style.background]="accent"
         [cpOKButton]="true"/>
 </div>
 <div md-dialog-actions>
