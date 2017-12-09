@@ -1,17 +1,11 @@
 <md-card>
-	<md-card-header>
+	<md-card-header *ngIf="header">
 	<md-card-title *ngIf="headerTitle || headerOptions" >{{ headerTitle }} {{ headerOptions }}</md-card-title>
 	</md-card-header>
 	<md-card-content>
-	  <ng-container *ngIf="displayList.length > 0;">
-    	<ng-container *ngFor="let view of displayList; let i=index;">
-      	<core-container [child]="displayList[i]"></core-container>
-    	</ng-container>
-  	</ng-container>	
+  	<display #display></display>
 	</md-card-content>
-	<md-card-actions *ngIf="footerControls && footerControls.length > 0">
-		<ng-container *ngFor="let control of footerControls; let ii=index;">
-			<core-container [child]="footerControls[ii]"></core-container>
-		</ng-container>
+	<md-card-actions >
+		<display #footerControls></display>
 	</md-card-actions>
 </md-card>

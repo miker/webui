@@ -5,13 +5,11 @@ import { ViewComponent } from 'app/core/components/view/view.component';
 import { CardComponent } from 'app/core/components/card/card.component';
 import { ViewButtonComponent } from 'app/core/components/viewbutton/viewbutton.component';
 import { Subject } from 'rxjs/Subject';
-import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
+import { Display } from 'app/core/components/display/display.component';
 
 @Component({
   selector: 'test-page',
-  //templateUrl: '../../../core/components/page/page.component.html',
   template:ViewControllerMetadata.template,
-  //template:'<core-container [loadedView]="loadedView"></core-container>',
   styleUrls: ['./test-page.component.css']
 })
 export class TestPage extends ViewControllerComponent implements AfterViewInit {
@@ -19,6 +17,9 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
   readonly componentName = TestPage;
   constructor(){
     super();
+  }
+
+  ngAfterViewInit(){
 
     /* 
      * Register the component with the EventBus 
@@ -38,9 +39,6 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
     this.init();
   }
 
-  ngAfterViewInit(){
-  }
-
   init(){
     this.core.emit({name:"VmProfilesRequest"});
     this.controlEvents.subscribe((evt:CoreEvent) => {
@@ -48,14 +46,18 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
 	default:
 	  console.log("btnPress received. Changing card.headerTitle...")
 	  console.log(evt.sender);
-	  console.log(this.displayList);
-	    
-	  let card = new CardComponent();
+	  console.log(this.display.displayList);
+
+	  let card = evt.sender;
+	  card.headerTitle = "Title Changed!";
+	  /*
+	  let card = this.create(CardComponent);
 	  card.headerTitle = "Title Changed!";
 	  let index = this.displayList.indexOf(evt.sender);
 	  this.displayList[index] = card;
+	   */
 
-	break;
+	  break;
       }
     });
   }
@@ -66,21 +68,26 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
 
   updateDataAll(data){
     console.log("updateDataAll()");
-    let card = new CardComponent();
-    card.headerTitle = "All of the Views";//data[i].name;
-
     for(var i = 0; i < data.length; i++){
-      let view = new ViewComponent();
-      card.addChild(view);
-    }
+      // Setup Card (ViewController)
+      let card = this.create(CardComponent);
+      card.header = true;
+      card.headerTitle = data[i].name;
 
-    let button = new ViewButtonComponent();
-    button.raised = false;
-    button.label = "Send";
-    button.action = { name:"btnPress", sender:card};
-    button.target = this.controlEvents;
-    button.contextColor = "warn";
-    card.footerControls = [button];
-    this.addChild(card);
+      // Setup the View
+      let view = card.create(ViewComponent);
+      card.addChild(view);
+
+      // Setup Controls
+      let button = card.create(ViewButtonComponent, 'footerControls');
+      button.raised = true;
+      button.label = "Change";
+      button.action = { name:"btnPress", sender:card};
+      button.target = this.controlEvents;
+      button.contextColor = "warn";
+      card.footer = true;
+      this.addChild(card);
+      card.addChild(button,'footerControls');
+    }
   }
 }

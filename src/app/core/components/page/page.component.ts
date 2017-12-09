@@ -4,7 +4,7 @@ import { ViewControllerComponent } from 'app/core/components/viewcontroller/view
 import { CardComponent } from 'app/core/components/card/card.component';
 import { CoreService, CoreEvent } from 'app/core/services/core.service';
 import { CoreServiceInjector } from 'app/core/services/coreserviceinjector';
-import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
+import { Display } from 'app/core/components/display/display.component';
 
 export interface PageOptions {
   data: any[];

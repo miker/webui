@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ComponentRef, OnInit, ViewChild } from '@angular/core';
 import { CoreServiceInjector } from 'app/core/services/coreserviceinjector';
-import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
+import { Display } from 'app/core/components/display/display.component';
 import { CoreService, CoreEvent } from 'app/core/services/core.service';
 import { ViewController } from 'app/core/classes/viewcontroller';
 import { Subject } from 'rxjs/Subject';
 
 export const ViewControllerMetadata = {
-  template: `
-  <ng-container *ngIf="displayList.length > 0;">
-    <ng-container *ngFor="let view of displayList; let i=index;">
-      <core-container [child]="displayList[i]"></core-container>
-    </ng-container>
-  </ng-container>
-  `,
+  template: `<display  #display></display>`,
 }
 
 export interface ViewConfig {
@@ -24,12 +18,13 @@ export interface ViewConfig {
 @Component({
   selector: 'viewcontroller',
   template:ViewControllerMetadata.template,
-  //template: '<core-container *ngFor="let view of viewsData; let i=index;" [loadedView]="view[i]"></core-container>',
   styleUrls: ['./viewcontroller.component.css']
 })
 export class ViewControllerComponent extends ViewController implements OnInit {
 
   readonly componentName = ViewControllerComponent;
+  @ViewChild('display') display;
+  //public displayList: ComponentRef[] = [];
   protected core: CoreService;
   public controlEvents: Subject<CoreEvent> = new Subject();
 
@@ -37,6 +32,19 @@ export class ViewControllerComponent extends ViewController implements OnInit {
     super();
     this.core = CoreServiceInjector.get(CoreService);
   }
+
+  
+  public create(component:any, container?:string){
+    if(!container){ container = 'display'}
+    let instance= this[container].create(component);
+    return instance;
+  }
+
+  public addChild(instance, container?: string){
+    if(!container){ container = 'display'}
+    this[container].addChild(instance);
+  }
+  
 
   ngOnInit(){
   }

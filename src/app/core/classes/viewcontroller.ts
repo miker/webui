@@ -13,7 +13,6 @@ export interface ViewControllerOptions {
 export abstract class ViewController implements OnDestroy {
 
   public name: string = "ViewController";
-  public displayList: any[] = []; 
   protected controlEvents: Subject<CoreEvent>;
   private coreContainer: Subject<CoreEvent>;
 
@@ -24,17 +23,6 @@ export abstract class ViewController implements OnDestroy {
     } else {
       this.setControlEvents();
     }
-  }
-
-  public addChild(component){
-      this.displayList.push(component);
-  }
-
-  public removeChild(){
-  }
-
-  public getName(){
-    return this.name;
   }
 
   public setControlEvents(subj?:Subject<CoreEvent>){

@@ -1,5 +1,5 @@
-import { Component,Input, OnInit } from '@angular/core';
-import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
+import { Component, ViewChild, Input, OnInit } from '@angular/core';
+import { Display } from 'app/core/components/display/display.component';
 import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
 import { MaterialModule } from '@angular/material';
 
@@ -38,10 +38,15 @@ export class CardComponent extends ViewControllerComponent {
    * addPrimaryAction(btn:  ViewFabButton);
    */	
 
-  public headerTitle?: string;
-  public headerOptions?: any; /*ViewControl*/
+  //@ViewChild('display') display; // Already created in base class by default
   public primaryAction?: any; /*ViewFabButton*/
-  public footerControls?: any[];
+  public header: boolean = false;
+  public headerTitle?: string;
+  //public headerOptions?: any; /*ViewControl*/
+  @ViewChild('headerOptions') headerOptions;
+
+  public footer: boolean = true;
+  @ViewChild('footerControls') footerControls;
 
   constructor(){
     super();

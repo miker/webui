@@ -7,15 +7,14 @@ import { ViewComponent } from 'app/core/components/view/view.component';
 import { CardComponent } from 'app/core/components/card/card.component';
 import { ViewControlComponent } from 'app/core/components/viewcontrol/viewcontrol.component';
 import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
-import { CoreContainer } from 'app/core/components/corecontainer/corecontainer.component';
+import { Display } from 'app/core/components/display/display.component';
 import { ViewButtonComponent } from './viewbutton/viewbutton.component';
 
 /*
  *
  * This is the Core Module. By importing this module you'll 
  * ensure your page will have the right dependencies in place
- * to make use of the CoreService (event bus) and any helper
- * services that get added later on.
+ * to make use of Core Components
  *
  * */
 
@@ -30,13 +29,13 @@ import { ViewButtonComponent } from './viewbutton/viewbutton.component';
     CardComponent,
     ViewControlComponent,
     ViewControllerComponent,
-    CoreContainer,
+    Display,
     ViewButtonComponent
   ],
   exports: [ // Modules and Components here
     CommonModule,
     MaterialModule,
-    CoreContainer,
+    Display,
     PageComponent,
     ViewComponent,
     ViewControlComponent,
