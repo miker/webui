@@ -7,8 +7,9 @@ import { ViewComponent } from 'app/core/components/view/view.component';
 import { CardComponent } from 'app/core/components/card/card.component';
 import { ViewControlComponent } from 'app/core/components/viewcontrol/viewcontrol.component';
 import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
-import { Display } from 'app/core/components/display/display.component';
+import { Display,DisplayContainer } from 'app/core/components/display/display.component';
 import { ViewButtonComponent } from './viewbutton/viewbutton.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 /*
  *
@@ -21,7 +22,8 @@ import { ViewButtonComponent } from './viewbutton/viewbutton.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   declarations: [
     PageComponent,
@@ -30,12 +32,15 @@ import { ViewButtonComponent } from './viewbutton/viewbutton.component';
     ViewControlComponent,
     ViewControllerComponent,
     Display,
+    DisplayContainer,
     ViewButtonComponent
   ],
   exports: [ // Modules and Components here
     CommonModule,
     MaterialModule,
+    FlexLayoutModule,
     Display,
+    DisplayContainer,
     PageComponent,
     ViewComponent,
     ViewControlComponent,
@@ -44,6 +49,7 @@ import { ViewButtonComponent } from './viewbutton/viewbutton.component';
     CardComponent
   ],
   entryComponents:[
+    DisplayContainer,
     ViewComponent,
     ViewControlComponent,
     ViewButtonComponent,

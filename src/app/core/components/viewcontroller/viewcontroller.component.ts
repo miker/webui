@@ -1,4 +1,4 @@
-import { Component,ComponentRef, OnInit, ViewChild } from '@angular/core';
+import { Component,ComponentRef, AfterViewInit, ViewChild } from '@angular/core';
 import { CoreServiceInjector } from 'app/core/services/coreserviceinjector';
 import { Display } from 'app/core/components/display/display.component';
 import { CoreService, CoreEvent } from 'app/core/services/core.service';
@@ -6,7 +6,9 @@ import { ViewController } from 'app/core/classes/viewcontroller';
 import { Subject } from 'rxjs/Subject';
 
 export const ViewControllerMetadata = {
-  template: `<display  #display></display>`,
+  template: `
+    <display #display></display>
+  `,
 }
 
 export interface ViewConfig {
@@ -20,7 +22,7 @@ export interface ViewConfig {
   template:ViewControllerMetadata.template,
   styleUrls: ['./viewcontroller.component.css']
 })
-export class ViewControllerComponent extends ViewController implements OnInit {
+export class ViewControllerComponent extends ViewController implements AfterViewInit {
 
   readonly componentName = ViewControllerComponent;
   @ViewChild('display') display;
@@ -33,6 +35,9 @@ export class ViewControllerComponent extends ViewController implements OnInit {
     this.core = CoreServiceInjector.get(CoreService);
   }
 
+  ngAfterViewInit(){
+  }
+
   
   public create(component:any, container?:string){
     if(!container){ container = 'display'}
@@ -43,9 +48,5 @@ export class ViewControllerComponent extends ViewController implements OnInit {
   public addChild(instance, container?: string){
     if(!container){ container = 'display'}
     this[container].addChild(instance);
-  }
-  
-
-  ngOnInit(){
   }
 }

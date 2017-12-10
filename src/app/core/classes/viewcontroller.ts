@@ -14,7 +14,6 @@ export abstract class ViewController implements OnDestroy {
 
   public name: string = "ViewController";
   protected controlEvents: Subject<CoreEvent>;
-  private coreContainer: Subject<CoreEvent>;
 
   constructor(options?: ViewControllerOptions) {
     console.log(this.name + ' Class Constructor'); 

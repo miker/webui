@@ -20,6 +20,29 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(){
+    console.log("******** TestPage OnInit() ********");
+    this.controlEvents.subscribe((evt:CoreEvent) => {
+      switch(evt.name){
+	case "DisplayReady":
+	  console.log("******** DisplayReady Event Received ********");
+	break;
+	default:
+	  console.log("btnPress received. Changing card.headerTitle...")
+	  console.log(evt.sender);
+	  console.log(this.display.displayList);
+
+	  let card = evt.sender;
+	  card.headerTitle = "Title Changed!";
+	break;
+      }
+    });
+    
+    this.init();
+  }
+
+  init(){
+    
+    console.log("******** TestPage Initializing... ********");
 
     /* 
      * Register the component with the EventBus 
@@ -36,30 +59,7 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
       this.updateData(evt.data); 
     });
 
-    this.init();
-  }
-
-  init(){
     this.core.emit({name:"VmProfilesRequest"});
-    this.controlEvents.subscribe((evt:CoreEvent) => {
-      switch(evt.name){
-	default:
-	  console.log("btnPress received. Changing card.headerTitle...")
-	  console.log(evt.sender);
-	  console.log(this.display.displayList);
-
-	  let card = evt.sender;
-	  card.headerTitle = "Title Changed!";
-	  /*
-	  let card = this.create(CardComponent);
-	  card.headerTitle = "Title Changed!";
-	  let index = this.displayList.indexOf(evt.sender);
-	  this.displayList[index] = card;
-	   */
-
-	  break;
-      }
-    });
   }
 
   updateData(data){
@@ -86,8 +86,8 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
       button.target = this.controlEvents;
       button.contextColor = "warn";
       card.footer = true;
-      this.addChild(card);
       card.addChild(button,'footerControls');
+      this.addChild(card);
     }
   }
 }
