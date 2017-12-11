@@ -13,7 +13,7 @@ export interface CardData {
 
 // This makes the metadata available globally
 export const CardComponentMetadata = {
-  selector: 'card',
+  selector: '[card]',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 }
@@ -50,6 +50,7 @@ export class CardComponent extends ViewControllerComponent {
 
   constructor(){
     super();
+    this.layoutChild = {flex:"100%"};
   }
 
   getHeaderTitle(): string{

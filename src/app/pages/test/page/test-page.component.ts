@@ -10,7 +10,7 @@ import { Display } from 'app/core/components/display/display.component';
 @Component({
   selector: 'test-page',
   template:ViewControllerMetadata.template,
-  styleUrls: ['./test-page.component.css']
+  styles: ViewControllerMetadata.styles
 })
 export class TestPage extends ViewControllerComponent implements AfterViewInit {
 

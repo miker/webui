@@ -31,6 +31,7 @@ app-breadcrumb{
     top:48px;
 }
 
+
 .rightside-content-hold {
     padding: 104px .03rem 10%;
     overflow-x: hidden;
@@ -44,6 +45,10 @@ app-breadcrumb{
 
 .rightside-content-hold.has-footer {
     padding: 104px .03rem 10%;
+}
+
+.rightside-content-hold:first-child{
+  display:block;
 }
 
 @-webkit-keyframes silde_to_top {
