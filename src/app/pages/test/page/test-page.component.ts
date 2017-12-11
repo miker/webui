@@ -25,7 +25,10 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
       switch(evt.name){
 	case "DisplayReady":
 	  console.log("******** DisplayReady Event Received ********");
-	break;
+	  break;
+	case "RemoveCard":
+	  this.removeChild(evt.sender);
+	  break;
 	default:
 	  console.log("btnPress received. Changing card.headerTitle...")
 	  console.log(evt.sender);
@@ -33,15 +36,15 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
 
 	  let card = evt.sender;
 	  card.headerTitle = "Title Changed!";
-	break;
+	  break;
       }
     });
-    
+
     this.init();
   }
 
   init(){
-    
+
     console.log("******** TestPage Initializing... ********");
 
     /* 
@@ -71,6 +74,7 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
     for(var i = 0; i < data.length; i++){
       // Setup Card (ViewController)
       let card = this.create(CardComponent);
+      card.layoutChild = { flex:"45%" }
       card.header = true;
       card.headerTitle = data[i].name;
 
@@ -80,9 +84,9 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
 
       // Setup Controls
       let button = card.create(ViewButtonComponent, 'footerControls');
-      button.raised = true;
-      button.label = "Change";
-      button.action = { name:"btnPress", sender:card};
+      button.raised = false;
+      button.label = "Delete";
+      button.action = { name:"RemoveCard", sender:card};
       button.target = this.controlEvents;
       button.contextColor = "warn";
       card.footer = true;

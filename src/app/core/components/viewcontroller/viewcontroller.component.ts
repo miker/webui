@@ -12,6 +12,7 @@ export const ViewControllerMetadata = {
   fxLayoutWrap
   fxLayout="row" 
   fxLayoutAlign="space-around center" 
+  fxLayoutGap="2%"
   >
     <display style="display:none;" #display></display>
   </div>
@@ -59,5 +60,10 @@ export class ViewControllerComponent extends ViewController implements AfterView
   public addChild(instance, container?: string){
     if(!container){ container = 'display'}
     this[container].addChild(instance);
+  }
+
+  public removeChild(instance, container?: string){
+    if(!container){ container = 'display'}
+    this[container].removeChild(instance);
   }
 }

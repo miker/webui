@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewInit, Input, ViewContainerRef,ComponentRef,ComponentFactory, ComponentFactoryResolver } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, Input, Renderer2, ViewContainerRef,ComponentRef,ComponentFactory, ComponentFactoryResolver } from '@angular/core';
 import { LayoutContainer, LayoutChild } from 'app/core/classes/layouts';
 import { ViewConfig } from 'app/core/components/viewcontroller/viewcontroller.component';
 import { Subject } from 'rxjs/Subject';
@@ -22,7 +22,7 @@ export class Display implements OnInit,AfterViewInit{
   @ViewChild('wrapper') wrapper;
   @ViewChild('test',{read:ViewContainerRef}) test:ViewContainerRef;
 
-  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef){
+  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef, private renderer: Renderer2){
     console.log("Display Component Constructor");
     
   }
@@ -50,11 +50,48 @@ export class Display implements OnInit,AfterViewInit{
   addChild(instance){
     let compRef = this.getChild(instance);
     console.log("******** addChild()!!!! ********");
+    console.log(compRef.hostView)
     /* NEW WAY */
+    // Insert into DOM
     this.viewContainerRef.insert(compRef.hostView);// addChild();
     //this.test.insert(compRef.hostView);// addChild();
+  
+    // Deal with component's selector element
+    let container = this.viewContainerRef.element.nativeElement;
+    //this.moveContents(compRef, container);
+
+    // Setup ChangeDetection and add to DisplayList
     compRef.changeDetectorRef.detectChanges();    
     this.displayList.push(instance);
+  }
+
+  private moveContents(compRef, container ){
+    let selector = compRef.hostView.rootNodes["0"];
+    let contents = compRef.hostView.rootNodes["0"].childNodes;
+    let node: any;
+    console.log("******** moveContents() ********");
+    console.log(contents);
+    for(let i = 0; i < contents.length; i++){
+      console.log(typeof contents[i]);
+      if(contents[i].tagName == "MD-CARD"){
+	this.renderer.appendChild(container, contents[i]);
+	this.renderer.removeChild(container, selector);
+      }
+    }
+    //this.renderer.appendChild(container, contents);
+  }
+
+  removeChild(instance){
+    let compRef = this.getChild(instance);
+    // Remove from children
+    let ci = this.children.indexOf(compRef);
+    this.children.splice(ci,1);
+    // Remove from displayList
+    let dli = this.displayList.indexOf(instance);
+    this.displayList.splice(dli,1);
+
+    // Destroy component reference
+    compRef.destroy();
   }
 
   getChild(instance){
