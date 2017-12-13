@@ -23,17 +23,10 @@ export class TestPage extends ViewControllerComponent implements AfterViewInit {
     console.log("******** TestPage OnInit() ********");
     this.controlEvents.subscribe((evt:CoreEvent) => {
       switch(evt.name){
-	case "DisplayReady":
-	  console.log("******** DisplayReady Event Received ********");
-	  break;
 	case "RemoveCard":
 	  this.removeChild(evt.sender);
 	  break;
 	default:
-	  console.log("btnPress received. Changing card.headerTitle...")
-	  console.log(evt.sender);
-	  console.log(this.display.displayList);
-
 	  let card = evt.sender;
 	  card.headerTitle = "Title Changed!";
 	  break;

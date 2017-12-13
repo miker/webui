@@ -78,7 +78,6 @@ export class Display implements OnInit,AfterViewInit{
 	this.renderer.removeChild(container, selector);
       }
     }
-    //this.renderer.appendChild(container, contents);
   }
 
   removeChild(instance){
