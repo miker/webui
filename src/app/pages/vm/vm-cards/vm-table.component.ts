@@ -1,10 +1,11 @@
-import {Component, OnChanges, ElementRef, OnInit, AfterViewInit, ViewChild, Input} from '@angular/core';
+import {Component, OnChanges, ElementRef, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Observable} from 'rxjs/Observable';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {RestService, WebSocketService} from '../../../services/';
+import { MaterialModule, MdButtonToggleGroup } from '@angular/material';
 
 export class Page {
     //The number of elements in the page
@@ -43,12 +44,13 @@ export class PagedData<T> {
       [offset]="page.pageNumber"
       (page)='setPage($event)'> -->
 
-      <ngx-datatable-column name="State" >
+      <ngx-datatable-column name="State">
 	<ng-template let-column="column" ngx-datatable-header-template>
 	  {{column.name}}
 	</ng-template>
-	<ng-template let-value="value" ngx-datatable-cell-template>
-	  <md-icon color="primary">power_settings_new</md-icon>
+	<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+	  <button md-icon-button (click)="onPower(row)" style="position:absolute;bottom:6px;"><md-icon [style.color]="value == 'running' ? '#41bd45' : '#900'">power_settings_new</md-icon></button>
+	  <!--<span> {{value}} </span>-->
 	</ng-template>
       </ngx-datatable-column>
 
@@ -61,7 +63,7 @@ export class PagedData<T> {
 	</ng-template>
       </ngx-datatable-column>
 
-      <!--<ngx-datatable-column name="Description">
+      <ngx-datatable-column name="Description">
         <ng-template let-column="column" ngx-datatable-header-template>
           {{column.name}}
         </ng-template>
@@ -95,13 +97,27 @@ export class PagedData<T> {
         <ng-template let-value="value" ngx-datatable-cell-template>
           <div>{{value}}</div>
         </ng-template>
-      </ngx-datatable-column>-->
-
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="Actions" [flexGrow]="2">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          {{column.name}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+	 <button md-icon-button [mdMenuTriggerFor]="menu" style="position:absolute;bottom:6px;">
+	  <md-icon>more_vert</md-icon>
+	 </button>
+	 <md-menu #menu="mdMenu">
+	    <button md-menu-item (click)="editRow(row)">Edit</button>
+	    <button md-menu-item (click)="deleteRow(row)">Delete</button>
+	  </md-menu>
+        </ng-template>
+      </ngx-datatable-column>
 
     </ngx-datatable>
   `
 })
-export class VmTableComponent implements AfterViewInit{
+export class VmTableComponent implements OnChanges{
 
   protected resource_name: string = 'vm/vm';
   protected route_add: string[] = [ 'vm', 'add' ];
@@ -124,7 +140,7 @@ export class VmTableComponent implements AfterViewInit{
     {name : 'Memory', prop : 'memory'},
     {name : 'Bootloader', prop : 'bootloader'},
     {name: 'Autostart', prop : 'autostart'},
-    /*{name: 'Actions', prop : 'cardActions'}*/
+    {name: 'Actions', prop : 'cardActions'}
   ];
 
   /*
@@ -136,18 +152,21 @@ export class VmTableComponent implements AfterViewInit{
    */
 
   @Input() data: any[];
+  @Output() edit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() power: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('datatable') datatable;
   public page = new Page();
 
   public rows = new Array<any>();
   public cache: any = {};
   public pageSize:number = 8;
-  public tableHeight:number = 150;
+  public tableHeight:number;
   constructor(protected router: Router, protected rest: RestService, protected ws: WebSocketService) {
     this.page.pageNumber = 0;
   }
 
-  ngAfterViewInit() {
+  ngOnChanges() {
     console.log("******** VM-CARDS ********");
     this.datatable.limit = this.pageSize; // items per page
     this.datatable.pageSize = 8;//this.pageSize;
@@ -218,7 +237,23 @@ export class VmTableComponent implements AfterViewInit{
     return pagedData;
   }
 
+  editRow(row){
+    let index = this.data.indexOf(row);
+    console.log(index);
+    this.edit.emit(index);
+  }
 
+  deleteRow(row){
+    let index = this.data.indexOf(row);
+    console.log(index);
+    this.delete.emit(index);
+  }
+
+  onPower(row){
+    let index = this.data.indexOf(row);
+    console.log(index);
+    this.power.emit(index);
+  }
 
   /*
   getActions(row) {
