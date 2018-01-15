@@ -17,6 +17,7 @@ export class InterfacesFormComponent {
   protected resource_name: string = 'network/interface/';
   protected route_success: string[] = [ 'network', 'interfaces' ];
   protected isEntity: boolean = true;
+  protected formArray: FormArray;
 
   public fieldConfig: FieldConfig[] = [
     {
@@ -120,6 +121,27 @@ export class InterfacesFormComponent {
         options : []
       }]
     },
+  ];
+
+  protected arrayControl: any;
+  protected initialCount: number = 1;
+  protected initialCount_default: number = 1;
+
+  public custActions: Array<any> = [
+    {
+      id : 'add_path',
+      name : 'Add Additional Path',
+      function : () => {
+        this.initialCount += 1;
+      }
+    },
+    {
+      id : 'remove_path',
+      name : 'Remove Additional Path',
+      function : () => {
+        this.initialCount -= 1;
+      }
+    }
   ];
 
   private int_v4netmaskbit: any;
