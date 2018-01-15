@@ -89,6 +89,37 @@ export class InterfacesFormComponent {
       tooltip : 'Additional parameters from ifconfig(8). Seperate\
  multiple paramerters with a space.',
     },
+    {
+      type: 'array',
+      name : 'int_alias',
+      initialCount: 1,
+      formarray: [
+      {
+        type : 'input',
+        name : 'int_alias_ipv4address',
+        placeholder : 'IPv4 Address',
+        tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
+      },
+      {
+        type : 'select',
+        name : 'int_alias_v4netmaskbit',
+        placeholder : 'IPv4 Netmask',
+        tooltip : 'Enter a netmask if <b>DHCP</b> is unchecked.',
+        options : []
+      },
+      {
+        type : 'input',
+        name : 'int_alias_ipv6address',
+        placeholder : 'IPv6 Address',
+        tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
+      },
+      {
+        type : 'select',
+        name : 'int_alias_v6netmaskbit',
+        placeholder : 'IPv6 Prefix Length',
+        options : []
+      }]
+    },
   ];
 
   private int_v4netmaskbit: any;
