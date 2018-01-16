@@ -13,9 +13,9 @@
         </div>
         <form #signinForm="ngForm" (ngSubmit)="signin()">
           <div class="">
-            <mat-input-container class="full-width">
+            <mat-form-field class="full-width">
               <input
-                mdInput
+                matInput
                 name="username"
                 required
                 [(ngModel)]="signinData.username"
@@ -25,16 +25,16 @@
               <mat-error *ngIf="username.errors && (username.dirty || username.touched) && (username.errors.required)">
                 Please enter your password <span *ngIf="failed">again</span>
               </mat-error>
-            </mat-input-container>
+            </mat-form-field>
           </div>
 
           <div class="">
-            <mat-input-container class="full-width">
+            <mat-form-field class="full-width">
               <input
                 type="password"
                 name="password"
                 required
-                mdInput
+                matInput
                 [(ngModel)]="signinData.password"
                 #password="ngModel"
                 placeholder="Password"
@@ -42,7 +42,7 @@
               <mat-error *ngIf="password.errors && (password.dirty || password.touched) && (password.errors.required)">
                 Please enter your password <span *ngIf="failed">again</span>
               </mat-error>
-            </mat-input-container>
+            </mat-form-field>
           </div>
 
           <!--div class="pb-1">
