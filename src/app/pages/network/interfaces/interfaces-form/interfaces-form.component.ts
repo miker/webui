@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 
 import { NetworkService, RestService } from '../../../../services';
@@ -130,14 +131,14 @@ export class InterfacesFormComponent {
   public custActions: Array<any> = [
     {
       id : 'add_path',
-      name : 'Add Additional Path',
+      name : 'Add extra Alias',
       function : () => {
         this.initialCount += 1;
       }
     },
     {
       id : 'remove_path',
-      name : 'Remove Additional Path',
+      name : 'Remove extra Alias',
       function : () => {
         this.initialCount -= 1;
       }
