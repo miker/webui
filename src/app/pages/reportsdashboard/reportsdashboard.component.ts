@@ -25,7 +25,7 @@ interface TabChartsMappingData {
 export class ReportsDashboardComponent implements OnInit, OnDestroy, HandleChartConfigDataFunc, AfterViewInit {
 
 
-   // MdPaginator Inputs
+   // MatPaginator Inputs
    paginationLength = 0;
    paginationPageSize = 5;
    paginationPageSizeOptions = [5, 10, 20];

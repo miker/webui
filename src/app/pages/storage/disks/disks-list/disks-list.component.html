@@ -6,18 +6,18 @@
                 <br/>
         </div>
         <div>
-                <md-tab-group (selectChange)="tabSelectChangeHandler($event)">
-                        <md-tab label="ALL_DISKS">
+                <mat-tab-group (selectChange)="tabSelectChangeHandler($event)">
+                        <mat-tab label="ALL_DISKS">
                                 <div>
                                         <entity-table [conf]="conf" [title]="conf.title"></entity-table>
                                 </div>
-                        </md-tab>
-                        <md-tab *ngFor="let row of zfsPoolRows" label="{{row.name}}">
+                        </mat-tab>
+                        <mat-tab *ngFor="let row of zfsPoolRows" label="{{row.name}}">
                                 <div *ngIf="selectedKeyName === row.name">
                                         <entity-table *ngIf="row.isReady" [conf]="row.disksListConfig"></entity-table>
                                 </div>
-                        </md-tab>
-                </md-tab-group>
+                        </mat-tab>
+                </mat-tab-group>
         </div>
 
 </div>

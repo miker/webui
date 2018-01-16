@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$md-primary: (
+$mat-primary: (
     50 : #e8eaf6,
     100 : #c5cbe9,
     200 : #9fa8da,
@@ -34,7 +34,7 @@ $md-primary: (
     )
 );
 
-$md-accent: (
+$mat-accent: (
     50 : #fff8e1,
     100 : #ffecb5,
     200 : #ffe083,
@@ -68,13 +68,13 @@ $md-accent: (
 );
 
 // mandatory stuff for theming
-$freenas-primary: mat-palette($md-primary);
-$freenas-accent:  mat-palette($md-accent);
+$freenas-primary: mat-palette($mat-primary);
+$freenas-accent:  mat-palette($mat-accent);
 
 // include the custom theme components into a theme object
 $freenas-theme: mat-light-theme($freenas-primary, $freenas-accent);
 
-$primary-dark: darken( map-get($md-primary, 500), 8% );
+$primary-dark: darken( map-get($mat-primary, 500), 8% );
 
 // include the custom theme object into the angular material theme
 .egret-indigo {
@@ -82,26 +82,26 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
 
     .mat-bg-primary,
     .topbar,
-    .sidebar-panel.mat-sidenav .sidebar-list-item.open md-icon:not(.menu-caret),
+    .sidebar-panel.mat-sidenav .sidebar-list-item.open mat-icon:not(.menu-caret),
     .chats-wrap .conversations-hold .single-conversation.me .conversation-msg,
     .ngx-datatable .datatable-footer .datatable-pager .pager .pages.active a,
     .fileupload-drop-zone.dz-file-over,
     .toolbar-avatar.online > .status-dot,
     .cal-open-day-events,
     div.hopscotch-bubble {
-        background: map-get($md-primary, 500) !important;
+        background: map-get($mat-primary, 500) !important;
         color: #ffffff !important;
     }
     .mat-color-primary,
     .sidebar-panel.mat-sidenav .sidebar-list-item.open > .mat-list-item-content > a > span,
     .sidebar-panel.mat-sidenav .sidebar-list-item.open .sub-menu .mat-list-item.selected a {
-        color: map-get($md-primary, 500) !important;
+        color: map-get($mat-primary, 500) !important;
     }
     .sidebar-panel .mat-nav-list .mat-list-item {
         color: rgba(0, 0, 0, 0.94)
     }
     .sidebar-panel.mat-sidenav .sidebar-list-item.open > .mat-list-item-content > .sub-menu {
-        border-left: 2px solid map-get($md-primary, 500);
+        border-left: 2px solid map-get($mat-primary, 500);
     }
     .sidebar-panel.mat-sidenav {
         background: url('../../images/sidebar-bg.jpg') no-repeat;
@@ -118,7 +118,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-bottom: 17px solid $primary-dark;
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.up .hopscotch-bubble-arrow {
-        border-bottom: 17px solid map-get($md-primary, 500);
+        border-bottom: 17px solid map-get($mat-primary, 500);
         top: -16px;
     }
     /* right arrow */
@@ -126,7 +126,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-left: 17px solid $primary-dark;
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-arrow {
-        border-left: 17px solid map-get($md-primary, 500);
+        border-left: 17px solid map-get($mat-primary, 500);
         left: -1px;
     }
     /* bottom arrow */
@@ -134,7 +134,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-top: 17px solid $primary-dark;
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-arrow {
-        border-top: 17px solid map-get($md-primary, 500);
+        border-top: 17px solid map-get($mat-primary, 500);
         top: -18px;
     }
     /* Left Arrow */
@@ -143,21 +143,21 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-arrow {
         left: 1px;
-        border-right: 17px solid map-get($md-primary, 500);
+        border-right: 17px solid map-get($mat-primary, 500);
     }
     .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-        background-color: map-get($md-accent, 400);
+        background-color: map-get($mat-accent, 400);
 
     }
     .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-          background-color: map-get($md-accent, 200);
+          background-color: map-get($mat-accent, 200);
 
     }
     .mat-bg-accent,
     div.hopscotch-bubble .hopscotch-bubble-number,
     div.hopscotch-bubble .hopscotch-nav-button.next:hover,
     div.hopscotch-bubble .hopscotch-nav-button.next {
-        background-color: map-get($md-accent, 500);
+        background-color: map-get($mat-accent, 500);
         color: black;
     }
     .mat-bg-warn {
@@ -165,7 +165,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         color: white;
     }
     .mat-color-accent {
-        color: map-get($md-accent, 500);
+        color: map-get($mat-accent, 500);
     }
     .mat-color-warn {
         color: #f44336;

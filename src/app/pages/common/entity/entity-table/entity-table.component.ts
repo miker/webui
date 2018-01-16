@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk';
-import { MdPaginator, MdSort, PageEvent } from '@angular/material';
+import { MatPaginator, MatSort, PageEvent } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs';
@@ -31,7 +31,7 @@ export class EntityTableComponent implements OnInit, AfterViewInit {
   @ViewChild('filter') filter: ElementRef;
   private erd: any = null;
 
-  // MdPaginator Inputs
+  // MatPaginator Inputs
   public paginationPageSize = 20;
   public paginationPageSizeOptions = [5, 10, 20, 100, 1000];
   public paginationPageIndex = 0;

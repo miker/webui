@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
-  MdIconModule,
-  MdDialogModule,
-  MdButtonModule,
-  MdCardModule,
+  MatIconModule,
+  MatDialogModule,
+  MatButtonModule,
+  MatCardModule,
   MaterialModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -35,10 +35,10 @@ import { ScrubFormComponent } from './scrub/scrub-form/scrub-form.component';
 @NgModule({
   imports: [
     CommonModule,
-    MdIconModule,
-    MdDialogModule,
-    MdButtonModule,
-    MdCardModule,
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
     MaterialModule,
     FlexLayoutModule,
     CalendarModule.forRoot(),

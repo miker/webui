@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$md-primary: (
+$mat-primary: (
     50 : #e1f0f2,
     100 : #b5dbe0,
     200 : #84c3cb,
@@ -34,7 +34,7 @@ $md-primary: (
     )
 );
 
-$md-accent: (
+$mat-accent: (
      50 : #fdf2e4,
     100 : #fbddbc,
     200 : #f9c790,
@@ -68,13 +68,13 @@ $md-accent: (
 );
 
 // mandatory stuff for theming
-$freenas-primary: mat-palette($md-primary);
-$freenas-accent:  mat-palette($md-accent);
+$freenas-primary: mat-palette($mat-primary);
+$freenas-accent:  mat-palette($mat-accent);
 
 // include the custom theme components into a theme object
 $freenas-theme: mat-dark-theme($freenas-primary, $freenas-accent);
 
-$primary-dark: darken( map-get($md-primary, 500), 8% );
+$primary-dark: darken( map-get($mat-primary, 500), 8% );
 
 // include the custom theme object into the angular material theme
 .freenas-sharks {
@@ -88,26 +88,26 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
 
     .mat-bg-primary,
     .topbar,
-    .sidebar-panel.mat-sidenav .sidebar-list-item.open md-icon:not(.menu-caret),
+    .sidebar-panel.mat-sidenav .sidebar-list-item.open mat-icon:not(.menu-caret),
     .chats-wrap .conversations-hold .single-conversation.me .conversation-msg,
     .ngx-datatable .datatable-footer .datatable-pager .pager .pages.active a,
     .fileupload-drop-zone.dz-file-over,
     .toolbar-avatar.online > .status-dot,
     .cal-open-day-events,
     div.hopscotch-bubble {
-        background: map-get($md-primary, 500) !important;
+        background: map-get($mat-primary, 500) !important;
         color: #ffffff !important;
     }
 
     .mat-color-primary, .tree, 
     .sidebar-panel.mat-sidenav .sidebar-list-item.open > .mat-list-item-content > a > span,
     .sidebar-panel.mat-sidenav .sidebar-list-item.open .sub-menu .mat-list-item.selected a {
-        color: map-get($md-primary, 700) !important;
+        color: map-get($mat-primary, 700) !important;
     }
     .node-content-wrapper-active, 
     .node-content-wrapper.node-content-wrapper-active:hover,
     .node-content-wrapper-active.node-content-wrapper-focused {
-        background: map-get($md-primary, 400) !important;
+        background: map-get($mat-primary, 400) !important;
         color: #000000;
     }
 
@@ -116,7 +116,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         font-weight: 500;
     }
     .sidebar-panel.mat-sidenav .sidebar-list-item.open > .mat-list-item-content > .sub-menu {
-        border-left: 2px solid map-get($md-primary, 500);
+        border-left: 2px solid map-get($mat-primary, 500);
     }
     .messages-wrap .inbox-hold {
         background: transparent !important;
@@ -125,7 +125,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         background: url('../../images/sidebar-bg-dark.jpg') no-repeat;
     }
     .app-user .app-user-name,
-    .sidebar-panel.mat-sidenav .sidebar-list-item md-icon:not(.menu-caret),
+    .sidebar-panel.mat-sidenav .sidebar-list-item mat-icon:not(.menu-caret),
     .ql-snow .ql-picker,
     .mat-option,
     .mat-dialog-container {
@@ -146,7 +146,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-color: rgba(255, 255, 255, 0.12) !important;
     }
     .mat-menu-content {
-        color: map-get($md-accent, 700) !important;
+        color: map-get($mat-accent, 700) !important;
     }
 
     .sidebar-panel.mat-sidenav .navigation-hold,
@@ -179,7 +179,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-color: #000 !important;
     }
     .ngx-datatable.material .datatable-header {
-        background-color: map-get($md-primary, 500) !important;
+        background-color: map-get($mat-primary, 500) !important;
         color: #ffffff !important;
 
     }
@@ -192,7 +192,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-bottom: 17px solid $primary-dark;
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.up .hopscotch-bubble-arrow {
-        border-bottom: 17px solid map-get($md-primary, 500);
+        border-bottom: 17px solid map-get($mat-primary, 500);
         top: -16px;
     }
     /* right arrow */
@@ -200,7 +200,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-left: 17px solid $primary-dark;
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-arrow {
-        border-left: 17px solid map-get($md-primary, 500);
+        border-left: 17px solid map-get($mat-primary, 500);
         left: -1px;
     }
     /* bottom arrow */
@@ -208,7 +208,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         border-top: 17px solid $primary-dark;
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-arrow {
-        border-top: 17px solid map-get($md-primary, 500);
+        border-top: 17px solid map-get($mat-primary, 500);
         top: -18px;
     }
     /* Left Arrow */
@@ -217,18 +217,18 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
     }
     div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-arrow {
         left: 1px;
-        border-right: 17px solid map-get($md-primary, 500);
+        border-right: 17px solid map-get($mat-primary, 500);
     }
     
     .mat-bg-accent,
     div.hopscotch-bubble .hopscotch-bubble-number,
     div.hopscotch-bubble .hopscotch-nav-button.next:hover,
     div.hopscotch-bubble .hopscotch-nav-button.next {
-        background-color: map-get($md-accent, 500);
+        background-color: map-get($mat-accent, 500);
         color: black;
     }
     .mat-button {
-        background-color: map-get($md-primary, 500);
+        background-color: map-get($mat-primary, 500);
         color: black;   
     }
     .mat-bg-warn {
@@ -236,7 +236,7 @@ $primary-dark: darken( map-get($md-primary, 500), 8% );
         color: white;
     }
     .mat-color-accent {
-        color: map-get($md-accent, 500);
+        color: map-get($mat-accent, 500);
     }
     .mat-color-warn {
         color: #f44336;

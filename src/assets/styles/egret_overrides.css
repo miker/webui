@@ -128,11 +128,11 @@ ngx-datatable .mat-box-shadow{
 }
 
 /* vm-cards */
-vm-cards md-card{
+vm-cards mat-card{
   padding:0 !important;
 }
 
-.vm-card-edit div.md-content{
+.vm-card-edit div.mat-content{
   width: 100% !important;
   height: 100% !important;
   position:absolute;

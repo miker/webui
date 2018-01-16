@@ -475,11 +475,11 @@ code {
 }
 /*---- Third pirty adjust -----*/
 /*--------- Material ---------*/
-md-list a[md-list-item] .mat-list-item-content, 
-md-list md-list-item .mat-list-item-content, 
-md-nav-list a[md-list-item] .mat-list-item-content, 
-md-nav-list md-list-item .mat-list-item-content,
-[md-menu-item],
+mat-list a[mat-list-item] .mat-list-item-content, 
+mat-list mat-list-item .mat-list-item-content, 
+mat-nav-list a[mat-list-item] .mat-list-item-content, 
+mat-nav-list mat-list-item .mat-list-item-content,
+[mat-menu-item],
 .mat-option, 
 body .mat-select-trigger {
     font-size: .875rem !important;
@@ -902,21 +902,21 @@ div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
     padding: 0 16px 0 0;
     z-index: 99;
 }
-.sidebar-panel.mat-sidenav .sidebar-list-item md-icon:not(.menu-caret) {
+.sidebar-panel.mat-sidenav .sidebar-list-item mat-icon:not(.menu-caret) {
     text-align: center;
     margin-right: 8px;
     height: 48px;
     width: 48px;
     line-height: 48px;
 }
-.sidebar-panel.mat-sidenav .sidebar-list-item md-icon.menu-caret {
+.sidebar-panel.mat-sidenav .sidebar-list-item mat-icon.menu-caret {
     float: right;
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
     -webkit-transition: all .3s cubic-bezier(.35,0,.25,1);
     transition: all .3s cubic-bezier(.35,0,.25,1);
 }
-.sidebar-panel.mat-sidenav .sidebar-list-item.open md-icon.menu-caret {
+.sidebar-panel.mat-sidenav .sidebar-list-item.open mat-icon.menu-caret {
     float: right;
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
@@ -1355,8 +1355,8 @@ div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
     text-decoration: none;
 }
 
-.has-tooltip md-input-container.full-width,
-.has-tooltip md-select.full-width {
+.has-tooltip mat-input-container.full-width,
+.has-tooltip mat-select.full-width {
     width: calc( 100% - 25px );
 }
 

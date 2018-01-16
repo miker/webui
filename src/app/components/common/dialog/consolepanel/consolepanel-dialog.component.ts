@@ -1,4 +1,4 @@
-import { MdDialog, MdDialogRef} from '@angular/material';
+import { MatDialog, MatDialogRef} from '@angular/material';
 import { Component, AfterViewChecked, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import {
   WebSocketService
@@ -17,7 +17,7 @@ export class ConsolePanelModalDialog {
   onEventEmitter = new EventEmitter();
 
   constructor(
-    public dialogRef: MdDialogRef<ConsolePanelModalDialog>,
+    public dialogRef: MatDialogRef<ConsolePanelModalDialog>,
     private ws: WebSocketService) { }
 
   ngOnInit() {

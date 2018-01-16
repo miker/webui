@@ -1,40 +1,40 @@
-@mixin smd-fab-speed-dial-container($box-orient, $flex-direction) {
+@mixin smat-fab-speed-dial-container($box-orient, $flex-direction) {
   -webkit-box-orient: $box-orient;
   -webkit-box-direction: normal;
   -webkit-flex-direction: $flex-direction;
   flex-direction: $flex-direction;  
 }
 
-@mixin smd-fab-speed-dial-box-order($ordinal-group, $order) {
+@mixin smat-fab-speed-dial-box-order($ordinal-group, $order) {
   -webkit-box-ordinal-group: $ordinal-group;
   -webkit-order: $order;
   order: $order;
 }
 
-@mixin smd-fab-speed-dial-actions($box-orient, $box-direction, $flex-direction, $ordinal-group, $order, $action-item-margin-direction) {
+@mixin smat-fab-speed-dial-actions($box-orient, $box-direction, $flex-direction, $ordinal-group, $order, $action-item-margin-direction) {
   -webkit-box-orient: $box-orient;
   -webkit-box-direction: $box-direction;
   -webkit-flex-direction: $flex-direction;
   flex-direction: $flex-direction;
 
-  @include smd-fab-speed-dial-box-order($ordinal-group, $order);
+  @include smat-fab-speed-dial-box-order($ordinal-group, $order);
 
-  & .smd-fab-action-item {
+  & .smat-fab-action-item {
     margin-#{$action-item-margin-direction}: 10px;
   }
 }
 
-smd-fab-speed-dial {
+smat-fab-speed-dial {
   display: inline-block;
   position: absolute;
   right: 66px;
   top: 34px;
   z-index:2;
 
-  &.smd-opened {
-    .smd-fab-speed-dial-container {
-      smd-fab-trigger {
-        &.smd-spin {
+  &.smat-opened {
+    .smat-fab-speed-dial-container {
+      smat-fab-trigger {
+        &.smat-spin {
           -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
         }
@@ -42,7 +42,7 @@ smd-fab-speed-dial {
     }
   }
 
-  .smd-fab-speed-dial-container {
+  .smat-fab-speed-dial-container {
     position: relative;
     display: -webkit-box;
     display: -webkit-flex;
@@ -52,17 +52,17 @@ smd-fab-speed-dial {
     align-items: center;
     z-index: 20;
 
-    smd-fab-trigger {
+    smat-fab-trigger {
       pointer-events: auto;
       z-index: 24;
 
-      &.smd-spin {
+      &.smat-spin {
         -webkit-transition: all .6s cubic-bezier(.4,0,.2,1);
         transition: all .6s cubic-bezier(.4,0,.2,1);
       }
     }
 
-    smd-fab-actions {
+    smat-fab-actions {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -70,10 +70,10 @@ smd-fab-speed-dial {
     }
   }
 
-  &.smd-fling {
-    .smd-fab-speed-dial-container {
-      smd-fab-actions {
-        & .smd-fab-action-item {
+  &.smat-fling {
+    .smat-fab-speed-dial-container {
+      smat-fab-actions {
+        & .smat-fab-action-item {
           display: block;
           opacity: 1;
           -webkit-transition: all .3s cubic-bezier(.55, 0, .55, .2);
@@ -83,10 +83,10 @@ smd-fab-speed-dial {
     }
   }
 
-  &.smd-scale {
-    .smd-fab-speed-dial-container {
-      smd-fab-actions {
-        & .smd-fab-action-item {
+  &.smat-scale {
+    .smat-fab-speed-dial-container {
+      smat-fab-actions {
+        & .smat-fab-action-item {
           -webkit-transform: scale(0);
           transform: scale(0);
           -webkit-transition: all .3s cubic-bezier(.55, 0, .55, .2);
@@ -98,58 +98,58 @@ smd-fab-speed-dial {
     }
   }
 
-  &.smd-down {
-    .smd-fab-speed-dial-container {
-      @include smd-fab-speed-dial-container(vertical, column);
+  &.smat-down {
+    .smat-fab-speed-dial-container {
+      @include smat-fab-speed-dial-container(vertical, column);
 
-      & smd-fab-trigger {
-        @include smd-fab-speed-dial-box-order(2, 1);
+      & smat-fab-trigger {
+        @include smat-fab-speed-dial-box-order(2, 1);
       }
 
-      & smd-fab-actions {
-        @include smd-fab-speed-dial-actions(vertical, normal, column, 3, 2, top);
-      }
-    }
-  }
-
-  &.smd-up {
-    .smd-fab-speed-dial-container {
-      @include smd-fab-speed-dial-container(vertical, column);
-
-      & smd-fab-trigger {
-        @include smd-fab-speed-dial-box-order(3, 2);
-      }
-
-      & smd-fab-actions {
-        @include smd-fab-speed-dial-actions(vertical, reverse, column-reverse, 2, 1, bottom);
+      & smat-fab-actions {
+        @include smat-fab-speed-dial-actions(vertical, normal, column, 3, 2, top);
       }
     }
   }
 
-  &.smd-left {
-    .smd-fab-speed-dial-container {
-      @include smd-fab-speed-dial-container(horizontal, row);
+  &.smat-up {
+    .smat-fab-speed-dial-container {
+      @include smat-fab-speed-dial-container(vertical, column);
 
-      & smd-fab-trigger {
-        @include smd-fab-speed-dial-box-order(3, 2);
+      & smat-fab-trigger {
+        @include smat-fab-speed-dial-box-order(3, 2);
       }
 
-      & smd-fab-actions {
-        @include smd-fab-speed-dial-actions(horizontal, normal, row-reverse, 2, 1, right);
+      & smat-fab-actions {
+        @include smat-fab-speed-dial-actions(vertical, reverse, column-reverse, 2, 1, bottom);
       }
     }
   }
 
-  &.smd-right {
-    .smd-fab-speed-dial-container {
-      @include smd-fab-speed-dial-container(horizontal, row);
+  &.smat-left {
+    .smat-fab-speed-dial-container {
+      @include smat-fab-speed-dial-container(horizontal, row);
 
-      & smd-fab-trigger {
-        @include smd-fab-speed-dial-box-order(2, 1);
+      & smat-fab-trigger {
+        @include smat-fab-speed-dial-box-order(3, 2);
       }
 
-      & smd-fab-actions {
-        @include smd-fab-speed-dial-actions(horizontal, normal, row, 3, 2, left);
+      & smat-fab-actions {
+        @include smat-fab-speed-dial-actions(horizontal, normal, row-reverse, 2, 1, right);
+      }
+    }
+  }
+
+  &.smat-right {
+    .smat-fab-speed-dial-container {
+      @include smat-fab-speed-dial-container(horizontal, row);
+
+      & smat-fab-trigger {
+        @include smat-fab-speed-dial-box-order(2, 1);
+      }
+
+      & smat-fab-actions {
+        @include smat-fab-speed-dial-actions(horizontal, normal, row, 3, 2, left);
       }
     }
   }
