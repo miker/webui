@@ -7,7 +7,7 @@
 				class="service-power-btn"
 		 		[ngClass]="{'service-power-btn-off':this.status.state == 'STOPPED','service-power-btn-on':this.status.state == 'RUNNING'}"
 		 		(click)="toggle()"
-		 		mdTooltip="{{ this.status.state }}" mdTooltipPosition="above">
+		 		matTooltip="{{ this.status.state }}" matTooltipPosition="above">
 				<mat-icon>power_settings_new</mat-icon>
 			</button>
 

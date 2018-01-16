@@ -85,7 +85,7 @@
            class="vm-power-btn"
            [ngClass]="{'vm-power-btn-off':cards[i].state == 'stopped','vm-power-btn-on':cards[i].state == 'running'}" 
            (click)="toggleVmState(i)"
-           mdTooltip="{{ powerBtnLabel(cards[i].state) }}" mdTooltipPosition="above">
+           matTooltip="{{ powerBtnLabel(cards[i].state) }}" matTooltipPosition="above">
           <mat-icon>power_settings_new</mat-icon>
         </button>
 
@@ -97,7 +97,7 @@
                   class="vm-power-btn"
                   [ngClass]="{'vm-power-btn-off':cards[i].state == 'stopped','vm-power-btn-on':cards[i].state == 'running'}" 
                   (click)="toggleVmState(i)"
-                  mdTooltip="{{ powerBtnLabel(cards[i].state) }}" mdTooltipPosition="above">
+                  matTooltip="{{ powerBtnLabel(cards[i].state) }}" matTooltipPosition="above">
             <mat-icon>power_settings_new</mat-icon>
           </button>
 

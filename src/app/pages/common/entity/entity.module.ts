@@ -3,7 +3,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCommonModule, MatTableModule, MatSortModule, MatSortHeader, MatSort, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatCommonModule, MatTableModule, MatSortModule, MatSortHeader, MatSort, MatDatepickerModule, MatNativeDateModule, MatMenuModule, MatTooltipModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TreeModule } from 'angular-tree-component';
 import { NgUploaderModule } from 'ngx-uploader';
@@ -51,7 +51,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 @NgModule({
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    MatCommonModule, NgxDatatableModule, MatTableModule, CdkTableModule, TreeModule,
+    MatCommonModule, MatTooltipModule, MatMenuModule, NgxDatatableModule, MatTableModule, CdkTableModule, TreeModule,
     Ng2DropdownModule, NgUploaderModule, MatSortModule, FlexLayoutModule, MatDatepickerModule, MatNativeDateModule
   ],
   declarations: [

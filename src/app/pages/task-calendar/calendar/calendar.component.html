@@ -75,7 +75,7 @@
     </button>
   </smat-fab-trigger>
   <smat-fab-actions>
-    <button *ngFor="let task of tasks" mat-mini-fab (click)="addTask(task.name)" mdTooltip="{{task.label}}">
+    <button *ngFor="let task of tasks" mat-mini-fab (click)="addTask(task.name)" matTooltip="{{task.label}}">
       <mat-icon>{{task.icon}}</mat-icon>
     </button>
   </smat-fab-actions>

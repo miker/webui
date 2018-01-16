@@ -17,10 +17,10 @@ import {EntityTableComponent} from './entity-table.component';
 			</smat-fab-trigger>
 
 			<smat-fab-actions>
-				<button *ngIf="this.entity.conf.route_add" mat-mini-fab (click)="this.entity.doAdd()" mdTooltip="{{this.entity.conf.route_add_tooltip}}">
+				<button *ngIf="this.entity.conf.route_add" mat-mini-fab (click)="this.entity.doAdd()" matTooltip="{{this.entity.conf.route_add_tooltip}}">
 					<mat-icon>add</mat-icon>
 				</button>
-				<button *ngFor="let action of actions" mat-mini-fab (click)="action.onClick()" mdTooltip="{{action.label}}">
+				<button *ngFor="let action of actions" mat-mini-fab (click)="action.onClick()" matTooltip="{{action.label}}">
 					<mat-icon>{{action.icon}}</mat-icon>
 				</button>
 			</smat-fab-actions>

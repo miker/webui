@@ -19,18 +19,18 @@
   </div -->
   <span fxFlex></span>
   <!--loading icon-->
-  <button *ngIf="showResilvering" mat-icon-button id="resilver" mdTooltip="resilvering" (click)="showResilveringDetails()" class="topbar-button-right">
+  <button *ngIf="showResilvering" mat-icon-button id="resilver" matTooltip="resilvering" (click)="showResilveringDetails()" class="topbar-button-right">
     <mat-icon class="fa-spin">autorenew</mat-icon>
   </button>
-  <button *ngIf="showReplication" mat-icon-button id="replication" mdTooltip="replication" (click)="showReplicationDetails()" class="topbar-button-right">
+  <button *ngIf="showReplication" mat-icon-button id="replication" matTooltip="replication" (click)="showReplicationDetails()" class="topbar-button-right">
     <mat-icon class="movement">content_copy</mat-icon>
   </button>
 
   <!-- Theme Switcher -->
-  <button mat-icon-button id="schemeToggle" [style.overflow]="'visible'" mdTooltip="FreeNAS Themes" [mdMenuTriggerFor]="themeMenu" class="topbar-button-right">
+  <button mat-icon-button id="schemeToggle" [style.overflow]="'visible'" matTooltip="FreeNAS Themes" [matMenuTriggerFor]="themeMenu" class="topbar-button-right">
     <mat-icon>format_color_fill</mat-icon>
   </button>
-  <mat-menu #themeMenu="mdMenu" >
+  <mat-menu #themeMenu="matMenu" >
     <mat-grid-list class="theme-list" cols="1" rowHeight="24px">
       <mat-grid-tile *ngFor="let theme of themeService.freenasThemes" (click)="changeTheme(theme)">
         <div mat-menu-item [title]="theme.name">
@@ -42,22 +42,22 @@
     </mat-grid-list>
   </mat-menu>
 
-  <button mat-icon-button (click)="startTour()" class="topbar-button-right" mdTooltip="Guide Tour" [style.overflow]="'visible'">
+  <button mat-icon-button (click)="startTour()" class="topbar-button-right" matTooltip="Guide Tour" [style.overflow]="'visible'">
     <mat-icon>flight_takeoff</mat-icon>
   </button>
 
   <!-- Notification toggle button -->
-  <button mat-icon-button mdTooltip="Notifications" (click)="toggleNotific()" [style.overflow]="'visible'" class="topbar-button-right">
+  <button mat-icon-button matTooltip="Notifications" (click)="toggleNotific()" [style.overflow]="'visible'" class="topbar-button-right">
     <mat-icon>notifications</mat-icon>
     <span *ngIf="notifications.length > 0" class="notification-number mat-bg-warn">{{notifications.length}}</span>
   </button>
 
   <!-- Top left user menu -->
-  <button mat-icon-button [mdMenuTriggerFor]="accountMenu" class="topbar-button-right">
+  <button mat-icon-button [matMenuTriggerFor]="accountMenu" class="topbar-button-right">
     <mat-icon>settings</mat-icon>
   </button>
-  <mat-menu #accountMenu="mdMenu">
-    <button mat-menu-item (click)="$event.stopPropagation()" [mdMenuTriggerFor]="languageMenu">
+  <mat-menu #accountMenu="matMenu">
+    <button mat-menu-item (click)="$event.stopPropagation()" [matMenuTriggerFor]="languageMenu">
       <mat-icon>translate</mat-icon>
       <ng-container *ngFor="let lang of availableLangs">
         <span *ngIf="lang.code == currentLang">{{ lang.name }}</span>
@@ -101,7 +101,7 @@
     </a>
   </mat-menu>
 
-  <mat-menu #languageMenu="mdMenu" [overlapTrigger]="false" xPosition="after">
+  <mat-menu #languageMenu="matMenu" [overlapTrigger]="false" xPosition="after">
     <ng-container *ngFor="let lang of availableLangs">
       <button mat-menu-item (click)="setLang(lang.code)">
         <span class="flag-icon" [ngClass]="{'flag-icon-us': lang.code === 'en'}" *ngIf="lang.code == 'en'">{{ lang.name }}</span>

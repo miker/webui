@@ -81,8 +81,8 @@
                         
                         <div *dxTemplate="let rowData of 'cellTemplate'">
                             <div class="panel_container">
-                                <mat-icon [mdMenuTriggerFor]="appMenu" [style.cursor]="'pointer'">more_vert</mat-icon>
-                                <mat-menu #appMenu="mdMenu">
+                                <mat-icon [matMenuTriggerFor]="appMenu" [style.cursor]="'pointer'">more_vert</mat-icon>
+                                <mat-menu #appMenu="matMenu">
                                     <span *ngFor="let action of rowData.data.actions">
                                         <button mat-menu-item  (click)="action.onClick( rowData.data );">
                                             <span>{{ action.label }}</span>

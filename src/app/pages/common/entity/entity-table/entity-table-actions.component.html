@@ -1,6 +1,6 @@
 <div class="panel_container">
-		<mat-icon [mdMenuTriggerFor]="appMenu" [style.cursor]="'pointer'">{{icon_name}}</mat-icon>
-<mat-menu #appMenu="mdMenu">
+		<mat-icon [matMenuTriggerFor]="appMenu" [style.cursor]="'pointer'">{{icon_name}}</mat-icon>
+<mat-menu #appMenu="matMenu">
     <span *ngFor="let action of actions">
 			<button mat-menu-item *ngIf="!entity.conf.isActionVisible
 						|| entity.conf.isActionVisible.bind(entity.conf)(action.id, row)" (click)="action.onClick(this.row);">
