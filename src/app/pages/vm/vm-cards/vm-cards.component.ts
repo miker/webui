@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MaterialModule, MatButtonToggleGroup } from '@angular/material';
+import { MatCommonModule, MatButtonToggleGroup } from '@angular/material';
 import { EntityModule } from '../../common/entity/entity.module';
 import { WebSocketService, RestService } from '../../../services/';
 import { DialogService } from '../../../services/dialog.service';

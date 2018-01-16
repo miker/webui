@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
+import { MatCommonModule } from '@angular/material';
 
 import { JailService } from '../../services';
 import { EntityModule } from '../common/entity/entity.module';
@@ -41,7 +41,7 @@ import { AssociatedTargetFormComponent } from './iscsi/associated-target/associa
     ReactiveFormsModule,
     routing,
     EntityModule,
-    MaterialModule
+    MatCommonModule
   ],
   declarations : [
     AFPListComponent,

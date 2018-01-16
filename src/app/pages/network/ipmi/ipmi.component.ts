@@ -2,7 +2,7 @@ import {ApplicationRef, Component, Injector, OnInit, Input, ViewChild, ElementRe
 import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 import {Subscription} from 'rxjs';
-import { MaterialModule, MatTableModule } from '@angular/material';
+import { MatCommonModule, MatTableModule } from '@angular/material';
 
 import {
   RestService,

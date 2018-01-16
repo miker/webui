@@ -5,7 +5,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { Http, HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
-import { MaterialModule } from '@angular/material';
+import { MatCommonModule } from '@angular/material';
 import { NgIdleModule } from '@ng-idle/core';
 import { rootRouterConfig } from './app.routes';
 import { AppCommonModule } from "./components/common/app-common.module";
@@ -51,7 +51,7 @@ export function createTranslateLoader(http: Http) {
       useFactory: (createTranslateLoader),
       deps: [Http]
     }),
-    MaterialModule,
+    MatCommonModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     NgIdleModule.forRoot(),
     MarkdownModule.forRoot(),
