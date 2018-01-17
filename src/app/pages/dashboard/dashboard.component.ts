@@ -184,9 +184,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.erd.listenTo(document.getElementById("dashboardcontainerdiv"), (element) => {
-      (<any>window).dispatchEvent(new Event('resize'));
-    });
+    setTimeout(()=>{
+      this.erd.listenTo(document.getElementById("dashboardcontainerdiv"), (element) => {
+        (<any>window).dispatchEvent(new Event('resize'));
+      });
+    }, -1);
   }
 
   addNote() {
