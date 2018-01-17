@@ -7,6 +7,7 @@ import { MdSnackBar } from '@angular/material';
 import * as hopscotch from 'hopscotch';
 import { RestService } from './services/rest.service';
 import { TourService } from './services/tour.service';
+import { WebSocketService } from './services/ws.service';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +26,16 @@ export class AppComponent implements OnInit {
     private routePartsService: RoutePartsService,
     public snackBar: MdSnackBar,
     private rest: RestService,
+    private ws: WebSocketService,
     private tour: TourService) {}
     protected user: any;
 
   ngOnInit() {
     this.changePageTitle();
+    let self = this;
+    window.addEventListener('beforeunload', function(e) {
+      self.ws.logout(); 
+    }, false);
   }
 
 
