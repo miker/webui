@@ -7,7 +7,7 @@ import { NetworkService, RestService } from '../../../../services';
 import {
   FieldConfig
 } from '../../../common/entity/entity-form/models/field-config.interface';
-
+import { EntityFormService } from '../../../common/entity/entity-form/services/entity-form.service';
 
 @Component({
   selector : 'app-interfaces-form',
@@ -93,31 +93,32 @@ export class InterfacesFormComponent {
     },
     {
       type: 'array',
-      name : 'int_alias',
+      name : 'inline_interfaces_formset_alias',
+      placeholder : 'Alias',
       initialCount: 1,
       formarray: [
       {
         type : 'input',
-        name : 'int_alias_ipv4address',
+        name : 'alias_set-alias_v4address',
         placeholder : 'IPv4 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
       },
       {
         type : 'select',
-        name : 'int_alias_v4netmaskbit',
+        name : 'alias_set-alias_v4netmaskbit',
         placeholder : 'IPv4 Netmask',
         tooltip : 'Enter a netmask if <b>DHCP</b> is unchecked.',
         options : []
       },
       {
         type : 'input',
-        name : 'int_alias_ipv6address',
+        name : 'alias_set-alias_v6address',
         placeholder : 'IPv6 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
       },
       {
         type : 'select',
-        name : 'int_alias_v6netmaskbit',
+        name : 'alias_set-alias_v6netmaskbit',
         placeholder : 'IPv6 Prefix Length',
         options : []
       }]
@@ -130,17 +131,12 @@ export class InterfacesFormComponent {
 
   public custActions: Array<any> = [
     {
-      id : 'add_path',
+      id : 'add_alias',
       name : 'Add extra Alias',
       function : () => {
         this.initialCount += 1;
-      }
-    },
-    {
-      id : 'remove_path',
-      name : 'Remove extra Alias',
-      function : () => {
-        this.initialCount -= 1;
+        this.entityFormService.insertFormArrayGroup(
+            this.initialCount, this.formArray, this.arrayControl.formarray);
       }
     }
   ];
@@ -150,21 +146,27 @@ export class InterfacesFormComponent {
   private int_interface: any;
   private entityForm: any;
 
-  constructor(protected router: Router, protected route: ActivatedRoute,
+  constructor(protected router: Router,
+              protected route: ActivatedRoute,
               protected rest: RestService,
-              protected networkService: NetworkService) {}
+              protected networkService: NetworkService,
+              protected entityFormService: EntityFormService) {}
 
   preInit(entityForm: any) {
     this.int_interface = _.find(this.fieldConfig, {'name' : 'int_interface'});
+    this.arrayControl = _.find(this.fieldConfig, {'name' : 'inline_interfaces_formset_alias'});
     this.route.params.subscribe(params => {
       if(!params['pk']) {
         this.int_interface.type = 'select';
         this.int_interface.options = [];
+        this.arrayControl.initialCount = this.initialCount = this.initialCount_default = 1;
       }
     });
   }
 
   afterInit(entityForm: any) {
+    this.formArray = entityForm.formGroup.controls['inline_interfaces_formset_alias'];
+
     this.int_v4netmaskbit =
         _.find(this.fieldConfig, {'name' : 'int_v4netmaskbit'});
     this.int_v4netmaskbit.options = this.networkService.getV4Netmasks();

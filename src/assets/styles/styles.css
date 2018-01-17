@@ -1376,3 +1376,8 @@ body.safari-platform .mat-raised-button {
     line-height: 1 !important;
     font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace !important;
 }
+
+/*---- Form Array ----*/
+.form-array fieldset {
+    min-width: 90%;
+}
