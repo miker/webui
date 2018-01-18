@@ -1,7 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {MatCommonModule} from '@angular/material';
+import {MatCommonModule, MatCardModule, MatTooltipModule, 
+  MatIconModule, MatChipsModule, MatCheckboxModule } from '@angular/material';
 
 import {EntityModule} from '../common/entity/entity.module';
 import {AppConfirmModule} from "../../services/app-confirm/app-confirm.module";
@@ -27,7 +28,9 @@ import {Services} from './services.component';
 import {routing} from './services.routing';
 
 @NgModule({
-  imports : [ CommonModule, FormsModule, EntityModule, routing, MatCommonModule, AppConfirmModule ],
+  imports : [ CommonModule, FormsModule, EntityModule, routing, 
+    MatCommonModule, AppConfirmModule, MatCardModule, MatTooltipModule, 
+    MatChipsModule, MatIconModule, MatCheckboxModule ],
   declarations : [
     Service, Services, ServiceSSHComponent, ServiceAFPComponent,
     ServiceDCComponent, ServiceFTPComponent, ServiceLLDPComponent,

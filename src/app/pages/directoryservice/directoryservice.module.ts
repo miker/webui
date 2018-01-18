@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgUploaderModule } from 'ngx-uploader';
-import { MatCommonModule } from '@angular/material';
+import { MatCommonModule, MatCardModule } from '@angular/material';
 
 import { SystemGeneralService } from '../../services';
 import { EntityModule } from '../common/entity/entity.module';
@@ -19,7 +19,7 @@ import { KerberosSettingsComponent } from './kerberossettings';
 @NgModule({
   imports: [
     CommonModule, EntityModule, FormsModule, ReactiveFormsModule,
-    NgUploaderModule, routing, MatCommonModule
+    NgUploaderModule, routing, MatCommonModule, MatCardModule
   ],
   declarations: [
     LdapComponent,

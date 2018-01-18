@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgUploaderModule} from 'ngx-uploader';
-import { MatCommonModule, MatTableModule } from '@angular/material';
+import { MatCommonModule, MatTableModule, MatCardModule, MatOptionModule, MatSelectModule } from '@angular/material';
 
 import {EntityModule} from '../common/entity/entity.module';
 import {NetworkService} from '../../services';
@@ -21,8 +21,8 @@ import {routing} from './network.routing';
 
 @NgModule({
   imports : [
-    EntityModule, CommonModule, FormsModule,
-    ReactiveFormsModule, NgUploaderModule, routing, MatCommonModule
+    EntityModule, CommonModule, FormsModule, MatCardModule, MatOptionModule,
+    ReactiveFormsModule, NgUploaderModule, routing, MatCommonModule, MatSelectModule
   ],
   declarations : [
     VlanFormComponent,

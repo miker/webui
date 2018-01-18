@@ -3,15 +3,15 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import { MatCommonModule, MatCardModule } from '@angular/material';
+import { MatCommonModule, MatCardModule, MatTabsModule, MatPaginatorModule } from '@angular/material';
 
 import {ReportsDashboardComponent} from './reportsdashboard.component';
 import {routing} from './reportsdashboard.routing';
 import {LineChartService} from '../../components/common/lineChart/lineChart.service';
 
 @NgModule({
-  imports : [ CommonModule, FormsModule, routing, 
-  MatCommonModule, MatCardModule, AppCommonModule ],
+  imports : [ CommonModule, FormsModule, routing, MatTabsModule,
+  MatCommonModule, MatPaginatorModule, MatCardModule, AppCommonModule ],
   declarations : [
     ReportsDashboardComponent
   ],

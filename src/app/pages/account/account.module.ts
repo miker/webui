@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCommonModule } from '@angular/material';
+import { MatCommonModule, MatIconModule, MatListModule,
+         MatCardModule } from '@angular/material';
 import { NgxDualListboxModule } from '../../components/common/dual-list/dual-list.module';
 
 import { EntityModule } from '../common/entity/entity.module';
@@ -19,7 +20,8 @@ import { MembersComponent } from './groups/members/members.component';
 @NgModule({
   imports: [
     EntityModule, CommonModule, FormsModule, MatCommonModule, NgxDualListboxModule,
-    ReactiveFormsModule, routing
+    ReactiveFormsModule, MatIconModule, MatListModule, MatCardModule,
+    routing
   ],
   declarations: [
     GroupListComponent,

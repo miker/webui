@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgUploaderModule} from 'ngx-uploader';
-import { MatCommonModule, MatTableModule } from '@angular/material';
+import { MatCommonModule, MatTableModule, MatCardModule } from '@angular/material';
 
 import {EntityModule} from '../common/entity/entity.module';
 
@@ -13,7 +13,7 @@ import { PluginsInstalledListComponent } from './plugins-installed/plugins-insta
 
 @NgModule({
   imports : [
-    EntityModule, CommonModule, FormsModule,
+    EntityModule, CommonModule, FormsModule, MatCardModule,
     ReactiveFormsModule, NgUploaderModule, routing, MatCommonModule
   ],
   declarations : [
