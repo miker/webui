@@ -5,7 +5,7 @@ import { NgUploaderModule } from 'ngx-uploader';
 
 import { EntityModule } from '../common/entity/entity.module';
 
-import { MatCommonModule, MatCardModule } from '@angular/material';
+import { MatCommonModule, MatCardModule, MatIconModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
 import { MarkdownModule } from 'angular2-markdown';
 import { routing } from './system.routing';
 
@@ -68,7 +68,8 @@ import { EmailComponent } from './email';
   imports: [
     EntityModule, CommonModule, FormsModule,
     ReactiveFormsModule, NgUploaderModule, routing,
-    MatCommonModule, MatCardModule, MarkdownModule.forRoot(),
+    MatCommonModule, MatCardModule, MatIconModule, MatCheckboxModule,
+    MatSelectModule, MarkdownModule.forRoot(),
   ],
   declarations: [
     GeneralComponent,

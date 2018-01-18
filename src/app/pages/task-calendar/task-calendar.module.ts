@@ -6,7 +6,9 @@ import {
   MatDialogModule,
   MatButtonModule,
   MatCardModule,
-  MatCommonModule
+  MatCommonModule,
+  MatListModule,
+  MatTooltipModule,
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -40,6 +42,8 @@ import { ScrubFormComponent } from './scrub/scrub-form/scrub-form.component';
     MatButtonModule,
     MatCardModule,
     MatCommonModule,
+    MatListModule,
+    MatTooltipModule,
     FlexLayoutModule,
     CalendarModule.forRoot(),
     RouterModule.forChild(TaskCalendarRoutes),

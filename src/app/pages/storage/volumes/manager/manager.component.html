@@ -5,9 +5,9 @@
   <div class="mat-content p-1">
     <div class="m-3">
       <div *ngIf="isNew;else extend">
-      <mat-input-container>
+      <mat-form-field>
           <input mdInput placeholder="Name" [(ngModel)]="name" required>
-      </mat-input-container>
+      </mat-form-field>
         <mat-checkbox
           [(ngModel)]="isEncrypted"
           class="form-control"
@@ -20,9 +20,9 @@
         </div>
       </div>
       <ng-template #extend>
-        <mat-input-container>
+        <mat-form-field>
           <input mdInput placeholder="Name" [value]="name" disabled>
-        </mat-input-container>
+        </mat-form-field>
         <mat-error *ngIf="isEncrypted">Extending an encrypted volume will reset the passphrase and recovery key!</mat-error>
       </ng-template>
     </div>
@@ -53,22 +53,22 @@
               <ngx-datatable-column name="Disk" prop="devname"></ngx-datatable-column>
               <ngx-datatable-column name="Capacity" prop="capacity"></ngx-datatable-column>
             </ngx-datatable>
-            <mat-input-container>
+            <mat-form-field>
                 <input mdInput
                   id="nameFilter"
                   type='text'
                   placeholder='Filter disks by name'
                   (keyup)='updateFilter($event)'
                 />
-              </mat-input-container>
-              <mat-input-container>
+              </mat-form-field>
+              <mat-form-field>
                 <input mdInput
                   id="capacityFilter"
                   type='text'
                   placeholder='Filter disks by capacity'
                   (keyup)='updateFilter($event)'
                 />
-              </mat-input-container>
+              </mat-form-field>
               <mat-error *ngIf="re_has_errors">{{re_errors}}</mat-error>
       </div>
       <div class="pool">
