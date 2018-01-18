@@ -16,6 +16,8 @@ import { ViewChartDonutComponent } from 'app/core/components/viewchartdonut/view
 import { ViewChartGaugeComponent } from './viewchartgauge/viewchartgauge.component';
 import { ViewChartLineComponent } from './viewchartline/viewchartline.component';
 
+import { AnimationDirective } from 'app/core/directives/animation.directive';
+
 /*
  *
  * This is the Core Module. By importing this module you'll 
@@ -31,6 +33,7 @@ import { ViewChartLineComponent } from './viewchartline/viewchartline.component'
     FlexLayoutModule
   ],
   declarations: [
+    AnimationDirective,
     PageComponent,
     ViewComponent,
     CardComponent,
@@ -49,6 +52,7 @@ import { ViewChartLineComponent } from './viewchartline/viewchartline.component'
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    AnimationDirective,
     Display,
     DisplayContainer,
     PageComponent,

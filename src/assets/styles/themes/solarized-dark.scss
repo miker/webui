@@ -147,7 +147,7 @@ $primary-dark: darken( map-get($mat-primary, 700), 8% );
     @include angular-material-theme($freenas-theme);
     
     // Background
-    body, .mat-sidenav-content{
+    body.solarized-dark .page-wrap, .mat-sidenav-content{
       background-color:$canvas;
       color:$base01;
     }

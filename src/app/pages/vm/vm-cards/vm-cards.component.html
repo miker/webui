@@ -3,7 +3,7 @@
   It's role is management of data and creating/destroying
   views. 
 -->
-<md-card class="card-filter">
+<md-card #collection class="card-filter">
   <md-card-header>
     <!--
       This is the filter bar which shares an md-card 
@@ -76,7 +76,7 @@
       so you can use any of the usual md-card internal selectors like <md-header>, 
       <md-content> etc.
     -->
-    <ng-template #cardfront let-name="name">
+    <ng-template #cardfront let-name="name" animation>
       <!-- Template for front face of card -->
       <div *ngIf="viewMode.value == 'cards'" class="vm-bg"></div>
       <div class="side-content section">

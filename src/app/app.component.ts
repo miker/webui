@@ -31,10 +31,6 @@ export class AppComponent implements OnInit {
     private api: ApiService,
     private tour: TourService) {
 
-    if (this.detectBrowser("Safari")) {
-      document.body.className += " safari-platform";
-    }
-
     router.events.subscribe(s => {
       if (s instanceof NavigationCancel) {
         let params = new URLSearchParams(s.url.split('#')[1]);
