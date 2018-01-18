@@ -92,33 +92,33 @@ export class InterfacesFormComponent {
  multiple paramerters with a space.',
     },
     {
-      type: 'array',
+      type : 'array',
       name : 'inline_interfaces_formset_alias',
       placeholder : 'Alias',
-      initialCount: 1,
-      formarray: [
+      initialCount : 1,
+      formarray : [
       {
         type : 'input',
-        name : 'alias_set-alias_v4address',
+        name : 'int_alias_v4address',
         placeholder : 'IPv4 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
       },
       {
         type : 'select',
-        name : 'alias_set-alias_v4netmaskbit',
+        name : 'int_alias_v4netmaskbit',
         placeholder : 'IPv4 Netmask',
         tooltip : 'Enter a netmask if <b>DHCP</b> is unchecked.',
         options : []
       },
       {
         type : 'input',
-        name : 'alias_set-alias_v6address',
+        name : 'int_alias_v6address',
         placeholder : 'IPv6 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
       },
       {
         type : 'select',
-        name : 'alias_set-alias_v6netmaskbit',
+        name : 'int_alias_v6netmaskbit',
         placeholder : 'IPv6 Prefix Length',
         options : []
       }]
@@ -143,6 +143,9 @@ export class InterfacesFormComponent {
 
   private int_v4netmaskbit: any;
   private int_v6netmaskbit: any;
+  private int_alias_v4address: any;
+  private int_alias_v6netmaskbit: any;
+
   private int_interface: any;
   private entityForm: any;
 
@@ -174,6 +177,14 @@ export class InterfacesFormComponent {
     this.int_v6netmaskbit =
         _.find(this.fieldConfig, {'name' : 'int_v6netmaskbit'});
     this.int_v6netmaskbit.options = this.networkService.getV6PrefixLength();
+
+    this.int_alias_v4address =
+        _.find(this.fieldConfig, {'name' : 'int_alias_v4address'});
+    this.int_alias_v4address.options = this.networkService.getV4Netmasks();
+
+    this.int_alias_v6netmaskbit =
+        _.find(this.fieldConfig, {'name' : 'int_alias_v6netmaskbit'});
+    this.int_alias_v6netmaskbit.options = this.networkService.getV6PrefixLength();
 
     if (!entityForm.isNew) {
       entityForm.setDisabled('int_interface', true);
