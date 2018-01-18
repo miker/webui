@@ -12,13 +12,13 @@
     <div class="filter-field">
       <mat-icon role="img">search</mat-icon>
       <div class="card-filter-field">
-        <mat-input-container floatPlaceholder="Filter VMs">
+        <mat-form-field floatPlaceholder="Filter VMs">
           <input mdInput #filter placeholder="Filter VM List" [ngModel]="searchTerm" (ngModelChange)="displayFilter('name',$event)">
-        </mat-input-container>
+        </mat-form-field>
       </div>
     </div>
     <div class="view-controls" >
-      <mat-button-toggle-group #viewMode="mdButtonToggleGroup" >
+      <mat-button-toggle-group #viewMode="matButtonToggleGroup" >
         <mat-button-toggle value="cards">Cards</mat-button-toggle>
         <mat-button-toggle value="slim" >Slim</mat-button-toggle>
         <mat-button-toggle value="table" >Table</mat-button-toggle>
