@@ -143,7 +143,7 @@ export class InterfacesFormComponent {
 
   private int_v4netmaskbit: any;
   private int_v6netmaskbit: any;
-  private int_alias_v4address: any;
+  private int_alias_v4netmaskbit: any;
   private int_alias_v6netmaskbit: any;
 
   private int_interface: any;
@@ -177,15 +177,16 @@ export class InterfacesFormComponent {
     this.int_v6netmaskbit =
         _.find(this.fieldConfig, {'name' : 'int_v6netmaskbit'});
     this.int_v6netmaskbit.options = this.networkService.getV6PrefixLength();
-
-    this.int_alias_v4address =
-        _.find(this.fieldConfig, {'name' : 'int_alias_v4address'});
-    this.int_alias_v4address.options = this.networkService.getV4Netmasks();
+    
+    this.int_alias_v4netmaskbit =
+        _.find(this.arrayControl.formarray, {'name' : 'int_alias_v4netmaskbit'});
+    this.int_alias_v4netmaskbit.options = this.networkService.getV4Netmasks();
 
     this.int_alias_v6netmaskbit =
-        _.find(this.fieldConfig, {'name' : 'int_alias_v6netmaskbit'});
+        _.find(this.arrayControl.formarray, {'name' : 'int_alias_v6netmaskbit'});
     this.int_alias_v6netmaskbit.options = this.networkService.getV6PrefixLength();
 
+    
     if (!entityForm.isNew) {
       entityForm.setDisabled('int_interface', true);
     }
