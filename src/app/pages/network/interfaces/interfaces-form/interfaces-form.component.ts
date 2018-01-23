@@ -7,14 +7,11 @@ import { NetworkService, RestService } from '../../../../services';
 import {
   FieldConfig
 } from '../../../common/entity/entity-form/models/field-config.interface';
-<<<<<<< HEAD
 import { EntityFormService } from '../../../common/entity/entity-form/services/entity-form.service';
-=======
 import { 
   regexValidator 
 } from '../../../common/entity/entity-form/validators/regex-validation';
 
->>>>>>> master
 
 @Component({
   selector : 'app-interfaces-form',
@@ -25,12 +22,8 @@ export class InterfacesFormComponent {
   protected resource_name: string = 'network/interface/';
   protected route_success: string[] = [ 'network', 'interfaces' ];
   protected isEntity: boolean = true;
-<<<<<<< HEAD
   protected formArray: FormArray;
-
-=======
   
->>>>>>> master
   public fieldConfig: FieldConfig[] = [
     {
       type : 'input',
