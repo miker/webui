@@ -93,7 +93,7 @@ export class InterfacesFormComponent {
     },
     {
       type : 'array',
-      name : 'inline_interfaces_formset_alias',
+      name : 'int_aliases',
       placeholder : 'Alias',
       initialCount : 1,
       formarray : [
@@ -157,7 +157,7 @@ export class InterfacesFormComponent {
 
   preInit(entityForm: any) {
     this.int_interface = _.find(this.fieldConfig, {'name' : 'int_interface'});
-    this.arrayControl = _.find(this.fieldConfig, {'name' : 'inline_interfaces_formset_alias'});
+    this.arrayControl = _.find(this.fieldConfig, {'name' : 'int_aliases'});
     this.route.params.subscribe(params => {
       if(!params['pk']) {
         this.int_interface.type = 'select';
@@ -168,7 +168,7 @@ export class InterfacesFormComponent {
   }
 
   afterInit(entityForm: any) {
-    this.formArray = entityForm.formGroup.controls['inline_interfaces_formset_alias'];
+    this.formArray = entityForm.formGroup.controls['int_aliases'];
 
     this.int_v4netmaskbit =
         _.find(this.fieldConfig, {'name' : 'int_v4netmaskbit'});
@@ -177,7 +177,7 @@ export class InterfacesFormComponent {
     this.int_v6netmaskbit =
         _.find(this.fieldConfig, {'name' : 'int_v6netmaskbit'});
     this.int_v6netmaskbit.options = this.networkService.getV6PrefixLength();
-    
+
     this.int_alias_v4netmaskbit =
         _.find(this.arrayControl.formarray, {'name' : 'int_alias_v4netmaskbit'});
     this.int_alias_v4netmaskbit.options = this.networkService.getV4Netmasks();
@@ -185,7 +185,6 @@ export class InterfacesFormComponent {
     this.int_alias_v6netmaskbit =
         _.find(this.arrayControl.formarray, {'name' : 'int_alias_v6netmaskbit'});
     this.int_alias_v6netmaskbit.options = this.networkService.getV6PrefixLength();
-
     
     if (!entityForm.isNew) {
       entityForm.setDisabled('int_interface', true);
