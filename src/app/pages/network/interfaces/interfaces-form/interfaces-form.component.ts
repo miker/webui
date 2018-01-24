@@ -107,7 +107,8 @@ export class InterfacesFormComponent {
         type : 'input',
         name : 'int_alias_v4address',
         placeholder : 'IPv4 Address',
-        tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
+        tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
+        validation : [ regexValidator(/^(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})(.(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})){3}$/) ],
       },
       {
         type : 'select',
@@ -120,7 +121,8 @@ export class InterfacesFormComponent {
         type : 'input',
         name : 'int_alias_v6address',
         placeholder : 'IPv6 Address',
-        tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.'
+        tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
+        validation : [ regexValidator(/^([0-9a-f]|:){1,4}(:([0-9a-f]{0,4})*){1,7}$/i) ],
       },
       {
         type : 'select',
