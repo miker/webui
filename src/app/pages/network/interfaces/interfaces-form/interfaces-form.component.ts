@@ -7,9 +7,11 @@ import { NetworkService, RestService } from '../../../../services';
 import {
   FieldConfig
 } from '../../../common/entity/entity-form/models/field-config.interface';
-import { EntityFormService } from '../../../common/entity/entity-form/services/entity-form.service';
 import { 
-  regexValidator 
+  EntityFormService 
+} from '../../../common/entity/entity-form/services/entity-form.service';
+import { 
+  IPV4_REGEXP, IPV6_REGEXP, regexValidator 
 } from '../../../common/entity/entity-form/validators/regex-validation';
 
 
@@ -18,7 +20,7 @@ import {
   template : `<entity-form [conf]="this"></entity-form>`
 })
 export class InterfacesFormComponent {
-
+  
   protected resource_name: string = 'network/interface/';
   protected route_success: string[] = [ 'network', 'interfaces' ];
   protected isEntity: boolean = true;
@@ -50,7 +52,7 @@ export class InterfacesFormComponent {
       name : 'int_ipv4address',
       placeholder : 'IPv4 Address',
       tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
-      validation : [ regexValidator(/^(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})(.(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})){3}$/) ],
+      validation : [ regexValidator(IPV4_REGEXP) ],
       relation : [
         {action : "DISABLE", when : [ {name : "int_dhcp", value : true} ]}
       ]
@@ -76,7 +78,7 @@ export class InterfacesFormComponent {
       name : 'int_ipv6address',
       placeholder : 'IPv6 Address',
       tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
-      validation : [ regexValidator(/^([0-9a-f]|:){1,4}(:([0-9a-f]{0,4})*){1,7}$/i) ],
+      validation : [ regexValidator(IPV6_REGEXP) ],
       relation : [
         {action : "DISABLE", when : [ {name : "int_ipv6auto", value : true} ]}
       ]
@@ -108,7 +110,7 @@ export class InterfacesFormComponent {
         name : 'int_alias_v4address',
         placeholder : 'IPv4 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
-        validation : [ regexValidator(/^(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})(.(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})){3}$/) ],
+        validation : [ regexValidator(IPV4_REGEXP) ],
       },
       {
         type : 'select',
@@ -122,7 +124,7 @@ export class InterfacesFormComponent {
         name : 'int_alias_v6address',
         placeholder : 'IPv6 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
-        validation : [ regexValidator(/^([0-9a-f]|:){1,4}(:([0-9a-f]{0,4})*){1,7}$/i) ],
+        validation : [ regexValidator(IPV6_REGEXP) ],
       },
       {
         type : 'select',
@@ -142,6 +144,9 @@ export class InterfacesFormComponent {
       id : 'add_alias',
       name : 'Add extra Alias',
       function : () => {
+        this.arrayControl.formarray[0].validation = [ regexValidator(IPV4_REGEXP) ];
+        this.arrayControl.formarray[2].validation = [ regexValidator(IPV6_REGEXP) ];
+
         this.initialCount += 1;
         this.entityFormService.insertFormArrayGroup(
             this.initialCount, this.formArray, this.arrayControl.formarray);
