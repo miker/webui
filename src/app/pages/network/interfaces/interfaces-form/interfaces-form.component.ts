@@ -151,6 +151,14 @@ export class InterfacesFormComponent {
         this.entityFormService.insertFormArrayGroup(
             this.initialCount, this.formArray, this.arrayControl.formarray);
       }
+    },
+    {
+      id : 'remove_alias',
+      name : 'Remove extra Alias',
+      function : () => {
+        this.initialCount -= 1;
+        this.entityFormService.removeFormArrayGroup(this.initialCount, this.formArray);
+      }
     }
   ];
 
@@ -168,6 +176,13 @@ export class InterfacesFormComponent {
               protected networkService: NetworkService,
               protected entityFormService: EntityFormService) {}
 
+  isCustActionVisible(actionId: string) {
+    if (actionId == 'remove_alias' && this.initialCount <= 1) {
+      return false;
+    }
+    return true;
+  }
+  
   preInit(entityForm: any) {
     this.int_interface = _.find(this.fieldConfig, {'name' : 'int_interface'});
     this.arrayControl = _.find(this.fieldConfig, {'name' : 'int_aliases'});
