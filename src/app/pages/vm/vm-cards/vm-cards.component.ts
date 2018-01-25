@@ -47,9 +47,7 @@ export class VmCardsComponent implements OnInit, AfterViewInit {
   @ViewChild('viewMode') viewMode:MdButtonToggleGroup;
   focusedVM:string;
 
-
   public tpl = "edit";
-  //private pwrBtnLabel: string;
   private pwrBtnOptions = {
     stopped: "Start VM",
     running: "Stop VM"
@@ -99,23 +97,8 @@ export class VmCardsComponent implements OnInit, AfterViewInit {
     this.getVmList();
   }
 
-  // POPMOTION EXPERIMENT
   ngAfterViewInit(){
-    /*
-    this.zone.runOutsideAngular(()=> {
-      const coll = styler(this.el.nativeElement.childNodes[1]);
-      //let fl =this.el.nativeElement.ownerDocument.body.querySelector('.flip');
-      //const coll = styler(this.el.nativeElement.ownerDocument.body.querySelector('.flip'));
-      console.log(this.el.nativeElement.ownerDocument);
-      tween({
-        from:{ y: 0, scale: 1 },
-        to: { y: 400, scale: 1 }, 
-        duration: 300,
-        flip:1
-      }).start(coll.set);
-    });*/
-  }
-  // END POPMOTION EXPERIMENT
+  }  
 
   getCardIndex(key,value){
     for(let i = 0; i < this.cards.length; i++){
