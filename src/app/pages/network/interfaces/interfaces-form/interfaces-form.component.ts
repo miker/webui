@@ -182,7 +182,7 @@ export class InterfacesFormComponent {
     }
     return true;
   }
-  
+
   preInit(entityForm: any) {
     this.int_interface = _.find(this.fieldConfig, {'name' : 'int_interface'});
     this.arrayControl = _.find(this.fieldConfig, {'name' : 'int_aliases'});
@@ -224,5 +224,54 @@ export class InterfacesFormComponent {
         });
       });
     }
+  }
+
+  getIPv4s(data: any[]): any[] {
+    let IPs = new Array();
+
+    if(data['int_ipv4address'] || data['int_v4netmaskbit']) {
+      let ip = data['int_ipv4address'] + '/' + data['int_v4netmaskbit'];
+      IPs.push(ip);
+    }    
+
+    let alias_data = data['int_aliases'];
+
+    for (let i in alias_data) {
+      if ('int_alias_v4address' in alias_data[i] && 'int_alias_v4netmaskbit' in alias_data[i]) {
+        if(alias_data[i]['int_alias_v4address'] || alias_data[i]['int_alias_v4netmaskbit']) {
+          let ip = alias_data[i]['int_alias_v4address'] + '/' + alias_data[i]['int_alias_v4netmaskbit'];
+          IPs.push(ip);
+        }
+      }
+    }
+    return IPs;
+  }
+
+  getIPv6s(data: any[]): any[] {
+    let IPs = new Array();
+
+    if(data['int_ipv6address'] || data['int_v6netmaskbit']) {
+      let ip = data['int_ipv6address'] + '/' + data['int_v6netmaskbit'];
+      IPs.push(ip);
+    }
+    
+    let alias_data = data['int_aliases'];
+
+    for (let i in alias_data) {
+      if ('int_alias_v6address' in alias_data[i] && 'int_alias_v6netmaskbit' in alias_data[i]) {
+        if(alias_data[i]['int_alias_v6address'] || alias_data[i]['int_alias_v6netmaskbit']) {
+          let ip = alias_data[i]['int_alias_v6address'] + '/' + alias_data[i]['int_alias_v6netmaskbit'];
+          IPs.push(ip);
+        }        
+      }
+    }
+    return IPs;
+  }
+
+  beforeSubmit(value: any) {
+    value['ipv4_addresses'] = this.getIPv4s(value);
+    value['ipv6_addresses'] = this.getIPv6s(value);
+    value['int_aliases'] = [];
+    console.log(value);
   }
 }
