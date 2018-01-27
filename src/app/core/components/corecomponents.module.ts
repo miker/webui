@@ -7,7 +7,7 @@ import { ViewComponent } from 'app/core/components/view/view.component';
 import { CardComponent } from 'app/core/components/card/card.component';
 import { ViewControlComponent } from 'app/core/components/viewcontrol/viewcontrol.component';
 import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
-import { Display,DisplayContainer } from 'app/core/components/display/display.component';
+import { Display,DisplayContainer, LayoutComponent } from 'app/core/components/display/display.component';
 import { ViewButtonComponent } from './viewbutton/viewbutton.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ViewChartComponent } from 'app/core/components/viewchart/viewchart.component';
@@ -15,6 +15,8 @@ import { ViewChartPieComponent } from 'app/core/components/viewchartpie/viewchar
 import { ViewChartDonutComponent } from 'app/core/components/viewchartdonut/viewchartdonut.component';
 import { ViewChartGaugeComponent } from './viewchartgauge/viewchartgauge.component';
 import { ViewChartLineComponent } from './viewchartline/viewchartline.component';
+
+import { AnimationDirective } from 'app/core/directives/animation.directive';
 
 /*
  *
@@ -31,6 +33,7 @@ import { ViewChartLineComponent } from './viewchartline/viewchartline.component'
     FlexLayoutModule
   ],
   declarations: [
+    AnimationDirective,
     PageComponent,
     ViewComponent,
     CardComponent,
@@ -38,6 +41,7 @@ import { ViewChartLineComponent } from './viewchartline/viewchartline.component'
     ViewControllerComponent,
     Display,
     DisplayContainer,
+    LayoutComponent,
     ViewButtonComponent,
     ViewChartComponent,
     ViewChartDonutComponent,
@@ -49,8 +53,10 @@ import { ViewChartLineComponent } from './viewchartline/viewchartline.component'
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    AnimationDirective,
     Display,
     DisplayContainer,
+    LayoutComponent,
     PageComponent,
     ViewComponent,
     ViewChartComponent,
@@ -65,6 +71,7 @@ import { ViewChartLineComponent } from './viewchartline/viewchartline.component'
   ],
   entryComponents:[
     DisplayContainer,
+    LayoutComponent,
     ViewComponent,
     ViewChartComponent,
     ViewChartDonutComponent,

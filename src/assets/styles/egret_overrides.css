@@ -108,7 +108,7 @@ app-breadcrumb{
 
 /* Cards & Tables */
 .mat-card{
-  margin:24px;/* This will be deprecated once Grid System is implemented*/
+  /*margin:24px;/* This will be deprecated once Grid System is implemented*/
 }
 
 .mat-card-table{

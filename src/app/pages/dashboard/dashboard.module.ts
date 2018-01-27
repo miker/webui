@@ -5,13 +5,14 @@ import {FormsModule} from '@angular/forms';
 
 import { MaterialModule, MdCardModule } from '@angular/material';
 import { EntityModule } from '../common/entity/entity.module';
+import { CoreComponents } from 'app/core/components/corecomponents.module';
 
 import {DashboardComponent} from './dashboard.component';
 import {routing} from './dashboard.routing';
 import { DashboardNoteEditComponent } from './dashboard-note-edit.component';
 
 @NgModule({
-  imports : [ CommonModule, FormsModule,  routing, 
+  imports : [ CoreComponents,CommonModule, FormsModule,  routing, 
   MaterialModule, MdCardModule, AppCommonModule , EntityModule],
   declarations : [
     DashboardComponent,

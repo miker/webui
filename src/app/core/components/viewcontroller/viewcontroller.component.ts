@@ -8,14 +8,12 @@ import { Subject } from 'rxjs/Subject';
 
 export const ViewControllerMetadata = {
   template: `
-  <div 
-  fxLayoutWrap
+  <display 
   fxLayout="row" 
+  fxLayoutWrap="wrap" 
   fxLayoutAlign="space-around center" 
   fxLayoutGap="2%"
-  >
-    <display style="display:none;" #display></display>
-  </div>
+   style="display:none;" #display></display>
   `,
   styles:[ ':host {display:block;}' ]
 }

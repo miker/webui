@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LayoutContainer, LayoutChild } from 'app/core/classes/layouts';
 import { CoreServiceInjector } from 'app/core/services/coreserviceinjector';
 import { ThemeService } from 'app/services/theme/theme.service';
 import { Subject } from 'rxjs/Subject';
@@ -21,6 +22,7 @@ export class ViewComponent extends View {
   protected _data: any;
   public viewController: Subject<CoreEvent>;
   protected themeService: ThemeService;
+  public layoutChild: LayoutChild = {flex:"100"};
 
   constructor(){
     super();

@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, OnInit, HostBinding } from '@angular/core';
 import { Display } from 'app/core/components/display/display.component';
 import { ViewControllerComponent } from 'app/core/components/viewcontroller/viewcontroller.component';
 import { MaterialModule } from '@angular/material';
@@ -19,7 +19,7 @@ export const CardComponentMetadata = {
 }
 
 @Component(CardComponentMetadata)
-export class CardComponent extends ViewControllerComponent {
+export class CardComponent extends ViewControllerComponent implements OnInit{
 
   readonly componentName = CardComponent;
   @Input() data: any; 
@@ -50,7 +50,10 @@ export class CardComponent extends ViewControllerComponent {
 
   constructor(){
     super();
-    this.layoutChild = {flex:"100%"};
+    this.layoutChild = {flex:"100"};
+  }
+
+  ngOnInit(){
   }
 
   getHeaderTitle(): string{
