@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, AfterViewInit, Input, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MaterialModule, MdButtonToggleGroup } from '@angular/material';
 import { EntityModule } from '../../common/entity/entity.module';
@@ -12,6 +12,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { CoreService, CoreEvent } from 'app/core/services/core.service';
+import { AnimationDirective } from 'app/core/directives/animation.directive';
+//import { tween, styler } from 'popmotion';
 
 
 interface VmProfile {
@@ -35,8 +37,9 @@ interface VmProfile {
   templateUrl: './vm-cards.component.html',
   styleUrls: ['./vm-cards.component.css'],
 })
-export class VmCardsComponent implements OnInit {
+export class VmCardsComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('collection') collection: ElementRef;
   @ViewChild('filter') filter: ElementRef;
   @Input() searchTerm:string = '';
   @Input() cards = []; // Display List
@@ -44,16 +47,14 @@ export class VmCardsComponent implements OnInit {
   @ViewChild('viewMode') viewMode:MdButtonToggleGroup;
   focusedVM:string;
 
-
   public tpl = "edit";
-  //private pwrBtnLabel: string;
   private pwrBtnOptions = {
     stopped: "Start VM",
     running: "Stop VM"
   }
   protected loaderOpen: boolean = false;
 
-  constructor(protected ws: WebSocketService,protected rest: RestService,private core:CoreService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
+  constructor(private zone:NgZone, private el:ElementRef, protected ws: WebSocketService,protected rest: RestService,private core:CoreService, private dialog: DialogService,protected loader: AppLoaderService,protected router: Router){}
 
   ngOnInit() {
     this.viewMode.value = "cards";
@@ -95,6 +96,9 @@ export class VmCardsComponent implements OnInit {
 
     this.getVmList();
   }
+
+  ngAfterViewInit(){
+  }  
 
   getCardIndex(key,value){
     for(let i = 0; i < this.cards.length; i++){

@@ -17,37 +17,14 @@ export class ThemeService {
 
   public freenasThemes: Theme[] = [
     {
-      name: 'egret-dark-purple',
-      label: 'Dark Purple',
-      baseColor: '#9c27b0',
-      isActive: false,
-      hasDarkLogo: false
-    }, {
-      name: 'egret-dark-pink',
-      label: 'Dark Pink',
-      baseColor: '#e91e63',
-      isActive: false,
-      hasDarkLogo: false
-    }, {
-      name: 'egret-blue',
-      label: 'Blue',
-      baseColor: '#2196f3',
-      isActive: false,
-      hasDarkLogo: true
-    }, {
       name: 'ix-blue',
       label: 'iX Blue',
       baseColor: '#0095D5',
       accentColors:['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896'],
       isActive: true,
       hasDarkLogo: false
-    }, {
-      name: 'egret-indigo',
-      label: 'Indigo',
-      baseColor: '#3f51b5',
-      isActive: false,
-      hasDarkLogo: false
-    }, {
+    }, 
+    {
       name: 'solarized-dark',
       label: 'Solarized Dark',
       baseColor: '#073642',
@@ -64,19 +41,50 @@ export class ThemeService {
        * */
       isActive: false,
       hasDarkLogo: false
-    }, {
-      name: 'freenas-warriors',
-      label: 'Warriors',
-      baseColor: '#fdb927',
+    }, 
+    {
+      name: 'egret-dark-purple',
+      label: 'Dark Purple',
+      baseColor: '#9c27b0',
       isActive: false,
-      hasDarkLogo: true
-    }, {
+      hasDarkLogo: false
+    },
+    {
+      name: 'egret-indigo',
+      label: 'Indigo',
+      baseColor: '#3f51b5',
+      isActive: false,
+      hasDarkLogo: false
+    }, 
+    {
       name: 'freenas-sharks',
       label: 'Sharks',
       baseColor: '#088696',
       isActive: false,
       hasDarkLogo: false
-    }];
+    }
+    /*{
+      name: 'egret-dark-pink',
+      label: 'Dark Pink',
+      baseColor: '#e91e63',
+      isActive: false,
+      hasDarkLogo: false
+    },*/ 
+    /*{
+      name: 'egret-blue',
+      label: 'Blue',
+      baseColor: '#2196f3',
+      isActive: false,
+      hasDarkLogo: true
+    }, */
+    /*{
+      name: 'freenas-warriors',
+      label: 'Warriors',
+      baseColor: '#fdb927',
+      isActive: false,
+      hasDarkLogo: true
+    }, */
+  ];
 
   savedUserTheme = "";
 
