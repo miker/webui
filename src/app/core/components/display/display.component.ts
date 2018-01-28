@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit, AfterViewInit, Input, Renderer2, ViewCont
 import { LayoutContainer, LayoutChild } from 'app/core/classes/layouts';
 import { ViewConfig } from 'app/core/components/viewcontroller/viewcontroller.component';
 import { Subject } from 'rxjs/Subject';
+import {Subscription} from "rxjs/Subscription";
+import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import { CoreEvent } from 'app/core/services/core.service';
 
 @Component({
@@ -46,30 +48,35 @@ export class Display implements OnInit,AfterViewInit{
   public layoutContainer: LayoutContainer;
   public layoutChild: LayoutChild = {flex:"91"};
   private ready:boolean = false;
+  private flexChange: Subscription;
   
   @ViewChild('wrapper') wrapper;
   //@ViewChild('test',{read:ViewContainerRef}) test:ViewContainerRef;
 
-  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef, private renderer: Renderer2){
-    console.log("Display Component Constructor");
-    
+  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef, private renderer: Renderer2, flexMedia: ObservableMedia){
+    //DEBUG: console.log("Display Component Constructor");
+    this.flexChange = flexMedia.subscribe((change: MediaChange) => {
+      console.log("**** BREAK!! ****");
+      console.log(change);
+      //this.moveAllStyles();
+    });
   }
 
   ngOnInit(){
   }
 
   ngAfterViewInit(){
-    console.log("******** Display AfterViewInit ********");    
+    //DEBUG: console.log("******** Display AfterViewInit ********");    
     //console.log(this.test);
 
     //if(!this.wrapper.viewContainerRef){ throw "WTF... this.wrapper.viewContainerRef is undefined!"}
-    console.log("******** Display is Ready!!!! ********");
+    //DEBUG: console.log("******** Display is Ready!!!! ********");
     this.ready = true;
   }
 
   create(component:any, returnCompRef?:boolean){
-    console.log("******** Create()!!!! ********");
-    console.log(component);
+    //DEBUG: console.log("******** Create()!!!! ********");
+    //DEBUG: console.log(component);
     let compRef = <any>this.resolver.resolveComponentFactory(component).create(this.viewContainerRef.injector);
     //let compRef = <any>this.resolver.resolveComponentFactory(component).create(this.test.injector);
     this.children.push(compRef);
@@ -83,7 +90,7 @@ export class Display implements OnInit,AfterViewInit{
     if(this.children.length == 0){return -1;}
     let compRef = this.getChild(instance);
     let childIndex = this.children.indexOf(compRef);
-    console.log("******** addChild()!!!! ********");
+    //DEBUG: console.log("******** addChild()!!!! ********");
 
     /* NEW WAY */
     // Insert into DOM
@@ -105,10 +112,10 @@ export class Display implements OnInit,AfterViewInit{
     let selector = compRef.hostView.rootNodes["0"];
     let contents = compRef.hostView.rootNodes["0"].childNodes;
     let node: any;
-    console.log("******** moveContents() ********");
+    //DEBUG: console.log("******** moveContents() ********");
     //console.log(contents);
     for(let i = 0; i < contents.length; i++){
-      console.log(contents[i].tagName);
+      //DEBUG: console.log(contents[i].tagName);
       if(contents[i].tagName){ // Comments come up as "undefined"
 	this.renderer.appendChild(container, contents[i]);
 	this.renderer.removeChild(container, selector);
@@ -117,7 +124,13 @@ export class Display implements OnInit,AfterViewInit{
   }
   */
 
-  moveStyles(compRef){
+ moveAllStyles(){
+  for(let i = 0; i < this.children.length; i++){
+    this.moveStyles(this.children[i]);
+  }
+ }
+
+  moveStyles(compRef,test?:boolean){
     let elRef = compRef.location;
     let el = elRef.nativeElement;
     let innerEl = el.children[0];
@@ -130,17 +143,17 @@ export class Display implements OnInit,AfterViewInit{
         style = innerElRef.attributes[i].value;
       }
     }
-
+    if(!style){return -1;}
     // Apply style to parent
     this.renderer.setAttribute(el, "style", ""); // clear the style
     this.renderer.setAttribute(el, "style", style);
     this.renderer.removeAttribute(innerEl,"style");
 
-    console.log("******** Moving Styles to Parent ********");
-    console.log(compRef);
-    console.log(style);
-    console.log(el);
-    console.log(innerEl);
+    //DEBUG: console.log("******** Moving Styles to Parent ********");
+    //DEBUG: console.log(compRef);
+    //DEBUG: console.log(style);
+    //DEBUG: console.log(el);
+    //DEBUG: console.log(innerEl);
   }
 
   removeChild(instance){
@@ -159,7 +172,7 @@ export class Display implements OnInit,AfterViewInit{
   /*
   getLayoutCompRef(index){
     let dc = this.viewContainerRef.get(index); //displayContainer's vcRef 
-    console.log(dc);
+    //DEBUG: console.log(dc);
     //let lc = dc.instance.vcRef; // layoutContainer's vcRef
     return dc;
   }

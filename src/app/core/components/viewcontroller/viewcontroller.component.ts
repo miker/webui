@@ -9,8 +9,9 @@ import { Subject } from 'rxjs/Subject';
 export const ViewControllerMetadata = {
   template: `
   <display 
-  fxLayout="row" 
-  fxLayoutWrap="wrap" 
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutWrap
   fxLayoutAlign="space-around center" 
   fxLayoutGap="2%"
    style="display:none;" #display></display>

@@ -67,8 +67,8 @@ export class DashboardComponent  extends ViewControllerComponent implements Afte
     for(var i = 0; i < data.length; i++){
       // Setup Card (ViewController)
       let card = this.create(CardComponent);
-      card.layoutChild = { flex:"45%" }
-        card.header = true;
+      card.layoutChild = { flex:"40%", xs:"100%" }
+      card.header = true;
       card.headerTitle = data[i].name;
 
       // Setup the View

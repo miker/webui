@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LayoutContainer, LayoutChild } from 'app/core/classes/layouts';
+import { LayoutChild } from 'app/core/classes/layouts';
 import { CoreServiceInjector } from 'app/core/services/coreserviceinjector';
 import { ThemeService } from 'app/services/theme/theme.service';
 import { Subject } from 'rxjs/Subject';

@@ -6,6 +6,11 @@ export interface LayoutContainer {
 
 export interface LayoutChild {
   flex: string;
+  xs?: string;
+  sm?: string;
+  md?: string;
+  lg?: string;
+  xl?: string;
   order?: string;
   offset?: string;
   align?: string;
