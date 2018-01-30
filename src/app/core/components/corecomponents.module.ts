@@ -13,8 +13,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ViewChartComponent } from 'app/core/components/viewchart/viewchart.component';
 import { ViewChartPieComponent } from 'app/core/components/viewchartpie/viewchartpie.component';
 import { ViewChartDonutComponent } from 'app/core/components/viewchartdonut/viewchartdonut.component';
-import { ViewChartGaugeComponent } from './viewchartgauge/viewchartgauge.component';
-import { ViewChartLineComponent } from './viewchartline/viewchartline.component';
+import { ViewChartGaugeComponent } from 'app/core/components/viewchartgauge/viewchartgauge.component';
+import { ViewChartLineComponent } from 'app/core/components/viewchartline/viewchartline.component';
+
+import { WidgetComponent } from 'app/core/components/widgets/widget/widget.component';
 
 import { AnimationDirective } from 'app/core/directives/animation.directive';
 
@@ -47,7 +49,8 @@ import { AnimationDirective } from 'app/core/directives/animation.directive';
     ViewChartDonutComponent,
     ViewChartPieComponent,
     ViewChartGaugeComponent,
-    ViewChartLineComponent
+    ViewChartLineComponent,
+    WidgetComponent
   ],
   exports: [ // Modules and Components here
     CommonModule,
@@ -67,7 +70,8 @@ import { AnimationDirective } from 'app/core/directives/animation.directive';
     ViewControlComponent,
     ViewButtonComponent,
     ViewControllerComponent,
-    CardComponent
+    CardComponent,
+    WidgetComponent
   ],
   entryComponents:[
     DisplayContainer,
@@ -81,7 +85,8 @@ import { AnimationDirective } from 'app/core/directives/animation.directive';
     ViewControlComponent,
     ViewButtonComponent,
     ViewControllerComponent,
-    CardComponent
+    CardComponent,
+    WidgetComponent
   ]
 })
 export class CoreComponents {}

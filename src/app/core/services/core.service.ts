@@ -56,8 +56,8 @@ export class CoreService {
   public register(reg:Registration){
     reg.observable = new Subject();
     this.dispatchTable.push(reg);
-    console.log("CORESERVICE: New Registration");
-    console.log(reg);
+    //DEBUG: console.log("CORESERVICE: New Registration");
+    //DEBUG: console.log(reg);
     return reg.observable;
   }
 

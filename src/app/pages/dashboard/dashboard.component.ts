@@ -1,61 +1,50 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { CoreService, CoreEvent } from 'app/core/services/core.service';
-import { ViewControllerComponent, ViewConfig, ViewControllerMetadata } from 'app/core/components/viewcontroller/viewcontroller.component';
-import { ViewComponent } from 'app/core/components/view/view.component';
-import { CardComponent } from 'app/core/components/card/card.component';
-import { ViewButtonComponent } from 'app/core/components/viewbutton/viewbutton.component';
 import { Subject } from 'rxjs/Subject';
-import { Display } from 'app/core/components/display/display.component';
+import { WidgetComponent } from 'app/core/components/widgets/widget/widget.component'; // POC
+import { AnimationDirective } from 'app/core/directives/animation.directive';
 
 @Component({
   selector: 'dashboard',
-  template:ViewControllerMetadata.template,
-  styles: ViewControllerMetadata.styles
+  template:`
+  <div class="widgets-wrapper"
+  fxLayout="row"
+  fxLayoutWrap
+  fxLayoutAlign="space-around center"
+  fxLayoutGap="1%">
+    <widget fxFlex="250px" [widgetSize]="small" animate [animation]="animation" [shake]="shake"></widget>
+      <button md-fab color="primary" (click)="toggleShake()"><md-icon role="img">settings</md-icon></button>
+  </div>
+  `
 })
-export class DashboardComponent  extends ViewControllerComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit {
 
-  //readonly componentName = TestPage;
+  protected core:CoreService;
+  public large: string = "lg";
+  public medium: string = "md";
+  public small: string = "sm";
+
+  public animation = "stop";
+  public shake = false;
+
   constructor(){
-    super();
   }
 
   ngAfterViewInit(){
-    console.log("******** TestPage OnInit() ********");
-    this.controlEvents.subscribe((evt:CoreEvent) => {
-      switch(evt.name){
-      case "RemoveCard":
-        this.removeChild(evt.sender);
-        break;
-      default:
-        let card = evt.sender;
-        card.headerTitle = "Title Changed!";
-        break;
-      }
-    });
-
     this.init();
   }
 
   init(){
 
-    console.log("******** TestPage Initializing... ********");
+    console.log("******** Dashboard Initializing... ********");
+  }
 
-    /* 
-     *      * Register the component with the EventBus 
-     *           * and subscribe to the observable it returns
-     *                */
-
-     this.core.register({observerClass:this, eventName:"VmProfiles"}).subscribe((evt: CoreEvent) => { 
-       console.log(evt);
-       this.updateDataAll(evt.data); 
-     });
-
-     this.core.register({observerClass:this, eventName:"VmProfile"}).subscribe((evt: CoreEvent) => { 
-       console.log(evt);
-       this.updateData(evt.data); 
-     });
-
-     this.core.emit({name:"VmProfilesRequest"});
+  toggleShake(){
+    if(this.shake){
+      this.shake = false;
+    } else if(!this.shake){
+      this.shake= true;
+    }
   }
 
   updateData(data){
@@ -63,28 +52,5 @@ export class DashboardComponent  extends ViewControllerComponent implements Afte
     }
 
   updateDataAll(data){
-    console.log("updateDataAll()");
-    for(var i = 0; i < data.length; i++){
-      // Setup Card (ViewController)
-      let card = this.create(CardComponent);
-      card.layoutChild = { flex:"40%", xs:"100%" }
-      card.header = true;
-      card.headerTitle = data[i].name;
-
-      // Setup the View
-      let view = card.create(ViewComponent);
-      card.addChild(view);
-
-      // Setup Controls
-      let button = card.create(ViewButtonComponent, 'footerControls');
-      button.raised = false;
-      button.label = "Delete";
-      button.action = { name:"RemoveCard", sender:card};
-      button.target = this.controlEvents;
-      button.contextColor = "warn";
-      card.footer = true;
-      card.addChild(button,'footerControls');
-      this.addChild(card);
-    }
   }
 }

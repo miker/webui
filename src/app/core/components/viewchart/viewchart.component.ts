@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnChanges, Input } from '@angular/core';
 import { LayoutChild } from 'app/core/classes/layouts';
 import { ViewComponent } from 'app/core/components/view/view.component';
 import {UUID} from 'angular2-uuid';
@@ -20,13 +20,13 @@ export const ViewChartMetadata = {
   //templateUrl: './viewchart.component.html',
   styleUrls: ['./viewchart.component.css']
 })
-export class ViewChartComponent extends ViewComponent implements OnInit {
+export class ViewChartComponent extends ViewComponent implements AfterViewInit {
 
   public chartColors: string[];
   public maxLabels: number;
   public units: string;
-  public width: number;
-  public height: number;
+  @Input() width: number;
+  @Input() height: number;
 
   protected chart: any;
   protected _chartType: string;
@@ -43,7 +43,8 @@ export class ViewChartComponent extends ViewComponent implements OnInit {
     this.units = '';
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    console.log("******** CHART DIMENSIONS - Width:" + this.width + "/ Height: " + this.height);
     this.render();
   }
 
