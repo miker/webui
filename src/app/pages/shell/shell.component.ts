@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   ViewChild,
   ElementRef,
   OnChanges,
@@ -12,11 +13,13 @@ import {
 import { Subscription } from 'rxjs';
 
 import { WebSocketService, ShellService } from '../../services/';
-import * as xterm from "xterm";
-import * as Terminal from 'xterm/dist/xterm';
-import 'xterm/dist/addons/fit/fit.js';
-import 'xterm/dist/addons/attach/attach.js';
+import {Terminal} from "xterm";
+import * as fit from 'xterm/lib/addons/fit/fit';
+import * as attach from 'xterm/lib/addons/attach/attach';
 import {TooltipComponent} from '../common/entity/entity-form/components/tooltip/tooltip.component';
+
+Terminal.applyAddon(attach);
+Terminal.applyAddon(fit);
 
 @Component({
   selector: 'app-shell',
@@ -25,7 +28,7 @@ import {TooltipComponent} from '../common/entity/entity-form/components/tooltip/
   providers: [ShellService],
 })
 
-export class ShellComponent implements OnInit, OnChanges {
+export class ShellComponent implements OnInit, OnChanges, OnDestroy {
   // sets the shell prompt
   @Input() prompt: string = '';
   //xter container
@@ -93,7 +96,6 @@ export class ShellComponent implements OnInit, OnChanges {
       'tabStopWidth': 4,
       'cols': 80,
       'rows': parseInt(rowNum.toFixed()),
-      'focus': true
     });
     this.xterm.open(this.container.nativeElement);
     this.xterm.attach(this.ss);
