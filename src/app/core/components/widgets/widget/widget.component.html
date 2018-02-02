@@ -1,0 +1,29 @@
+<div class="widget widget-{{widgetSize}}">
+  <div class="card-container {{flipDirection}} front" animate [animation]="flipAnimation">
+    <md-card class="front" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between stretch">
+      <md-toolbar-row fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between start" fxFlex="100" class="md-card-toolbar">
+        <span class="mat-card-title-text"><div class="card-title-text">{{title}}</div></span>
+        <button md-icon-button [mdMenuTriggerFor]="menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+      </md-toolbar-row>
+      <md-menu #menu="mdMenu">
+        <button md-menu-item (click)="toggleConfig()">
+          <md-icon>settings</md-icon>
+          <span>Configure</span>
+        </button>
+      </md-menu>
+      <md-card-content fxLayout="row" fxLayoutWrap fxLayoutAlign="center start" fxFlex="100">
+        <viewchartdonut fxFlex="30" #chartDonut [width]="chartSize" [height]="chartSize" style="display:none;"></viewchartdonut>
+        <viewchartline fxFlex="100" fxFlexAlign="end" #chartCpu [width]="chartSize" [height]="chartSize"></viewchartline>
+      </md-card-content>
+      <!--<div class="widget-footer"><button md-raised-button color="primary" (click)="toggleConfig()">Flip</button></div>-->
+    </md-card>
+    <md-card class="back">
+      <md-card-content>
+        <h3>Form goes here</h3>
+      </md-card-content>
+      <div class="widget-footer"><button md-raised-button color="primary" (click)="toggleConfig()">Flip</button></div>
+    </md-card>
+  </div>
+</div>

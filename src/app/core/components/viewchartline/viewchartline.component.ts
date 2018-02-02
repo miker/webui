@@ -99,7 +99,7 @@ export class ViewChartLineComponent extends ViewChartComponent implements OnInit
           }
         },
         y:{
-          inner:false
+          inner:true
         }
       },
       data: {
@@ -111,7 +111,7 @@ export class ViewChartLineComponent extends ViewChartComponent implements OnInit
         //height: this.height
         },
       subchart: {
-        show: true,
+        show: false,
         size:{
           height:32
         }

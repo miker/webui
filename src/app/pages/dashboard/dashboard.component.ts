@@ -12,7 +12,7 @@ import { AnimationDirective } from 'app/core/directives/animation.directive';
   fxLayoutWrap
   fxLayoutAlign="space-around center"
   fxLayoutGap="1%">
-    <widget fxFlex="250px" [widgetSize]="small" animate [animation]="animation" [shake]="shake"></widget>
+    <widget fxFlex="50" [widgetSize]="medium" animate [animation]="animation" [shake]="shake"></widget>
       <button md-fab color="primary" (click)="toggleShake()"><md-icon role="img">settings</md-icon></button>
   </div>
   `

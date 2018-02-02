@@ -3,7 +3,7 @@ import { LayoutChild } from 'app/core/classes/layouts';
 import { ViewComponent } from 'app/core/components/view/view.component';
 import {UUID} from 'angular2-uuid';
 import * as c3 from 'c3';
-import {ChartConfiguration} from 'c3';
+import { ChartConfiguration, LegendOptions } from 'c3';
 
 export interface ChartData {
   legend: string;
@@ -11,7 +11,7 @@ export interface ChartData {
 }
 
 export const ViewChartMetadata = {
-  template: `<div id="{{chartId}}" [ngClass]="chartClass"></div>`
+  template: `<div id="{{chartId}}" [ngClass]="chartClass" style="position:absolute!important;bottom:0;"></div>`
 }
 
 @Component({
@@ -33,6 +33,7 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
   protected _data: any[];
   protected _chartId: string;
   protected colors: string[];
+  protected legendOptions: LegendOptions = {show: false};
 
   protected chartConfig: ChartConfiguration;
 
@@ -48,9 +49,11 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
     this.render();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes) {
     console.log("OnChanges");
-    this.render();
+    if(changes.data){
+      this.render();
+    }
   }
 
   get data(){
@@ -150,6 +153,9 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
       }
       conf.color = color;
     }
+
+    // Hide legend. We've moved the legends out of the svg and into Angular
+    conf.legend = this.legendOptions;
     
     console.log("GENERATING DATA FROM ...");
     console.log(conf);
