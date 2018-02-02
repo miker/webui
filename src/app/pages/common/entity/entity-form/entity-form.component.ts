@@ -429,14 +429,10 @@ export class EntityFormComponent implements OnInit, OnDestroy {
     let activations =
         this.fieldRelationService.findActivationRelation(config.relation);
     if (activations) {
-      let tobeDisabled = this.fieldRelationService.isFormControlToBeDisabled(
-          activations, this.formGroup);
-      this.setDisabled(config.name, tobeDisabled);
       this.fieldRelationService.getRelatedFormControls(config, this.formGroup)
           .forEach(control => {
-            console.log("3--", control);
+            this.relationUpdate(config, activations);
             control.valueChanges.subscribe(() => {
-              console.log("4--", activations);
               this.relationUpdate(config, activations);
             });
           });
