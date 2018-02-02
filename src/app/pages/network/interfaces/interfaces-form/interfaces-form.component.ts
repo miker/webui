@@ -53,6 +53,7 @@ export class InterfacesFormComponent {
       placeholder : 'IPv4 Address',
       tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
       validation : [ regexValidator(IPV4_REGEXP) ],
+      value : '',
       relation : [
         {action : "DISABLE", when : [ {name : "int_dhcp", value : true} ]}
       ]
@@ -64,7 +65,14 @@ export class InterfacesFormComponent {
       tooltip : 'Enter a netmask if <b>DHCP</b> is unchecked.',
       options : [],
       relation : [
-        {action : "DISABLE", when : [ {name : "int_dhcp", value : true} ]}
+        {
+          action : "DISABLE",
+          connective : "OR",
+          when : [ 
+            {name : "int_dhcp", value : true}, 
+            {name : "int_ipv4address", value : "", status : "INVALID"} 
+          ]
+        }
       ]
     },
     {
@@ -79,8 +87,9 @@ export class InterfacesFormComponent {
       placeholder : 'IPv6 Address',
       tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
       validation : [ regexValidator(IPV6_REGEXP) ],
+      value : '',
       relation : [
-        {action : "DISABLE", when : [ {name : "int_ipv6auto", value : true} ]}
+        {action : "DISABLE", when : [ {name : "int_ipv6auto", value : true, status : "INVALID"} ]}
       ]
     },
     {
@@ -89,7 +98,14 @@ export class InterfacesFormComponent {
       placeholder : 'IPv6 Prefix Length',
       options : [],
       relation : [
-        {action : "DISABLE", when : [ {name : "int_ipv6auto", value : true} ]}
+        {
+          action : "DISABLE",
+          connective : "OR",
+          when : [ 
+            {name : "int_ipv6auto", value : true},
+            {name : "int_ipv6address", value : "", status : "INVALID"}
+          ]
+        }
       ]
     },
     {
@@ -111,13 +127,17 @@ export class InterfacesFormComponent {
         placeholder : 'IPv4 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
         validation : [ regexValidator(IPV4_REGEXP) ],
+        value : ''
       },
       {
         type : 'select',
         name : 'int_alias_v4netmaskbit',
         placeholder : 'IPv4 Netmask',
         tooltip : 'Enter a netmask if <b>DHCP</b> is unchecked.',
-        options : []
+        options : [],
+        relation : [
+          {action : "DISABLE", when : [ {name : "int_alias_v4address", value : "", status : "INVALID"} ]}
+        ]
       },
       {
         type : 'input',
@@ -125,12 +145,16 @@ export class InterfacesFormComponent {
         placeholder : 'IPv6 Address',
         tooltip : 'Enter a static IP address if <b>DHCP</b> is unchecked.',
         validation : [ regexValidator(IPV6_REGEXP) ],
+        value : ''
       },
       {
         type : 'select',
         name : 'int_alias_v6netmaskbit',
         placeholder : 'IPv6 Prefix Length',
-        options : []
+        options : [],
+        relation : [
+          {action : "DISABLE", when : [ {name : "int_alias_v6address", value : "", status : "INVALID"} ]}
+        ]
       }]
     },
   ];
@@ -226,52 +250,34 @@ export class InterfacesFormComponent {
     }
   }
 
-  getIPv4s(data: any[]): any[] {
+  getIPv4IPv6s(data: any[]): any[] {
     let IPs = new Array();
-
-    if(data['int_ipv4address'] || data['int_v4netmaskbit']) {
-      let ip = data['int_ipv4address'] + '/' + data['int_v4netmaskbit'];
-      IPs.push(ip);
-    }    
-
     let alias_data = data['int_aliases'];
 
     for (let i in alias_data) {
+      let ipv4 = "";
+      let ipv6 = "";
+
       if ('int_alias_v4address' in alias_data[i] && 'int_alias_v4netmaskbit' in alias_data[i]) {
         if(alias_data[i]['int_alias_v4address'] || alias_data[i]['int_alias_v4netmaskbit']) {
-          let ip = alias_data[i]['int_alias_v4address'] + '/' + alias_data[i]['int_alias_v4netmaskbit'];
-          IPs.push(ip);
+          ipv4 = alias_data[i]['int_alias_v4address'] + '/' + alias_data[i]['int_alias_v4netmaskbit'];
+          IPs.push(ipv4);
         }
       }
-    }
-    return IPs;
-  }
 
-  getIPv6s(data: any[]): any[] {
-    let IPs = new Array();
-
-    if(data['int_ipv6address'] || data['int_v6netmaskbit']) {
-      let ip = data['int_ipv6address'] + '/' + data['int_v6netmaskbit'];
-      IPs.push(ip);
-    }
-    
-    let alias_data = data['int_aliases'];
-
-    for (let i in alias_data) {
       if ('int_alias_v6address' in alias_data[i] && 'int_alias_v6netmaskbit' in alias_data[i]) {
         if(alias_data[i]['int_alias_v6address'] || alias_data[i]['int_alias_v6netmaskbit']) {
-          let ip = alias_data[i]['int_alias_v6address'] + '/' + alias_data[i]['int_alias_v6netmaskbit'];
-          IPs.push(ip);
+          ipv6 = alias_data[i]['int_alias_v6address'] + '/' + alias_data[i]['int_alias_v6netmaskbit'];
+          IPs.push(ipv6);
         }        
-      }
+      }     
     }
     return IPs;
   }
 
   beforeSubmit(value: any) {
-    value['ipv4_addresses'] = this.getIPv4s(value);
-    value['ipv6_addresses'] = this.getIPv6s(value);
-    value['int_aliases'] = [];
+    let IP_array = this.getIPv4IPv6s(value);
+    value['int_aliases'] = [...IP_array];
     console.log(value);
   }
 }
