@@ -15,6 +15,7 @@ export interface Legend {
   name:string;
   value?:number | string;
   x?: number | string;
+  visible: boolean;
 }
 
 export const ViewChartMetadata = {
@@ -24,7 +25,7 @@ export const ViewChartMetadata = {
         <div class="legend-x legend-item" *ngIf="chartConfig.data.x">Time: <span *ngIf="showLegendValues">{{legend[0].x}}</span></div>
         <div class="legend-html" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="16px" >
           <ng-container *ngFor="let item of legend; let i=index ">
-            <div class="legend-item" *ngIf="chartType != 'gauge'">
+            <div class="legend-item" *ngIf="chartType != 'gauge'" (click)="focus(legend[i])" [ngClass]="{'legend-item-disabled':!legend[i].visible}">
               <span class="legend-swatch" [style.background-color]="legend[i].swatch"></span>
               <span class="legend-name">{{legend[i].name}}: </span>
               <div class="legend-value" [style.color]="legend[i].swatch"><span *ngIf="showLegendValues">{{legend[i].value}}{{units}}</span></div>
@@ -121,7 +122,7 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
         let dataObj = legend.concat(item.data)
         result.push(dataObj);
 
-        let legendHtmlItem: Legend = {swatch:'',name:item.legend, value: "empty", x:"empty"};
+        let legendHtmlItem: Legend = {swatch:'',name:item.legend, value: "empty", x:"empty", visible:true};
         if(this.chartType == "donut" || this.chartType == "pie"){
           console.log("******** DONUT/PIE LEGEND VALUE ********");
           console.log(legendHtmlItem);
@@ -195,6 +196,15 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
      }
     }
     return this.chartConfig;
+  }
+
+  focus(item){
+    if(item.visible){
+      this.chart.hide(item.name);
+    } else {
+      this.chart.show(item.name);
+    }
+    item.visible = !item.visible;
   }
 
   refresh(){
