@@ -2,12 +2,12 @@
   <div class="card-container {{flipDirection}} front" animate [animation]="flipAnimation">
     <md-card class="front" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between stretch">
       <md-toolbar-row fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between start" fxFlex="100" class="md-card-toolbar">
-        <span class="mat-card-title-text"><div class="card-title-text">{{title}}</div></span>
+        <h4 class="mat-card-title-text"><div class="card-title-text">{{title}}</div></h4>
         <button md-icon-button [mdMenuTriggerFor]="menu">
           <md-icon>more_vert</md-icon>
         </button>
       </md-toolbar-row>
-      <md-menu #menu="mdMenu">
+      <md-menu #menu="mdMenu" color="warn">
         <button md-menu-item (click)="toggleConfig()">
           <md-icon>settings</md-icon>
           <span>Configure</span>

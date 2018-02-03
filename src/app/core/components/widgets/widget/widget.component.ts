@@ -19,7 +19,7 @@ export class WidgetComponent implements AfterViewInit {
   @Input() widgetSize: string;
   @ViewChild('chartDonut') chartDonut: ViewChartDonutComponent;// | ViewChartPieComponent;
   @ViewChild('chartCpu') chartCpu: ViewChartLineComponent;
-  public title:string = "Widget";
+  public title:string = "CPU History";
   public chartSize:number;
   public flipAnimation = "stop";
   public flipDirection = "vertical";
@@ -109,7 +109,7 @@ export class WidgetComponent implements AfterViewInit {
      *  }
      **/
 
-     this.chartCpu.chartType = 'area-spline';
+     this.chartCpu.chartType = 'line';
      this.chartCpu.units = '%';
      this.chartCpu.timeSeries = true;
      this.chartCpu.timeFormat = '%H:%M';// eg. %m-%d-%Y %H:%M:%S.%L

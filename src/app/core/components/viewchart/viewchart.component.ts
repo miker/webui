@@ -3,15 +3,40 @@ import { LayoutChild } from 'app/core/classes/layouts';
 import { ViewComponent } from 'app/core/components/view/view.component';
 import {UUID} from 'angular2-uuid';
 import * as c3 from 'c3';
-import { ChartConfiguration, LegendOptions } from 'c3';
+import { ChartConfiguration, LegendOptions, TooltipOptions } from 'c3';
 
 export interface ChartData {
   legend: string;
   data: any[];
 }
 
+export interface Legend {
+  swatch?: string;
+  name:string;
+  value?:number | string;
+  x?: number | string;
+}
+
 export const ViewChartMetadata = {
-  template: `<div id="{{chartId}}" [ngClass]="chartClass" style="position:absolute!important;bottom:0;"></div>`
+  template: `
+    <div class="viewchart-wrapper {{chartClass}}-wrapper">
+      <div *ngIf="chartLoaded" class="legend-wrapper">
+        <div class="legend-x legend-item" *ngIf="chartConfig.data.x">Time: <span *ngIf="showLegendValues">{{legend[0].x}}</span></div>
+        <div class="legend-html" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="16px" >
+          <ng-container *ngFor="let item of legend; let i=index ">
+            <div class="legend-item" *ngIf="chartType != 'gauge'">
+              <span class="legend-swatch" [style.background-color]="legend[i].swatch"></span>
+              <span class="legend-name">{{legend[i].name}}: </span>
+              <div class="legend-value"><span *ngIf="showLegendValues">{{legend[i].value}}{{units}}</span></div>
+            </div>
+          </ng-container>
+          <!--<div class="legend-x legend-item" fxFlex="100"><span class="legend-swatch" style="background-color:"rgba(255,255,255,0);"></span><span class="legend-name">X: </span><div class="legend-value"><span *ngIf="showLegendValues">{{legend[0].x}}</span></div></div>-->
+        </div>
+      </div>
+      <div id="{{chartId}}" [ngClass]="chartClass">
+      </div>
+    </div>
+  `
 }
 
 @Component({
@@ -28,12 +53,30 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
   @Input() width: number;
   @Input() height: number;
 
-  protected chart: any;
+  public chart: any;
+  public chartLoaded: boolean = false;
   protected _chartType: string;
   protected _data: any[];
   protected _chartId: string;
   protected colors: string[];
-  protected legendOptions: LegendOptions = {show: false};
+  public legend: Legend[] = [];
+  public showLegendValues: boolean = false;
+  protected legendOptions: LegendOptions = {
+    show: false
+  };
+  protected tooltipOptions: TooltipOptions = {
+    contents: (raw, defaultTitleFormat, defaultValueFormat, color) => {
+      if(!this.showLegendValues){
+        this.showLegendValues = true;
+      }
+      let time = raw[0].x;
+      for(let i in raw){
+        this.legend[i].value = raw[i].value;
+        this.legend[i].x = time;
+      }
+      return '<div style="display:none">' + time + '</div>';
+    }
+  }
 
   protected chartConfig: ChartConfiguration;
 
@@ -72,10 +115,13 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
       let result: any[] = [];
      
       for(let i = 0; i < d.length; i++){
+
+        // setup data
         let item = d[i];
         let legend = [item.legend];
         let dataObj = legend.concat(item.data)
         result.push(dataObj);
+        this.legend.push({swatch:'',name:item.legend, value: "empty", x:"empty"});
       }
       this._data = result;
 
@@ -124,6 +170,11 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
        height: this.height
      },
      tooltip:{
+       show:false,
+       /*contents: (raw, defaultTitleFormat, defaultValueFormat, color) =>{
+         console.log(raw[0]);
+           //return ... // formatted html as you want
+       }*/
        format: {
          value: (value, ratio, id, index) => {
            if(this.units){
@@ -156,10 +207,20 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
 
     // Hide legend. We've moved the legends out of the svg and into Angular
     conf.legend = this.legendOptions;
-    
+    conf.tooltip = this.tooltipOptions;
+    if(this.legend.length > 0 && colors){
+      console.log(conf);
+      for(let i in this.legend){
+        this.legend[i].swatch = conf.color.pattern[i];
+      }
+    }
+    conf.data.onmouseout = (d) => {
+      this.showLegendValues = false;
+    }
+
     console.log("GENERATING DATA FROM ...");
-    console.log(conf);
     this.chart = c3.generate(conf);
+    this.chartLoaded = true;
     return this.chart
   }
 
