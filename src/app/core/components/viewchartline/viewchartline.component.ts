@@ -113,7 +113,7 @@ export class ViewChartLineComponent extends ViewChartComponent implements OnInit
       subchart: {
         show: false,
         size:{
-          height:32
+          height:24
         }
       },
       zoom:{

@@ -41,6 +41,10 @@ export class WidgetComponent implements AfterViewInit {
       this.setCPUData(evt);
     });
 
+    this.core.register({observerClass:this, eventName:"ThemeChanged"}).subscribe(() => {
+      this.chartCpu.refresh();
+    });
+
     this.core.emit({name:"PoolDataRequest"});
     this.core.emit({name:"StatsCpuRequest", data:[['user','interrupt','system'/*,'idle','nice'*/],{step:'10', start:'now-10m'}]});
   }

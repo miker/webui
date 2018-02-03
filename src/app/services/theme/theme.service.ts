@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as domHelper from '../../helpers/dom.helper';
 import { RestService, WebSocketService } from 'app/services';
+import { CoreService, CoreEvent } from 'app/core/services/core.service';
 
 export interface Theme {
   name: string;
@@ -20,7 +21,7 @@ export class ThemeService {
       name: 'ix-blue',
       label: 'iX Blue',
       baseColor: '#0095D5',
-      accentColors:['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896'],
+      accentColors:['#d238ff', '#00d0d6', '#ff0013', '#00a2ff', '#59d600', '#eec302', '#f0cb00', '#c17ecc'], // based on TangoAdapted
       isActive: true,
       hasDarkLogo: false
     }, 
@@ -29,6 +30,7 @@ export class ThemeService {
       label: 'Solarized Dark',
       baseColor: '#073642',
       accentColors:['#d33682', '#2aa198', '#dc322f', '#268bd2', '#859900', '#cb4b16', '#b58900', '#6c71c4'],
+      // Order is magenta, cyan, red, blue, green, orange, yellow, violet
       /*
        $yellow:    #b58900;
        $orange:    #cb4b16;
@@ -88,7 +90,7 @@ export class ThemeService {
 
   savedUserTheme = "";
 
-  constructor(private rest: RestService, private ws: WebSocketService) {
+  constructor(private rest: RestService, private ws: WebSocketService, private core:CoreService) {
 
     this.rest.get("account/users/1", {}).subscribe((res) => {
       this.savedUserTheme = res.data.bsdusr_attributes.usertheme;
@@ -121,5 +123,7 @@ export class ThemeService {
     this.ws.call('user.set_attribute', [1, 'usertheme', theme.name]).subscribe((res_ws) => {
       console.log("Saved usertheme:", res_ws, theme.name);
     });
+
+    this.core.emit({name:'ThemeChanged'});
   }
 }

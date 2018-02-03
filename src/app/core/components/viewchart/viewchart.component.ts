@@ -197,6 +197,10 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
     return this.chartConfig;
   }
 
+  refresh(){
+    this.render();
+  }
+
   render(){
     if(this.data.length == 0){
       console.log("NO DATA FOUND");
