@@ -17,6 +17,7 @@ export class VmSummaryComponent implements AfterViewInit {
 
   @ViewChild('cpu') cpuChart:ViewChartLineComponent;
   @ViewChild('zpool') zpoolChart:ViewChartDonutComponent;
+  //@ViewChild('zpool') zpoolChart:ViewChartPieComponent;
   @ViewChild('net') netChart:ViewChartGaugeComponent;
   @Input() virtualMachines;
   public chartSize:number = 260;

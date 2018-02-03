@@ -27,10 +27,9 @@ export const ViewChartMetadata = {
             <div class="legend-item" *ngIf="chartType != 'gauge'">
               <span class="legend-swatch" [style.background-color]="legend[i].swatch"></span>
               <span class="legend-name">{{legend[i].name}}: </span>
-              <div class="legend-value"><span *ngIf="showLegendValues">{{legend[i].value}}{{units}}</span></div>
+              <div class="legend-value" [style.color]="legend[i].swatch"><span *ngIf="showLegendValues">{{legend[i].value}}{{units}}</span></div>
             </div>
           </ng-container>
-          <!--<div class="legend-x legend-item" fxFlex="100"><span class="legend-swatch" style="background-color:"rgba(255,255,255,0);"></span><span class="legend-name">X: </span><div class="legend-value"><span *ngIf="showLegendValues">{{legend[0].x}}</span></div></div>-->
         </div>
       </div>
       <div id="{{chartId}}" [ngClass]="chartClass">
@@ -121,7 +120,15 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
         let legend = [item.legend];
         let dataObj = legend.concat(item.data)
         result.push(dataObj);
-        this.legend.push({swatch:'',name:item.legend, value: "empty", x:"empty"});
+
+        let legendHtmlItem: Legend = {swatch:'',name:item.legend, value: "empty", x:"empty"};
+        if(this.chartType == "donut" || this.chartType == "pie"){
+          console.log("******** DONUT/PIE LEGEND VALUE ********");
+          console.log(legendHtmlItem);
+          legendHtmlItem.value = d[i].data[0];
+          this.showLegendValues = true;
+        }
+        this.legend.push(legendHtmlItem)
       }
       this._data = result;
 
@@ -214,8 +221,10 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
         this.legend[i].swatch = conf.color.pattern[i];
       }
     }
-    conf.data.onmouseout = (d) => {
-      this.showLegendValues = false;
+    if(this.chartType != "donut" && this.chartType != "pie"){
+      conf.data.onmouseout = (d) => {
+        this.showLegendValues = false;
+      }
     }
 
     console.log("GENERATING DATA FROM ...");
