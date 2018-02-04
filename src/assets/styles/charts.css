@@ -161,6 +161,16 @@ div.c3.area-spline .c3-chart-line .c3-lines path.c3-line{
   stroke-width:0;
 }
 
+/* Event Rects */
+g.c3-event-rects{
+  fill: rgba(0,0,0,0);
+  stroke: rgba(128,128,128,0.0325);
+}
+
+g.c3-event-rects rect.c3-event-rect:nth-child(odd){
+  fill: rgba(128,128,128,0.025) !important;
+}
+
 /* SUBCHARTS */
 g.c3-brush + g{
   opacity:0 !important;

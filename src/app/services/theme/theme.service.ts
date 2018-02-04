@@ -129,11 +129,15 @@ export class ThemeService {
     this.freenasThemes.forEach((t) => {
       t.isActive = (t.name === theme.name);
     });
-
-    /*this.ws.call('user.set_attribute', [1, 'usertheme', theme.name]).subscribe((res_ws) => {
-      console.log("Saved usertheme:", res_ws, theme.name);
-    });*/
-
+    //this.saveCurrentTheme();
     this.core.emit({name:'ThemeChanged'});
+  }
+
+  saveCurrentTheme(){
+    let theme = this.currentTheme();
+    //this.rest.put("account/users/1", {bsdusr_attributes:{usertheme:theme.name}}).subscribe((res) => {
+    this.ws.call('user.update', [1,{attributes:{usertheme:theme.name}}]).subscribe((res) => {
+      console.log("Saved usertheme:", res, theme.name);
+    });
   }
 }

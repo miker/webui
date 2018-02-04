@@ -141,6 +141,10 @@ export class TopbarComponent implements OnInit, OnDestroy {
     this.themeService.changeTheme(theme);
   }
 
+  saveCurrentTheme(){
+    this.themeService.saveCurrentTheme();
+  }
+
   toggleNotific() {
     this.notificPanel.toggle();
   }

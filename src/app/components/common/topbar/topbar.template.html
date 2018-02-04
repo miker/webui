@@ -39,6 +39,13 @@
         </div>
         <span class="mat-color-accent text-muted text-sm mat-list-item-ripple mat-ripple">{{ theme.label }}</span>
       </md-grid-tile>
+      <md-grid-tile (click)="saveCurrentTheme()">
+        <div md-menu-item >
+          <!--<div class="egret-swatch"></div>-->
+          <md-icon style="color:#999;position:absolute;left:2px;top:2px;font-size:22px">save</md-icon>
+        </div>
+        <span class="mat-color-accent text-muted text-sm mat-list-item-ripple mat-ripple">Save current theme</span>
+      </md-grid-tile>
     </md-grid-list>
   </md-menu>
 
