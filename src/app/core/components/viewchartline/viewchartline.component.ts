@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChartComponent, ViewChartMetadata } from 'app/core/components/viewchart/viewchart.component';
-//import * as c3 from 'c3';
+import * as d3 from 'd3';
 
 interface TimeData {
   start: number;
@@ -99,7 +99,10 @@ export class ViewChartLineComponent extends ViewChartComponent implements OnInit
           }
         },
         y:{
-          inner:true
+          inner:true,
+          /*tick:{
+            format: d3.format(this.units)
+          }*/
         }
       },
       data: {

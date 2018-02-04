@@ -14,7 +14,7 @@ export interface Theme {
 
 @Injectable()
 export class ThemeService {
-  readonly freeThemeDefaultIndex = 3;
+  readonly freeThemeDefaultIndex = 0;
 
   public freenasThemes: Theme[] = [
     {
@@ -93,7 +93,17 @@ export class ThemeService {
   constructor(private rest: RestService, private ws: WebSocketService, private core:CoreService) {
 
     this.rest.get("account/users/1", {}).subscribe((res) => {
+      console.log("******** THEME SERVICE CONTRUCTOR ********");
+      console.log(res.data);
       this.savedUserTheme = res.data.bsdusr_attributes.usertheme;
+
+      // TEMPORARY FIX: Removed egret-blue theme but that theme is still 
+      // the default in the middleware. This is a workaround until that
+      // default value can be changed
+      if(this.savedUserTheme == "egret-blue"){
+        this.savedUserTheme = "ix-blue";
+      }
+
       this.freenasThemes.forEach((t) => {
         t.isActive = (t.name === this.savedUserTheme);
       });
@@ -120,9 +130,9 @@ export class ThemeService {
       t.isActive = (t.name === theme.name);
     });
 
-    this.ws.call('user.set_attribute', [1, 'usertheme', theme.name]).subscribe((res_ws) => {
+    /*this.ws.call('user.set_attribute', [1, 'usertheme', theme.name]).subscribe((res_ws) => {
       console.log("Saved usertheme:", res_ws, theme.name);
-    });
+    });*/
 
     this.core.emit({name:'ThemeChanged'});
   }

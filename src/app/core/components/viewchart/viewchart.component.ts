@@ -219,6 +219,7 @@ export class ViewChartComponent extends ViewComponent implements AfterViewInit {
 
     let conf = this.makeConfig();
     let colors = this.colorsFromTheme();
+    console.log(colors);
     if(colors){
       let color = {
         pattern: colors

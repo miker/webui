@@ -38,6 +38,12 @@ export class VmSummaryComponent implements AfterViewInit {
       this.setNetData(evt);
     });
 
+    this.core.register({observerClass:this,eventName:"ThemeChanged"}).subscribe((evt:CoreEvent) => {
+      this.cpuChart.refresh();
+      this.zpoolChart.refresh();
+      this.netChart.refresh();
+    });
+
     // Pool Stats
     this.core.emit({name:"PoolDataRequest"});
     // CPU Stats (dataList eg. {source: "aggregation-cpu-sum", type: "cpu-user", dataset: "value"})
