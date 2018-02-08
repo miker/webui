@@ -125,14 +125,6 @@ export class EntityFormComponent implements OnInit, OnDestroy {
         if (config.relation.length > 0) {
           this.setRelation(config);
         }
-        if (config.type == "array") {
-          let formarray = config.formarray;
-          for (let j in formarray) {
-            if (formarray[j].relation.length > 0) {
-              this.setRelation(formarray[j]);
-            }
-          }
-        }
       }
 
       if (this.conf.queryCall) {
@@ -371,20 +363,6 @@ export class EntityFormComponent implements OnInit, OnDestroy {
       const method = disable ? 'disable' : 'enable';      
       this.formGroup.controls[name][method]();
       return;
-    }
-    else {
-      this.fieldConfig.map((item) => {
-        if(this.formGroup.controls[item.name].constructor.name == "FormArray") {
-          let formArray = (<FormArray>this.formGroup.controls[item.name]).controls;
-          formArray.map((groupObj) => {
-            if(groupObj.get(name)) {
-              const method = disable ? 'disable' : 'enable';      
-              groupObj.get(name)[method]();
-              return;
-            }
-          });
-        }
-      });
     }
 
     this.fieldConfig = this.fieldConfig.map((item) => {

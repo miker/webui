@@ -34,21 +34,6 @@ export class FieldRelationService {
           !controls.some(controlElement => controlElement === control)) {
         controls.push(control);
       }
-      if(!control){
-        for (let i in controlGroup.controls) {
-          if(controlGroup.controls[i].constructor.name == "FormArray") {
-            let formArray = (<FormArray>controlGroup.controls[i]).controls;
-            for (let j in formArray) {
-              let groupObj = formArray[j];
-              if(groupObj.get(rel.name)) {
-                control = <FormControl>groupObj.get(rel.name);
-                break;
-              }
-            }
-          }
-        }
-        controls.push(control);
-      }
     }));
     return controls;
   }
@@ -58,21 +43,7 @@ export class FieldRelationService {
     return relGroup.when.reduce(
         (toBeDisabled: boolean, rel: FieldRelation, index: number) => {
           let control = formGroup.get(rel.name);
-          if(!control){
-            for (let i in formGroup.controls) {
-              if(formGroup.controls[i].constructor.name == "FormArray") {
-                let formArray = (<FormArray>formGroup.controls[i]).controls;
-                for (let j in formArray) {
-                  let groupObj = formArray[j];
-                  if(groupObj.get(rel.name)) {
-                    control = groupObj.get(rel.name);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-
+          
           if (control && relGroup.action === ACTION_DISABLE) {
             if (index > 0 && relGroup.connective === CONNECTION_AND &&
                 !toBeDisabled) {

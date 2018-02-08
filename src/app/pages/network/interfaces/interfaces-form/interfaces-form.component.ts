@@ -135,9 +135,6 @@ export class InterfacesFormComponent {
         placeholder : 'IPv4 Netmask',
         tooltip : 'Enter a netmask if <b>DHCP</b> is unchecked.',
         options : [],
-        relation : [
-          {action : "DISABLE", when : [ {name : "int_alias_v4address", value : "", status : "INVALID"} ]}
-        ]
       },
       {
         type : 'input',
@@ -152,9 +149,6 @@ export class InterfacesFormComponent {
         name : 'int_alias_v6netmaskbit',
         placeholder : 'IPv6 Prefix Length',
         options : [],
-        relation : [
-          {action : "DISABLE", when : [ {name : "int_alias_v6address", value : "", status : "INVALID"} ]}
-        ]
       }]
     },
   ];
@@ -250,6 +244,42 @@ export class InterfacesFormComponent {
     }
   }
 
+  preHandler(data: any[]): any[] {
+    type IPAddress = {
+      int_alias_v4address: string,
+      int_alias_v4netmaskbit: string,
+      int_alias_v6address: string,
+      int_alias_v6netmaskbit: string
+    };
+    let rs = [];
+    console.log("=====", data);
+    for (let i in data) {
+      let item: IPAddress;
+      var ip_arr: any[] = _.split(data[i], '/');
+      var ip = ip_arr[0];
+      var netmaskbit = ip_arr[1];
+
+      if (IPV4_REGEXP.test(ip)) {
+        item = {
+          int_alias_v4address: ip, 
+          int_alias_v4netmaskbit: netmaskbit, 
+          int_alias_v6address: "", 
+          int_alias_v6netmaskbit: ""};      
+      }
+      else {
+        item = {
+          int_alias_v4address: "", 
+          int_alias_v4netmaskbit: "", 
+          int_alias_v6address: ip, 
+          int_alias_v6netmaskbit: netmaskbit
+        };
+      }
+      rs.push(item);
+    }
+    console.log("re====", rs);
+    return rs;
+  }
+
   getIPv4IPv6s(data: any[]): any[] {
     let IPs = new Array();
     let alias_data = data['int_aliases'];
@@ -278,6 +308,5 @@ export class InterfacesFormComponent {
   beforeSubmit(value: any) {
     let IP_array = this.getIPv4IPv6s(value);
     value['int_aliases'] = [...IP_array];
-    console.log(value);
   }
 }
