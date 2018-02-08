@@ -1,7 +1,7 @@
 # Author: Rishabh Chauhan
 # License: BSD
 # Location for tests  of FreeNAS new GUI
-# Test case count: 4
+# Test case count: 5
 
 from source import *
 from selenium.webdriver.common.keys import Keys
@@ -26,33 +26,17 @@ except ImportError:
 
 
 xpaths = { 'navService' : "//*[@id='nav-8']/div/a[1]",
-          'turnoffConfirm' : "/html/body/div[5]/div[3]/div/mat-dialog-container/app-confirm/div[2]/button[1]",
-          'status' : "/html/body/app-root/app-admin-layout/mat-sidenav-container/mat-sidenav-content/div/services/div/service[14]/mat-card/div[2]/div[1]/mat-chip"
-        }
+          'turnoffConfirm' : "//*[contains(text(), 'OK')]"
+         }
 
-class configure_ssh_test(unittest.TestCase):
+class conf_ssh_test(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         driver.implicitly_wait(30)
         pass
 
-    def test_01_nav_services(self):
-        # Click  Service menu
-        print ("navigating to service menu")
-        driver.find_element_by_xpath(xpaths['navService']).click()
-        # allowing the button to load
-        time.sleep(1)
-        # get the ui element
-        ui_element=driver.find_element_by_xpath("//*[@id='breadcrumb-bar']/ul/li/a")
-        # get the weather data
-        page_data=ui_element.text
-        print ("the Page now is: " + page_data)
-        # assert response
-        self.assertTrue("Services" in page_data)
 
-
-
-    def test_02_turnon_ssh (self):
+    def test_01_turnon_ssh (self):
         # click Service Menu
         driver.find_element_by_xpath(xpaths['navService']).click()
         # allowing the button to load
@@ -63,6 +47,13 @@ class configure_ssh_test(unittest.TestCase):
         time.sleep(2)
         self.status_change("14", "start")
 
+    def test_02_checkif_ssh_on (self):
+        print (" check if ssh turned on")
+        # scroll down
+        driver.find_element_by_tag_name('html').send_keys(Keys.END)
+        time.sleep(2)
+        self.status_check("14")
+
     def test_03_configure_ssh(self):
         print (" configuring ssh service with root access")
         time.sleep(2)
@@ -72,8 +63,7 @@ class configure_ssh_test(unittest.TestCase):
         driver.find_element_by_xpath("//*[@id='ssh_rootlogin']/mat-checkbox/label/div").click()
         # click on save button
         driver.find_element_by_xpath("//*[@id='save_button']").click()
-        time.sleep(1)
-
+        time.sleep(5)
 
     def test_04_turnoff_ssh(self):
         # click Service Menu
@@ -85,6 +75,13 @@ class configure_ssh_test(unittest.TestCase):
         driver.find_element_by_tag_name('html').send_keys(Keys.END)
         time.sleep(2)
         self.status_change("14", "stop")
+
+    def test_05_checkif_ssh_off (self):
+        print (" check if ssh turned on")
+        # scroll down
+        driver.find_element_by_tag_name('html').send_keys(Keys.END)
+        time.sleep(2)
+        self.status_check("14")
         time.sleep(10)
 
         # Next step-- To check if the new user is present in the list via automation
@@ -107,10 +104,9 @@ class configure_ssh_test(unittest.TestCase):
         ui_element_status=driver.find_element_by_xpath("/html/body/app-root/app-admin-layout/mat-sidenav-container/mat-sidenav-content/div/services/div/service[" + str(which) + "]/mat-card/div[2]/div[1]/mat-chip")
         # get the status data
         status_data=ui_element_status.text
-        print ("current status is: " + status_data)
-        if to == "start":        
-            if status_data == "STOPPED": 
-                # Click on the afp toggle button
+        if to == "start":
+            if status_data == "STOPPED":
+                # Click on the toggle button
                 driver.find_element_by_xpath("/html/body/app-root/app-admin-layout/mat-sidenav-container/mat-sidenav-content/div/services/div/service[" + str(which) + "]/mat-card/div[2]/div[1]/button").click()
                 time.sleep(1)
                 print ("status has now changed to running")
@@ -118,7 +114,7 @@ class configure_ssh_test(unittest.TestCase):
                 print ("the status is already " + status_data)
         elif to == "stop":
             if status_data == "RUNNING":
-                #Click on the afp toggle button
+                #Click on the toggle button
                 driver.find_element_by_xpath("/html/body/app-root/app-admin-layout/mat-sidenav-container/mat-sidenav-content/div/services/div/service[" + str(which) + "]/mat-card/div[2]/div[1]/button").click()
                 time.sleep(1)
                 # re-confirming if the turning off the service
@@ -128,13 +124,22 @@ class configure_ssh_test(unittest.TestCase):
                 print ("the status is already" + status_data)
 
 
+    def status_check(self, which):
+        ui_element_status=driver.find_element_by_xpath("/html/body/app-root/app-admin-layout/mat-sidenav-container/mat-sidenav-content/div/services/div/service[" + str(which) + "]/mat-card/div[2]/div[1]/mat-chip")
+        # get the status data
+        status_data=ui_element_status.text
+        print ("current status is: " + status_data)
+
+
+
+
     @classmethod
     def tearDownClass(inst):
         pass
 
 
-def run_configure_ssh_test(webdriver):
+def run_conf_ssh_test(webdriver):
     global driver
     driver = webdriver
-    suite = unittest.TestLoader().loadTestsFromTestCase(configure_ssh_test)
+    suite = unittest.TestLoader().loadTestsFromTestCase(conf_ssh_test)
     xmlrunner.XMLTestRunner(output=results_xml, verbosity=2).run(suite)
