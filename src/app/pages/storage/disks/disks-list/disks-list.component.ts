@@ -77,15 +77,15 @@ export class DisksListConfig implements InputTableConf {
         onClick : (row1) => {
           this.loader.open();
 
-          this.rest.post("storage/volume/" +  row1.disk_name + "/detach", { body: JSON.stringify({}) }).subscribe((restPostResp) => {
+          this.rest.post("storage/disk/" +  row1.id + "/detach", { body: JSON.stringify({}) }).subscribe((restPostResp) => {
             this.loader.close();
   
-            this.dialogService.Info(T("Cloned"), T("Successfully Promoted ") + row1.path).subscribe((infoResult) => {
+            this.dialogService.Info(T("Detached"), T("Successfully Detached ") + row1.disk_name).subscribe((infoResult) => {
               this.parentDisksListComponent.repaintMe();
             });
           }, (res) => {
             this.loader.close();
-            this.dialogService.errorReport(T("Error Promoted dataset ") + row1.path, res.message, res.stack);
+            this.dialogService.errorReport(T("Error detaching disk: ") + row1.disk_name, res.message, res.stack);
           });
         }
       });
