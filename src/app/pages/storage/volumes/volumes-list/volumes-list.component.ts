@@ -346,22 +346,25 @@ export class VolumesListTableConfig implements InputTableConf {
         });
       }
 
-      actions.push({
-        label: T("Promote Dataset"),
-        onClick: (row1) => {
-          this.loader.open();
+      this.ws.call('pool.dataset.query', [[["id", '=', rowData.path]]]).subscribe((res) => {
+        console.log(res);
+        actions.push({
+          label: T("Promote Dataset"),
+          onClick: (row1) => {
+            this.loader.open();
 
-          this.ws.call('pool.dataset.promote', [row1.path]).subscribe((wsResp) => {
-            this.loader.close();
-            // Showing info here because theres no feedback on list parent for this if promoted.
-            this.dialogService.Info(T("Promote Dataset"), T("Successfully Promoted ") + row1.path).subscribe((infoResult) => {
-              this.parentVolumesListComponent.repaintMe();
-            });
-          }, (res) => {
-            this.loader.close();
-            this.dialogService.errorReport(T("Error Promoting dataset ") + row1.path, res.reason, res.stack);
-          });
-        }
+            this.ws.call('pool.dataset.promote', [row1.path]).subscribe((wsResp) => {
+              this.loader.close();
+
+              this.dialogService.Info(T("Promote Dataset"), T("Successfully Promoted ") + row1.path).subscribe((infoResult) => {
+                this.parentVolumesListComponent.repaintMe();
+              });
+            }, (res) => {
+              this.loader.close();
+              this.dialogService.errorReport(T("Error Promoting dataset ") + row1.path, res.reason, res.stack);
+            });          
+          }
+        });
       });
     }
     if (rowData.type === "zvol") {
