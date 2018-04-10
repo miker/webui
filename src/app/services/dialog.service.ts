@@ -46,7 +46,7 @@ export class DialogService {
         return dialogRef.afterClosed();
     }
 
-    public Info(title: string, info: string ): Observable<boolean> {
+    public Info(title: string, info: string, buttonMsg?: string ): Observable<boolean> {
         
         let dialogRef: MatDialogRef<InfoDialog>;
 
@@ -54,6 +54,10 @@ export class DialogService {
 
         dialogRef.componentInstance.title = title;
         dialogRef.componentInstance.info = info;
+
+        if(buttonMsg) {
+            dialogRef.componentInstance.buttonMsg = buttonMsg;
+        }
 
         return dialogRef.afterClosed();
     }
