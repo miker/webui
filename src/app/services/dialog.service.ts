@@ -46,7 +46,7 @@ export class DialogService {
         return dialogRef.afterClosed();
     }
 
-    public Info(title: string, info: string, buttonMsg?: string ): Observable<boolean> {
+    public Info(title: string, info: string): Observable<boolean> {
         
         let dialogRef: MatDialogRef<InfoDialog>;
 
@@ -54,10 +54,6 @@ export class DialogService {
 
         dialogRef.componentInstance.title = title;
         dialogRef.componentInstance.info = info;
-
-        if(buttonMsg) {
-            dialogRef.componentInstance.buttonMsg = buttonMsg;
-        }
 
         return dialogRef.afterClosed();
     }
@@ -92,4 +88,15 @@ export class DialogService {
 
     }
 
+    public Operation(title: string, message: string): MatDialogRef<InfoDialog> {
+        let dialogRef: MatDialogRef<InfoDialog>;
+
+        dialogRef = this.dialog.open(InfoDialog);
+
+        dialogRef.componentInstance.title = title;
+        dialogRef.componentInstance.info = message;
+        dialogRef.componentInstance.buttonMsg = 'Cancel';
+
+        return dialogRef;
+    }
 }
