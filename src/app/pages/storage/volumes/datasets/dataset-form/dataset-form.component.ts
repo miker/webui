@@ -33,6 +33,7 @@ interface DatasetFormData {
   copies: string;
   recordsize: string;
   casesensitivity: string;
+  dataset_share_type: string;
 };
 
 
@@ -79,6 +80,19 @@ export class DatasetFormComponent implements Formconfiguration {
       name: 'comments',
       placeholder: T('Comments'),
       tooltip: T('Enter comments or notes about this dataset here.'),
+    },
+    {
+      type: 'select',
+      name: 'dataset_share_type',
+      label: "Share Type",
+      value: 'unix',
+      placeholder: T('Share Type'),
+      tooltip: T('The os Type the share will be created for.  (Unix is the Default.)'),
+      options: [
+        { label: 'Unix', value: 'unix' },
+        { label: 'Windows', value: 'windows' },
+        { label: 'Mac', value: 'mac' }
+      ],
     },
     {
       type: 'select',
@@ -214,6 +228,7 @@ makes the .zfs snapshot directory <b>Visible</b> or <b>Invisible</b> on this dat
       ],
       value: 1
     },
+    
     {
       type: 'select',
       name: 'recordsize',
@@ -359,7 +374,8 @@ makes the .zfs snapshot directory <b>Visible</b> or <b>Invisible</b> on this dat
         refreservation: this.getFieldValueOrRaw(wsResponse.refreservation),
         reservation: this.getFieldValueOrRaw(wsResponse.reservation),
         snapdir: this.getFieldValueOrRaw(wsResponse.snapdir),
-        sync: this.getFieldValueOrRaw(wsResponse.sync)
+        sync: this.getFieldValueOrRaw(wsResponse.sync),
+        dataset_share_type: this.getFieldValueOrRaw(wsResponse.dataset_share_type)
      };
 
      // If combacks as Megabytes... Re-convert it to K.  Oddly enough.. It only takes K as an input.
@@ -396,9 +412,9 @@ makes the .zfs snapshot directory <b>Visible</b> or <b>Invisible</b> on this dat
         this.route_success));
     }, (res) => {
       this.loader.close();
-      //Handled in global error websocketservice
-      // this.dialogService.errorReport("Error Importing volume", res.message, res.stack);
-      console.log(T("Error saving dataset"), res.message, res.stack);
+      this.dialogService.errorReport("Error Importing volume", 
+                                      res.reason, 
+                                      ( res.trace !== undefined ) ? res.trace.formatted : T("Uknown") );
     });
   }
 
