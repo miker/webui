@@ -6,10 +6,6 @@ import { DialogService } from '../../../services/';
 
 import {WebSocketService} from '../../../services/ws.service';
 
-interface Navigator {
-  credentials: any;
-}
-
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
