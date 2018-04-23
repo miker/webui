@@ -6,6 +6,10 @@ import { DialogService } from '../../../services/';
 
 import {WebSocketService} from '../../../services/ws.service';
 
+interface Navigator {
+  credentials: any;
+}
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -67,6 +71,10 @@ export class SigninComponent implements OnInit {
 
     this.ws.call('auth.authenticator_signin_challenge', [this.signinData.username]).subscribe((result) => {
       console.log(result);
+      if (result == false) {
+        this.loginCallback(false);
+        return;
+      }
 
       result.challenge = new Uint8Array(result.challenge);
       result.allowCredentials.forEach((item) => {
@@ -98,6 +106,7 @@ export class SigninComponent implements OnInit {
         });
       }).catch((err) => {
         console.log(err);
+        this.loginCallback(false);
       });
     })
   }
