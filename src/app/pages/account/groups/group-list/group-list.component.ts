@@ -69,7 +69,7 @@ export class GroupListComponent {
     return actions;
   }
   checkbox_confirm(id: any){
-    const params = [id, {"delete_users": false}]
+    const params = [id, {"delete_users": true}]
     const ds = this.dialogService.confirm(
       T("Delete"), 
       T("Are you sure you want to delete the selected item?"), 
