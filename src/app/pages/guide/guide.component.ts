@@ -10,12 +10,14 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 
 export class GuideComponent implements OnInit{
-
-  public safeUrl: SafeUrl;
-
-  constructor(public sanitizer: DomSanitizer) {}
-
-  ngOnInit() {
-	this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("http://" + environment.remote + "//docs/freenas.html");
+  
+    public safeUrl: SafeUrl;
+    public targetAnchor: string = "//docs/freenas.html";
+  
+    constructor(public sanitizer: DomSanitizer) {}
+  
+    ngOnInit() {
+    this.safeUrl = this.sanitizer
+      .bypassSecurityTrustResourceUrl("http://" + environment.remote + this.targetAnchor);
+    }
   }
-}
