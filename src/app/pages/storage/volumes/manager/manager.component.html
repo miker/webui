@@ -22,7 +22,8 @@
             <button *ngIf="suggestable_disks.length <= 8" [disabled]="dirty" mat-raised-button class="btn btn-accent" (click)="suggestLayout()">{{"Suggest Layout" | translate}}</button>
             <tooltip class="volumeTooltip" [message]=suggested_layout_tooltip></tooltip>
           </div>
-        </div>
+         </div>
+         <span (click)="readThis('Trained cadres...')">Read This!</span>
         <ng-template #extend>
           <mat-input-container>
             <input matInput placeholder="Name" [value]="name" disabled>

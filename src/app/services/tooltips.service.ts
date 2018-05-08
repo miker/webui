@@ -18,4 +18,8 @@ export class TooltipsService {
       }
     }
   }
+
+  passMessage(message: string) {
+    console.log(message);
+  }
 }

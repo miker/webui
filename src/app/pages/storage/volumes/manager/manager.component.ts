@@ -1,5 +1,6 @@
 import {
   Component,
+  Input,
   OnInit,
   OnDestroy,
   QueryList,
@@ -9,7 +10,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { RestService, WebSocketService, DialogService } from '../../../../services/';
+import { RestService, WebSocketService, DialogService, TooltipsService } from '../../../../services/';
 import { DiskComponent } from './disk/';
 import { VdevComponent } from './vdev/';
 import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
@@ -28,11 +29,12 @@ import * as _ from 'lodash';
   ],
   providers: [
     RestService,
-    DialogService
+    DialogService,
+    TooltipsService
   ],
 })
 export class ManagerComponent implements OnInit, OnDestroy {
-
+  @Input() message: string;
   public disks: Array < any > = [];
   public suggestable_disks: Array < any > = [];
   public can_suggest = false;
@@ -84,7 +86,8 @@ export class ManagerComponent implements OnInit, OnDestroy {
     private loader:AppLoaderService,
     protected route: ActivatedRoute,
     public mdDialog: MatDialog,
-    public translate: TranslateService ) {
+    public translate: TranslateService,
+    private tooltipsService: TooltipsService ) {
 
     dragulaService.setOptions('pool-vdev', {
       accepts: (el, target, source, sibling) => { return true; },
@@ -169,6 +172,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  readThis(message) {
+    this.tooltipsService.passMessage(message);
   }
 
   ngOnDestroy() {
