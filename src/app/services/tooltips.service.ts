@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/map';
 
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable, Subject, Subscription} from 'rxjs/Rx';
 
@@ -19,7 +19,9 @@ export class TooltipsService {
     }
   }
 
-  passMessage(message: string) {
-    console.log(message);
-  }
+  guideRoute = new EventEmitter<string>();
+
+  // passMessage(message: string) {
+  //   console.log(message);
+  // }
 }

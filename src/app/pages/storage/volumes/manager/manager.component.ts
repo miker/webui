@@ -174,8 +174,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  readThis(message) {
-    this.tooltipsService.passMessage(message);
+  readThis(message: string) {
+    //this.tooltipsService.passMessage(message);
+    this.tooltipsService.guideRoute.emit(message);
+    console.log(message);
   }
 
   ngOnDestroy() {
