@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { TooltipsService } from '../../services/tooltips.service'
+import { TooltipsService } from '../../services/tooltips.service';
+import { GuidePageService } from '../../services/guide-page.service'
 
 @Component({
   selector: 'app-guide',
   templateUrl: './guide.component.html',
   styleUrls: ['./guide.component.css'],
-  providers: [TooltipsService]
+  providers: [GuidePageService]
 })
 
 export class GuideComponent implements OnInit{
@@ -17,11 +18,11 @@ export class GuideComponent implements OnInit{
     public targetAnchor: string = "//docs/freenas.html";
   
     constructor(public sanitizer: DomSanitizer,
-                private tooltipsService: TooltipsService) {
-                  this.tooltipsService.guideRoute.subscribe(
-                    (message: string) => alert(message)
-                  );
-                }
+                private guidePageService: GuidePageService) {
+      this.guidePageService.guideRoute.subscribe(
+        (message: string) => alert('Listen up ' + message)
+      );
+    }
   
     ngOnInit() {
     this.safeUrl = this.sanitizer

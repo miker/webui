@@ -10,7 +10,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { RestService, WebSocketService, DialogService, TooltipsService } from '../../../../services/';
+import { RestService, WebSocketService, DialogService, TooltipsService, GuidePageService } from '../../../../services/';
 import { DiskComponent } from './disk/';
 import { VdevComponent } from './vdev/';
 import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
@@ -30,11 +30,12 @@ import * as _ from 'lodash';
   providers: [
     RestService,
     DialogService,
-    TooltipsService
+    TooltipsService,
+    GuidePageService
   ],
 })
 export class ManagerComponent implements OnInit, OnDestroy {
-  @Input() message: string;
+  //@Input() message: string;
   public disks: Array < any > = [];
   public suggestable_disks: Array < any > = [];
   public can_suggest = false;
@@ -87,7 +88,8 @@ export class ManagerComponent implements OnInit, OnDestroy {
     protected route: ActivatedRoute,
     public mdDialog: MatDialog,
     public translate: TranslateService,
-    private tooltipsService: TooltipsService ) {
+    private tooltipsService: TooltipsService,
+    private guidePageService: GuidePageService) {
 
     dragulaService.setOptions('pool-vdev', {
       accepts: (el, target, source, sibling) => { return true; },
@@ -175,9 +177,9 @@ export class ManagerComponent implements OnInit, OnDestroy {
   }
 
   readThis(message: string) {
-    //this.tooltipsService.passMessage(message);
-    this.tooltipsService.guideRoute.emit(message);
-    console.log(message);
+    this.guidePageService.logMessage(message);
+    this.guidePageService.guideRoute.emit('hello, ' + message);
+    console.log('Logged from manager component - ' + message);
   }
 
   ngOnDestroy() {

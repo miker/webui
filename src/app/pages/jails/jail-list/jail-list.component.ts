@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { AppLoaderService } from '../../../services/app-loader/app-loader.service';
+import { GuidePageService  } from '../../../services/guide-page.service';
 import { EntityUtils } from '../../common/entity/utils';
 import { TranslateService } from '@ngx-translate/core'
 import { T } from '../../../translate-marker';
@@ -115,7 +116,13 @@ export class JailListComponent implements OnInit {
   until after the first jail is created. iocage uses this dataset to store FreeBSD RELEASES \
   and all other jail data. To create a new ZFS Pool, navigate Storage/Volumes and click 'Create ZFS Pool'.");
 
-  constructor(protected router: Router, protected rest: RestService, protected ws: WebSocketService, protected loader: AppLoaderService) {}
+  constructor(protected router: Router, protected rest: RestService, 
+    protected ws: WebSocketService, protected loader: AppLoaderService,
+    public guidePageService: GuidePageService) {
+      this.guidePageService.guideRoute.subscribe(
+        (message: string) => console.log(message)
+      );
+    }
 
   ngOnInit(){
     this.getActivatedPool();

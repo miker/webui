@@ -21,7 +21,7 @@ export class TooltipsService {
 
   guideRoute = new EventEmitter<string>();
 
-  // passMessage(message: string) {
-  //   console.log(message);
-  // }
+  passMessage(message: string) {
+    console.log('Logged from tooltips.service - ' + message);
+  }
 }
